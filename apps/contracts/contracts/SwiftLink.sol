@@ -28,4 +28,18 @@ contract SwiftLink is Ownable {
 
         emit ProfileRegistered(msg.sender, _username);
     }
+
+    /**
+     * @dev Send a payment to a user by their username
+     */
+    function payUser(string memory _username, address _token, uint256 _amount) external {
+        address recipient = usernameToAddress[_username];
+        require(recipient != address(0), "User not found");
+        require(_amount > 0, "Amount must be greater than 0");
+
+        IERC20 token = IERC20(_token);
+        require(token.transferFrom(msg.sender, recipient, _amount), "Transfer failed");
+
+        emit PaymentReceived(msg.sender, recipient, _amount, _token);
+    }
 }
