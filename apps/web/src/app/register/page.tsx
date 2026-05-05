@@ -42,7 +42,7 @@ export default function RegisterPage() {
       address: SWIFTLINK_ADDRESS,
       abi: SWIFTLINK_ABI,
       functionName: 'registerUsername',
-      args: [username],
+      args: [username, ""],
     });
   };
 

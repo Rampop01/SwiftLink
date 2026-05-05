@@ -33,28 +33,32 @@ export default function PayPage({ params }: { params: { username: string } }) {
     hash,
   });
 
+  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD');
+
   const handlePay = () => {
     if (!amount || isNaN(Number(amount))) {
       toast.error('Please enter a valid amount');
       return;
     }
     
-    // In a real app, we'd check for allowance first. 
-    // For now, we'll assume the user has approved the contract or we'll add that later.
+    const tokenAddress = tokenType === 'cUSD' ? CUSD_SEPOLIA_ADDRESS : '0x0000000000000000000000000000000000000000';
+    const amountInWei = parseUnits(amount, 18);
+
     writeContract({
       address: SWIFTLINK_ADDRESS,
       abi: SWIFTLINK_ABI,
       functionName: 'payUser',
-      args: [username, CUSD_SEPOLIA_ADDRESS, parseUnits(amount, 18)],
+      args: [username, tokenAddress, amountInWei],
+      value: tokenType === 'CELO' ? amountInWei : 0n,
     });
   };
 
   React.useEffect(() => {
     if (isSuccess) {
-      toast.success(`Sent ${amount} cUSD to ${username}!`);
+      toast.success(`Sent ${amount} ${tokenType} to ${username}!`);
       setAmount('');
     }
-  }, [isSuccess, amount, username]);
+  }, [isSuccess, amount, username, tokenType]);
 
   if (isResolving) {
     return (
@@ -112,24 +116,41 @@ export default function PayPage({ params }: { params: { username: string } }) {
               </p>
             </div>
 
-            <div className="space-y-3">
-              <Label htmlFor="amount" className="text-sm font-semibold flex justify-between">
-                Amount to Send
-                <span className="text-xs text-muted-foreground font-normal">cUSD (Celo Sepolia)</span>
-              </Label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-muted-foreground">
-                  $
-                </span>
-                <Input
-                  id="amount"
-                  type="number"
-                  placeholder="0.00"
-                  className="pl-10 h-16 text-3xl font-bold bg-muted/30 border-2 focus-visible:ring-primary/20 transition-all"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  disabled={isPending || isConfirming}
-                />
+            <div className="space-y-4">
+              <div className="flex p-1 bg-muted rounded-lg">
+                <button 
+                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${tokenType === 'cUSD' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground'}`}
+                  onClick={() => setTokenType('cUSD')}
+                >
+                  cUSD
+                </button>
+                <button 
+                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${tokenType === 'CELO' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground'}`}
+                  onClick={() => setTokenType('CELO')}
+                >
+                  CELO
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                <Label htmlFor="amount" className="text-sm font-semibold flex justify-between">
+                  Amount to Send
+                  <span className="text-xs text-muted-foreground font-normal">{tokenType} (Celo Sepolia)</span>
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-muted-foreground">
+                    {tokenType === 'cUSD' ? '$' : 'C'}
+                  </span>
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="0.00"
+                    className="pl-10 h-16 text-3xl font-bold bg-muted/30 border-2 focus-visible:ring-primary/20 transition-all"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    disabled={isPending || isConfirming}
+                  />
+                </div>
               </div>
             </div>
 
