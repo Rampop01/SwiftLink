@@ -3,7 +3,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, ExternalLink } from "lucide-react"
+import { Menu, ExternalLink, Link2, LayoutDashboard, UserPlus } from "lucide-react"
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -14,11 +15,19 @@ import {
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Docs", href: "https://docs.celo.org", external: true },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Register", href: "/register", icon: UserPlus },
 ]
 
 export function Navbar() {
-  const pathname = usePathname()
+  const { address, isConnected } = useAccount()
+  const { connect, connectors } = useConnect()
+  const { disconnect } = useDisconnect()
+
+  const handleConnect = () => {
+    // In MiniPay, the first connector is usually the injected one
+    connect({ connector: connectors[0] })
+  }
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -33,10 +42,10 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-80">
-              <div className="flex items-center gap-2 mb-8">
-
-                <span className="font-bold text-lg">
-                  swiftlink
+              <div className="flex items-center gap-2 mb-8 text-primary">
+                <Link2 className="h-6 w-6" />
+                <span className="font-bold text-lg text-foreground">
+                  SwiftLink
                 </span>
               </div>
               <nav className="flex flex-col gap-4">
@@ -44,28 +53,32 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
                     className={`flex items-center gap-2 text-base font-medium transition-colors hover:text-primary ${
                       pathname === link.href ? "text-foreground" : "text-foreground/70"
                     }`}
                   >
+                    {link.icon && <link.icon className="h-4 w-4" />}
                     {link.name}
-                    {link.external && <ExternalLink className="h-4 w-4" />}
                   </Link>
                 ))}
                 <div className="mt-6 pt-6 border-t">
-                  <Button className="w-full">Connect Wallet</Button>
+                  {isConnected ? (
+                    <Button variant="outline" className="w-full" onClick={() => disconnect()}>
+                      {address?.slice(0, 6)}...{address?.slice(-4)}
+                    </Button>
+                  ) : (
+                    <Button className="w-full" onClick={handleConnect}>Connect Wallet</Button>
+                  )}
                 </div>
               </nav>
             </SheetContent>
           </Sheet>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Link2 className="h-6 w-6 text-primary" />
             <span className="hidden font-bold text-xl sm:inline-block">
-              swiftlink
+              SwiftLink
             </span>
           </Link>
         </div>
@@ -76,21 +89,25 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary ${
                 pathname === link.href
                   ? "text-foreground"
                   : "text-foreground/70"
               }`}
             >
+              {link.icon && <link.icon className="h-4 w-4" />}
               {link.name}
-              {link.external && <ExternalLink className="h-4 w-4" />}
             </Link>
           ))}
           
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">Connect Wallet</Button>
+            {isConnected ? (
+              <Button variant="outline" size="sm" onClick={() => disconnect()}>
+                {address?.slice(0, 6)}...{address?.slice(-4)}
+              </Button>
+            ) : (
+              <Button size="sm" onClick={handleConnect}>Connect Wallet</Button>
+            )}
           </div>
         </nav>
       </div>
