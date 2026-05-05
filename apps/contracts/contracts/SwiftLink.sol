@@ -27,6 +27,7 @@ contract SwiftLink is Ownable, ReentrancyGuard {
     event ProfileUpdated(address indexed user, string username, string metadata, bool isActive);
     event UsernameTransferred(string username, address indexed oldWallet, address indexed newWallet);
     event PaymentReceived(address indexed from, address indexed to, uint256 amount, address token);
+    event ProfileDeactivatedByAdmin(string username, string reason);
 
     constructor() Ownable(msg.sender) {}
 
@@ -104,6 +105,28 @@ contract SwiftLink is Ownable, ReentrancyGuard {
         }
 
         emit PaymentReceived(msg.sender, recipient, _amount, _token);
+    }
+
+    /**
+     * @dev Admin function to deactivate a profile (e.g. for offensive content)
+     */
+    function adminDeactivateProfile(string memory _username, string memory _reason) external onlyOwner {
+        require(profiles[_username].wallet != address(0), "User not found");
+        profiles[_username].isActive = false;
+        emit ProfileDeactivatedByAdmin(_username, _reason);
+    }
+
+    /**
+     * @dev Emergency function to withdraw any stuck tokens/CELO in the contract
+     */
+    function emergencyWithdraw(address _token) external onlyOwner {
+        if (_token == address(0)) {
+            payable(owner()).transfer(address(this).balance);
+        } else {
+            IERC20 token = IERC20(_token);
+            uint256 balance = token.balanceOf(address(this));
+            require(token.transfer(owner(), balance), "Transfer failed");
+        }
     }
 
     /**
