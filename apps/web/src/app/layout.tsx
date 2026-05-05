@@ -4,6 +4,7 @@ import './globals.css';
 
 import { Navbar } from '@/components/navbar';
 import { Web3Provider } from '@/components/Web3Provider';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Web3Provider>
+          <Toaster richColors position="top-center" />
           {/* Navbar is included on all pages */}
           <div className="relative flex min-h-screen flex-col">
             <Navbar />

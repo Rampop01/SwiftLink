@@ -6,7 +6,6 @@ import { Zap, Link2, CheckCircle2, Globe, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
-  return (
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

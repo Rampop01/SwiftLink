@@ -20,6 +20,7 @@ const navLinks = [
 ]
 
 export function Navbar() {
+  const pathname = usePathname()
   const { address, isConnected } = useAccount()
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()

@@ -13,7 +13,8 @@ import {
   ArrowUpRight, 
   ArrowDownLeft,
   QrCode,
-  Share2
+  Share2,
+  Link2
 } from 'lucide-react';
 import { useAccount, useReadContract } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
@@ -27,7 +28,10 @@ export default function DashboardPage() {
     address: SWIFTLINK_ADDRESS,
     abi: SWIFTLINK_ABI,
     functionName: 'addressToUsername',
-    args: [address],
+    args: [address as `0x${string}`],
+    query: {
+      enabled: !!address,
+    },
   });
 
   const paymentLink = username ? `swiftlink.me/pay/${username}` : '';
