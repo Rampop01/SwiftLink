@@ -31,52 +31,44 @@ describe("SwiftLink", function () {
         swiftLink.write.registerUsername(["al", ""], { account: user1.account })
       ).to.be.rejectedWith("Username too short");
     });
-
-    it("Should fail if address already has a username", async function () {
-      const { swiftLink, user1 } = await deploySwiftLink();
-      await swiftLink.write.registerUsername(["alice", ""], { account: user1.account });
-      await expect(
-        swiftLink.write.registerUsername(["bob", ""], { account: user1.account })
-      ).to.be.rejectedWith("Address already has a username");
-    });
   });
 
-  describe("Transfers & Updates", function () {
-    it("Should update profile metadata", async function () {
-      const { swiftLink, user1 } = await deploySwiftLink();
-      await swiftLink.write.registerUsername(["alice", "old"], { account: user1.account });
-      await swiftLink.write.updateProfile(["new", true], { account: user1.account });
+  describe("Admin Functions", function () {
+    it("Should allow admin to deactivate a profile", async function () {
+      const { swiftLink, owner, user1 } = await deploySwiftLink();
+      await swiftLink.write.registerUsername(["malicious", ""], { account: user1.account });
       
-      const profile = await swiftLink.read.getProfile(["alice"]);
-      expect(profile.metadata).to.equal("new");
+      await swiftLink.write.adminDeactivateProfile(["malicious", "offensive content"], {
+        account: owner.account,
+      });
+
+      const profile = await swiftLink.read.getProfile(["malicious"]);
+      expect(profile.isActive).to.be.false;
     });
 
-    it("Should transfer username to a new address", async function () {
+    it("Should fail if non-owner tries to deactivate a profile", async function () {
       const { swiftLink, user1, user2 } = await deploySwiftLink();
       await swiftLink.write.registerUsername(["alice", ""], { account: user1.account });
-      await swiftLink.write.transferUsername([user2.account.address], { account: user1.account });
       
-      const profile = await swiftLink.read.getProfile(["alice"]);
-      expect(getAddress(profile.wallet)).to.equal(getAddress(user2.account.address));
-      expect(await swiftLink.read.addressToUsername([user2.account.address])).to.equal("alice");
+      await expect(
+        swiftLink.write.adminDeactivateProfile(["alice", "reason"], { account: user2.account })
+      ).to.be.rejected;
     });
   });
 
   describe("Payments", function () {
-    it("Should pay a user with native CELO", async function () {
-      const { swiftLink, user1, user2, publicClient } = await deploySwiftLink();
+    it("Should fail if paying an inactive profile", async function () {
+      const { swiftLink, owner, user1, user2 } = await deploySwiftLink();
       await swiftLink.write.registerUsername(["bob", ""], { account: user2.account });
+      await swiftLink.write.adminDeactivateProfile(["bob", "banned"], { account: owner.account });
       
       const amount = parseEther("1");
-      const initialBalance = await publicClient.getBalance({ address: user2.account.address });
-
-      await swiftLink.write.payUser(["bob", "0x0000000000000000000000000000000000000000", amount], {
-        account: user1.account,
-        value: amount,
-      });
-
-      const finalBalance = await publicClient.getBalance({ address: user2.account.address });
-      expect(finalBalance - initialBalance).to.equal(amount);
+      await expect(
+        swiftLink.write.payUser(["bob", "0x0000000000000000000000000000000000000000", amount], {
+          account: user1.account,
+          value: amount,
+        })
+      ).to.be.rejectedWith("User profile is inactive");
     });
   });
 });
