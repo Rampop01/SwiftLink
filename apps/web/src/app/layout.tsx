@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Navbar } from '@/components/navbar';
+import { Web3Provider } from '@/components/Web3Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
