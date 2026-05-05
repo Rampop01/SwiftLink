@@ -18,14 +18,16 @@ export default function PayPage({ params }: { params: { username: string } }) {
   const [amount, setAmount] = React.useState('');
   
   // Resolve address from username
-  const { data: recipient, isLoading: isResolving } = useReadContract({
+  const { data: profileData, isLoading: isResolving } = useReadContract({
     address: SWIFTLINK_ADDRESS,
     abi: SWIFTLINK_ABI,
-    functionName: 'usernameToAddress',
+    functionName: 'profiles',
     args: [username],
   });
 
-  const isValidUser = recipient && recipient !== '0x0000000000000000000000000000000000000000';
+  const recipient = profileData?.[1]; // The address is the second field in the Profile struct
+
+  const isValidUser = recipient && recipient !== '0x0000000000000000000000000000000000000000' && profileData?.[3] === true;
 
   const { writeContract, data: hash, isPending } = useWriteContract();
   
@@ -77,7 +79,7 @@ export default function PayPage({ params }: { params: { username: string } }) {
           </div>
           <h1 className="text-3xl font-bold">User Not Found</h1>
           <p className="text-muted-foreground">
-            The username <span className="font-bold text-foreground">@{username}</span> has not been registered on SwiftLink yet.
+            The username <span className="font-bold text-foreground">@{username}</span> has not been registered on SwiftLink yet or is currently inactive.
           </p>
           <Button asChild variant="outline">
             <a href="/">Back to Home</a>
@@ -112,7 +114,7 @@ export default function PayPage({ params }: { params: { username: string } }) {
             <div className="p-4 bg-muted/50 rounded-xl border border-border/50 text-center">
               <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-1">Recipient Address</p>
               <p className="text-sm font-mono break-all text-foreground/80">
-                {recipient as string}
+                {(recipient as string) || 'Resolving...'}
               </p>
             </div>
 

@@ -15,16 +15,17 @@ export default function RegisterPage() {
   const { address, isConnected } = useAccount();
   const [username, setUsername] = React.useState('');
   
-  // Check if username is taken
-  const { data: owner, isLoading: isChecking } = useReadContract({
+  const { data: profileData, isLoading: isChecking } = useReadContract({
     address: SWIFTLINK_ADDRESS,
     abi: SWIFTLINK_ABI,
-    functionName: 'usernameToAddress',
+    functionName: 'profiles',
     args: [username],
     query: {
       enabled: username.length >= 3,
     },
   });
+
+  const owner = profileData?.[1];
 
   const isAvailable = username.length >= 3 && !isChecking && owner === '0x0000000000000000000000000000000000000000';
   const isTaken = username.length >= 3 && !isChecking && owner !== '0x0000000000000000000000000000000000000000' && owner !== undefined;
