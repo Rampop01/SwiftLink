@@ -21,7 +21,8 @@
     "lucide-react": "^0.292.0",
     "viem": "^2.x",
     "wagmi": "^2.x",
-    "@tanstack/react-query": "^5.x"
+    "@tanstack/react-query": "^5.x",
+    "framer-motion": "^11.x"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
