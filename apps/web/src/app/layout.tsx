@@ -20,13 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* Navbar is included on all pages */}
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-                  </div>
+        <Web3Provider>
+          {/* Navbar is included on all pages */}
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+          </div>
+        </Web3Provider>
       </body>
     </html>
   );
