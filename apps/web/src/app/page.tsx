@@ -20,29 +20,38 @@ export default function Home() {
 
         {/* Main Heading */}
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70"
         >
-          Welcome to{" "}
-          <span className="text-primary">swiftlink</span>
+          Your Link to <br />
+          <span className="text-primary">Global Payments</span>
         </h1>
 
         {/* Subtitle */}
         <p
-          className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          Start building your decentralized application on Celo. Fast and secure blockchain for everyone.
+          Generate a unique payment link and get paid in cUSD/USDC instantly. 
+          Perfect for freelancers, creators, and vendors on Celo.
         </p>
 
-        {/* User Balance Display */}
-        <UserBalance />
-
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-        >
-          <Button size="lg" className="px-8 py-3 text-base font-medium">
-            Get Started
-          </Button>
+        {/* CTA Section */}
+        <div className="flex flex-col items-center gap-6 mb-20">
+          <div className="flex w-full max-w-md items-center space-x-2 bg-muted/50 p-1.5 rounded-full border border-border shadow-sm">
+            <div className="flex-1 flex items-center px-4 text-muted-foreground">
+              <span className="text-sm font-medium">swiftlink.me/pay/</span>
+              <input 
+                type="text" 
+                placeholder="username" 
+                className="bg-transparent border-none outline-none text-foreground font-semibold placeholder:text-muted-foreground/50 w-full"
+              />
+            </div>
+            <Button size="lg" className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95">
+              Claim Link
+            </Button>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            No fees. No borders. Just Celo.
+          </p>
         </div>
       </div>
     </div>
