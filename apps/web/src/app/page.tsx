@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
-  Zap, 
   CheckCircle2, 
   Globe, 
   ShieldCheck, 
@@ -69,7 +68,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 lg:pt-40 lg:pb-32">
+      <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-32">
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div 
             className="text-center max-w-5xl mx-auto"
@@ -77,19 +76,10 @@ export default function Home() {
             animate="visible"
             variants={containerVariants}
           >
-            {/* Badge */}
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 text-sm font-bold tracking-wide uppercase bg-primary/10 text-primary rounded-full border border-primary/20 shadow-sm"
-            >
-              <Zap className="h-4 w-4 fill-primary" />
-              Revolutionizing Web3 Payments
-            </motion.div>
-
             {/* Main Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-10 leading-[0.9]"
+              className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[1.1] md:leading-[1]"
             >
               The Simplest Way <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-400 to-primary animate-gradient-x">to Get Paid.</span>
