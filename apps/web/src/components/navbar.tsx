@@ -1,10 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, ExternalLink, Link2, LayoutDashboard, UserPlus } from "lucide-react"
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { Menu, Link2, LayoutDashboard, UserPlus, Sparkles } from "lucide-react"
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,19 +15,12 @@ import {
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Request", href: "/request", icon: Sparkles },
   { name: "Register", href: "/register", icon: UserPlus },
 ]
 
 export function Navbar() {
   const pathname = usePathname()
-  const { address, isConnected } = useAccount()
-  const { connect, connectors } = useConnect()
-  const { disconnect } = useDisconnect()
-
-  const handleConnect = () => {
-    // In MiniPay, the first connector is usually the injected one
-    connect({ connector: connectors[0] })
-  }
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -62,14 +54,12 @@ export function Navbar() {
                     {link.name}
                   </Link>
                 ))}
-                <div className="mt-6 pt-6 border-t">
-                  {isConnected ? (
-                    <Button variant="outline" className="w-full" onClick={() => disconnect()}>
-                      {address?.slice(0, 6)}...{address?.slice(-4)}
-                    </Button>
-                  ) : (
-                    <Button className="w-full" onClick={handleConnect}>Connect Wallet</Button>
-                  )}
+                <div className="mt-6 pt-6 border-t flex justify-center">
+                  <ConnectButton 
+                    accountStatus="address"
+                    showBalance={false}
+                    chainStatus="none"
+                  />
                 </div>
               </nav>
             </SheetContent>
@@ -102,13 +92,11 @@ export function Navbar() {
           ))}
           
           <div className="flex items-center gap-3">
-            {isConnected ? (
-              <Button variant="outline" size="sm" onClick={() => disconnect()}>
-                {address?.slice(0, 6)}...{address?.slice(-4)}
-              </Button>
-            ) : (
-              <Button size="sm" onClick={handleConnect}>Connect Wallet</Button>
-            )}
+            <ConnectButton 
+              accountStatus="address"
+              showBalance={false}
+              chainStatus="icon"
+            />
           </div>
         </nav>
       </div>
