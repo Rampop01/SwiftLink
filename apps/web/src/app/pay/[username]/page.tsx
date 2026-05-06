@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Link2, Send, ShieldCheck, Wallet } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_SEPOLIA_ADDRESS } from '@/lib/contracts';
+import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_ADDRESS } from '@/lib/contracts';
 import { toast } from 'sonner';
 import { parseUnits } from 'viem';
 import { Metadata } from 'next';
@@ -64,7 +64,7 @@ export default function PayPage({ params, searchParams }: { params: { username: 
       return;
     }
     
-    const tokenAddress = tokenType === 'cUSD' ? CUSD_SEPOLIA_ADDRESS : '0x0000000000000000000000000000000000000000';
+    const tokenAddress = tokenType === 'cUSD' ? CUSD_ADDRESS : '0x0000000000000000000000000000000000000000';
     const amountInWei = parseUnits(amount, 18);
 
     writeContract({
@@ -163,7 +163,7 @@ export default function PayPage({ params, searchParams }: { params: { username: 
               <div className="space-y-3">
                 <Label htmlFor="amount" className="text-sm font-semibold flex justify-between">
                   Amount to Send
-                  <span className="text-xs text-muted-foreground font-normal">{tokenType} (Celo Sepolia)</span>
+                  <span className="text-xs text-muted-foreground font-normal">{tokenType} (Celo Mainnet)</span>
                 </Label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-muted-foreground">
