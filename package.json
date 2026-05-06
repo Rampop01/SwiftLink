@@ -12,7 +12,9 @@
     "contracts:test": "turbo run test --filter=hardhat",
     "contracts:deploy": "turbo run deploy --filter=hardhat",
     "contracts:deploy:celo-sepolia": "turbo run deploy:celo-sepolia --filter=hardhat",
-    "contracts:deploy:celo": "turbo run deploy:celo --filter=hardhat"
+    "contracts:deploy:celo": "turbo run deploy:celo --filter=hardhat",
+    "contracts:health": "cd apps/contracts && npx ts-node scripts/health-check-utility.ts",
+    "contracts:load-test": "cd apps/contracts && npx ts-node scripts/load-test-utility.ts"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
