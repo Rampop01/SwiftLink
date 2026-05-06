@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
+@layer utilities {
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 3s ease infinite;
+  }
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+:root {
     --border: 214.3 31.8% 91.4%;
     --input: 216 33% 97%;
     --ring: 215 20.2% 65.1%;
