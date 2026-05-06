@@ -12,10 +12,11 @@ import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_SEPOLIA_ADDRESS } from '@/lib/co
 import { toast } from 'sonner';
 import { parseUnits } from 'viem';
 
-export default function PayPage({ params }: { params: { username: string } }) {
+export default function PayPage({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string } }) {
   const { username } = params;
   const { address, isConnected } = useAccount();
-  const [amount, setAmount] = React.useState('');
+  const [amount, setAmount] = React.useState(searchParams.amount || '');
+  const [description] = React.useState(searchParams.desc || '');
   
   // Resolve address from username
   const { data: profileData, isLoading: isResolving } = useReadContract({
@@ -109,6 +110,11 @@ export default function PayPage({ params }: { params: { username: string } }) {
               <ShieldCheck className="h-3 w-3 text-green-500" />
               Verified SwiftLink User
             </CardDescription>
+            {description && (
+              <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/10 text-sm italic text-muted-foreground">
+                "{description}"
+              </div>
+            )}
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="p-4 bg-muted/50 rounded-xl border border-border/50 text-center">

@@ -19,6 +19,8 @@ import {
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
 import { QRCodeModal } from '@/components/QRCodeModal';
 import { toast } from 'sonner';
+import Link from 'next/link';
+import { FileText } from 'lucide-react';
 
 export default function DashboardPage() {
   const { address, isConnected } = useAccount();
@@ -62,6 +64,12 @@ export default function DashboardPage() {
         </div>
         <div className="flex gap-2">
           {username && <QRCodeModal username={username} url={paymentLink} />}
+          <Button variant="outline" asChild className="gap-2">
+            <Link href="/request">
+              <FileText className="h-4 w-4" />
+              Request
+            </Link>
+          </Button>
           <Button className="gap-2 shadow-lg shadow-primary/20">
             <TrendingUp className="h-4 w-4" />
             Withdraw
