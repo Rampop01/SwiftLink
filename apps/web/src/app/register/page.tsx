@@ -11,9 +11,9 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
 import { toast } from 'sonner';
 
-export default function RegisterPage() {
+export default function RegisterPage({ searchParams }: { searchParams: { username?: string } }) {
   const { address, isConnected } = useAccount();
-  const [username, setUsername] = React.useState('');
+  const [username, setUsername] = React.useState(searchParams.username || '');
   
   const { data: profileData, isLoading: isChecking } = useReadContract({
     address: SWIFTLINK_ADDRESS,
@@ -82,7 +82,9 @@ export default function RegisterPage() {
                 <Input
                   id="username"
                   placeholder="john"
-                  className="pl-[125px] h-12 text-lg font-medium"
+                  className={`pl-[125px] h-12 text-lg font-medium transition-all ${
+                    isAvailable ? "border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)] ring-1 ring-green-500/20" : ""
+                  }`}
                   value={username}
                   onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
                   disabled={isPending || isConfirming}

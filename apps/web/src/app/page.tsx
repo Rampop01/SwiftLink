@@ -1,18 +1,16 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { 
   Zap, 
-  Link2, 
   CheckCircle2, 
   Globe, 
   ShieldCheck, 
   Sparkles, 
   QrCode, 
-  ArrowRight,
-  TrendingUp,
-  Cpu
+  ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -44,6 +42,8 @@ const features = [
 ];
 
 export default function Home() {
+  const [claimName, setClaimName] = React.useState("");
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -111,22 +111,24 @@ export default function Home() {
             >
               <div className="flex w-full max-w-xl items-center space-x-2 bg-background/50 backdrop-blur-xl p-2 rounded-full border-2 border-primary/20 shadow-2xl ring-4 ring-primary/5">
                 <div className="flex-1 flex items-center px-6 text-muted-foreground">
-                  <span className="text-lg font-bold text-primary/60">swiftlink.me/</span>
+                  <span className="text-lg font-bold text-primary/60 truncate">swiftlink.me/</span>
                   <input 
                     type="text" 
                     placeholder="yourname" 
+                    value={claimName}
+                    onChange={(e) => setClaimName(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
                     className="bg-transparent border-none outline-none text-foreground font-bold text-lg placeholder:text-muted-foreground/30 w-full ml-1"
                   />
                 </div>
                 <Button size="lg" className="rounded-full px-8 h-14 text-lg font-bold shadow-xl hover:scale-105 transition-transform" asChild>
-                  <Link href="/register">Claim Now</Link>
+                  <Link href={`/register?username=${claimName}`}>Claim Now</Link>
                 </Button>
               </div>
               
               <div className="flex items-center gap-8 text-sm font-bold text-muted-foreground/60 uppercase tracking-widest">
-                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Zero Fees</div>
-                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Instant Settlement</div>
-                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> MiniPay Ready</div>
+                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> Zero Fees</div>
+                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> Instant Settlement</div>
+                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> MiniPay Ready</div>
               </div>
             </motion.div>
 
@@ -180,10 +182,10 @@ export default function Home() {
           <div className="relative p-12 lg:p-20 rounded-[4rem] bg-foreground text-background overflow-hidden text-center">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-transparent opacity-50" />
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-none">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-none text-white">
                 Ready to own your <br /> payment identity?
               </h2>
-              <p className="text-xl text-background/70 mb-10 max-w-2xl mx-auto font-medium">
+              <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto font-medium">
                 Join thousands of creators and freelancers who are simplifying their crypto payments with SwiftLink.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -193,7 +195,7 @@ export default function Home() {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="rounded-full px-10 h-16 text-lg font-bold border-background/20 text-background hover:bg-background/10" asChild>
+                <Button size="lg" variant="outline" className="rounded-full px-10 h-16 text-lg font-bold border-white/20 text-white hover:bg-white/10" asChild>
                   <Link href="/dashboard">View Dashboard</Link>
                 </Button>
               </div>
