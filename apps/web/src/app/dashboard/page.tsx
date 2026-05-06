@@ -16,8 +16,8 @@ import {
   Share2,
   Link2
 } from 'lucide-react';
-import { useAccount, useReadContract } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
+import { QRCodeModal } from '@/components/QRCodeModal';
 import { toast } from 'sonner';
 
 export default function DashboardPage() {
@@ -61,10 +61,7 @@ export default function DashboardPage() {
           <p className="text-muted-foreground">Welcome back{username ? `, @${username}` : ''}</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="gap-2">
-            <QrCode className="h-4 w-4" />
-            My QR
-          </Button>
+          {username && <QRCodeModal username={username} url={paymentLink} />}
           <Button className="gap-2 shadow-lg shadow-primary/20">
             <TrendingUp className="h-4 w-4" />
             Withdraw
