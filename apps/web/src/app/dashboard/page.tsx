@@ -16,6 +16,7 @@ import {
   Share2,
   Link2
 } from 'lucide-react';
+import { useAccount, useReadContract } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
 import { QRCodeModal } from '@/components/QRCodeModal';
 import { toast } from 'sonner';
