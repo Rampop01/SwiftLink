@@ -14,11 +14,19 @@ import {
   Link2,
   FileText
 } from "lucide-react"
-import { useAccount, useReadContract, useBalance } from "wagmi"
+import { useAccount, useReadContract, useBalance, usePublicClient } from "wagmi"
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
 import { QRCodeModal } from "@/components/QRCodeModal"
 import { toast } from "sonner"
 import Link from "next/link"
+import { formatUnits } from "viem"
+
+interface ActivityEvent {
+  from: string;
+  amount: string;
+  timestamp: number;
+  hash: string;
+}
 
 export default function DashboardPage() {
   const { address, isConnected } = useAccount()
@@ -38,6 +46,43 @@ export default function DashboardPage() {
   const { data: balanceData } = useBalance({
     address: address,
   })
+
+  const publicClient = usePublicClient()
+  const [events, setEvents] = React.useState<ActivityEvent[]>([])
+  const [isLoadingEvents, setIsLoadingEvents] = React.useState(true)
+
+  React.useEffect(() => {
+    const fetchEvents = async () => {
+      if (!address || !publicClient) return
+      
+      try {
+        const logs = await publicClient.getLogs({
+          address: SWIFTLINK_ADDRESS,
+          event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'PaymentReceived') as any,
+          args: { to: address },
+          fromBlock: 'earliest'
+        })
+
+        const formattedEvents = await Promise.all(logs.map(async (log: any) => {
+          const block = await publicClient.getBlock({ blockNumber: log.blockNumber })
+          return {
+            from: log.args.from,
+            amount: formatUnits(log.args.amount, 18),
+            timestamp: Number(block.timestamp) * 1000,
+            hash: log.transactionHash
+          }
+        }))
+
+        setEvents(formattedEvents.sort((a, b) => b.timestamp - a.timestamp))
+      } catch (error) {
+        console.error("Error fetching events:", error)
+      } finally {
+        setIsLoadingEvents(false)
+      }
+    }
+
+    fetchEvents()
+  }, [address, publicClient])
 
   const paymentLink = username ? `swiftlink.me/pay/${username}` : ""
 
@@ -172,11 +217,38 @@ export default function DashboardPage() {
         <Card className="md:col-span-3 rounded-[2rem]">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
-            <CardDescription className="font-medium">Live updates from the Celo network</CardDescription>
+            <CardDescription className="font-medium text-primary/60">Live updates from the Celo network</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {username ? (
+              {isLoadingEvents ? (
+                <div className="flex flex-col items-center justify-center py-20 animate-pulse">
+                  <div className="h-12 w-12 rounded-full bg-primary/10 mb-4" />
+                  <div className="h-4 w-32 bg-primary/10 rounded" />
+                </div>
+              ) : events.length > 0 ? (
+                <div className="space-y-4">
+                  {events.map((event, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group">
+                      <div className="flex items-center gap-4">
+                        <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <ArrowDownLeft className="h-5 w-5 text-green-600" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-sm">Payment Received</p>
+                          <p className="text-xs text-muted-foreground font-mono">from {event.from.slice(0, 6)}...{event.from.slice(-4)}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-black text-green-600">+{parseFloat(event.amount).toFixed(2)}</p>
+                        <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
+                          {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : username ? (
                 <div className="text-center py-20 border-2 border-dashed border-primary/10 rounded-[2rem] bg-primary/[0.02]">
                   <ArrowDownLeft className="h-16 w-16 mx-auto mb-6 text-primary opacity-10" />
                   <p className="text-xl font-bold text-muted-foreground/60">No recent transactions yet</p>
