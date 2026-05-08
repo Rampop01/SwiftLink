@@ -99,6 +99,9 @@ export default function DashboardPage() {
     },
   })
 
+  const totalVolume = events.reduce((acc, event) => acc + parseFloat(event.amount), 0);
+  const uniquePayers = new Set(events.map(event => event.from)).size;
+
   const paymentLink = username ? `swiftlink.me/pay/${username}` : ""
 
   const copyToClipboard = () => {
@@ -205,13 +208,13 @@ export default function DashboardPage() {
           <Card className="rounded-[1.5rem]">
             <CardContent className="pt-8 pb-8">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Total Payments</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Total Volume</p>
                 <div className="h-8 w-8 rounded-full bg-green-500/10 flex items-center justify-center">
                   <ArrowDownLeft className="h-4 w-4 text-green-500" />
                 </div>
               </div>
-              <div className="text-4xl font-black">--</div>
-              <p className="text-xs text-muted-foreground mt-2 font-medium">Coming soon</p>
+              <div className="text-4xl font-black">{totalVolume.toFixed(2)}</div>
+              <p className="text-xs text-muted-foreground mt-2 font-medium">CELO Received</p>
             </CardContent>
           </Card>
           <Card className="rounded-[1.5rem]">
@@ -222,8 +225,8 @@ export default function DashboardPage() {
                   <Users className="h-4 w-4 text-blue-500" />
                 </div>
               </div>
-              <div className="text-4xl font-black">--</div>
-              <p className="text-xs text-muted-foreground mt-2 font-medium">Coming soon</p>
+              <div className="text-4xl font-black">{uniquePayers}</div>
+              <p className="text-xs text-muted-foreground mt-2 font-medium">Verified addresses</p>
             </CardContent>
           </Card>
         </div>
