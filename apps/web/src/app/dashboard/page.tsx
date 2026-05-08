@@ -14,7 +14,7 @@ import {
   Link2,
   FileText
 } from "lucide-react"
-import { useAccount, useReadContract, useBalance, usePublicClient } from "wagmi"
+import { useAccount, useReadContract, useBalance, usePublicClient, useWatchContractEvent } from "wagmi"
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
 import { QRCodeModal } from "@/components/QRCodeModal"
 import { toast } from "sonner"
@@ -51,38 +51,53 @@ export default function DashboardPage() {
   const [events, setEvents] = React.useState<ActivityEvent[]>([])
   const [isLoadingEvents, setIsLoadingEvents] = React.useState(true)
 
-  React.useEffect(() => {
-    const fetchEvents = async () => {
-      if (!address || !publicClient) return
-      
-      try {
-        const logs = await publicClient.getLogs({
-          address: SWIFTLINK_ADDRESS,
-          event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'PaymentReceived') as any,
-          args: { to: address },
-          fromBlock: 'earliest'
-        })
+  const fetchEvents = React.useCallback(async () => {
+    if (!address || !publicClient) return
+    
+    try {
+      const logs = await publicClient.getLogs({
+        address: SWIFTLINK_ADDRESS,
+        event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'PaymentReceived') as any,
+        args: { to: address },
+        fromBlock: 'earliest'
+      })
 
-        const formattedEvents = await Promise.all(logs.map(async (log: any) => {
-          const block = await publicClient.getBlock({ blockNumber: log.blockNumber })
-          return {
-            from: log.args.from,
-            amount: formatUnits(log.args.amount, 18),
-            timestamp: Number(block.timestamp) * 1000,
-            hash: log.transactionHash
-          }
-        }))
+      const formattedEvents = await Promise.all(logs.map(async (log: any) => {
+        const block = await publicClient.getBlock({ blockNumber: log.blockNumber })
+        return {
+          from: log.args.from,
+          amount: formatUnits(log.args.amount, 18),
+          timestamp: Number(block.timestamp) * 1000,
+          hash: log.transactionHash
+        }
+      }))
 
-        setEvents(formattedEvents.sort((a, b) => b.timestamp - a.timestamp))
-      } catch (error) {
-        console.error("Error fetching events:", error)
-      } finally {
-        setIsLoadingEvents(false)
-      }
+      setEvents(formattedEvents.sort((a, b) => b.timestamp - a.timestamp))
+    } catch (error) {
+      console.error("Error fetching events:", error)
+    } finally {
+      setIsLoadingEvents(false)
     }
-
-    fetchEvents()
   }, [address, publicClient])
+
+  React.useEffect(() => {
+    fetchEvents()
+  }, [fetchEvents])
+
+  // Watch for new events
+  useWatchContractEvent({
+    address: SWIFTLINK_ADDRESS,
+    abi: SWIFTLINK_ABI,
+    eventName: 'PaymentReceived',
+    args: { to: address },
+    onLogs(logs) {
+      const newEvent = logs[0] as any;
+      if (newEvent.args.to === address) {
+        toast.success(`Received ${formatUnits(newEvent.args.amount, 18)} CELO! ✨`);
+        fetchEvents();
+      }
+    },
+  })
 
   const paymentLink = username ? `swiftlink.me/pay/${username}` : ""
 
