@@ -49,9 +49,44 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
 
   React.useEffect(() => {
     if (isSuccess) {
-      toast.success('Username registered successfully!');
+      toast.success('Username registered successfully! 🎉');
     }
   }, [isSuccess]);
+
+  if (isSuccess) {
+    return (
+      <div className="container flex items-center justify-center min-h-[calc(100vh-64px)] py-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="w-full max-w-md text-center"
+        >
+          <Card className="border-2 border-green-500/20 shadow-2xl shadow-green-500/5 bg-background/50 backdrop-blur-sm">
+            <CardHeader className="pb-2">
+              <div className="flex justify-center mb-6">
+                <div className="h-20 w-20 rounded-full bg-green-500/10 flex items-center justify-center">
+                  <CheckCircle2 className="h-10 w-10 text-green-500" />
+                </div>
+              </div>
+              <CardTitle className="text-3xl font-black">You&apos;re Live! 🚀</CardTitle>
+              <CardDescription className="text-base mt-2">
+                Your payment link is ready to share with the world.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="p-4 bg-primary/5 rounded-xl border-2 border-primary/10">
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Your Link</p>
+                <p className="text-lg font-black text-primary">swiftlink.me/pay/{username}</p>
+              </div>
+              <Button className="w-full h-14 text-lg font-bold shadow-xl" size="lg" asChild>
+                <a href="/dashboard">Go to Dashboard →</a>
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="container flex items-center justify-center min-h-[calc(100vh-64px)] py-12">
