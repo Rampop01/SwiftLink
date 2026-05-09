@@ -30,13 +30,13 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             {/* Global Background */}
             <div className="fixed inset-0 -z-10 bg-background overflow-hidden">
-              <div className="absolute inset-0 bg-grid opacity-[0.15]" />
-              {/* Celo Green Glow */}
-              <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-[120px] animate-float mix-blend-screen" />
-              {/* Accent Gold Glow */}
-              <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-amber-500/15 rounded-full blur-[100px] animate-float mix-blend-screen" style={{ animationDelay: '3s' }} />
-              {/* Deep Purple Glow */}
-              <div className="absolute top-[40%] left-[-10%] w-[400px] h-[400px] bg-purple-500/15 rounded-full blur-[120px] mix-blend-screen" />
+              {/* Custom Image Background */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 mix-blend-screen" 
+                style={{ backgroundImage: 'url(/bg-glow.png)' }} 
+              />
+              {/* Optional: keep the subtle grid over the image for texture */}
+              <div className="absolute inset-0 bg-grid opacity-[0.1]" />
             </div>
 
             <Navbar />
