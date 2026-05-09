@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 import './globals.css';
 
 import { Navbar } from '@/components/navbar';
@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer';
 import { Web3Provider } from '@/components/Web3Provider';
 import { Toaster } from 'sonner';
 
-const inter = Inter({ subsets: ['latin'] });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 export const metadata: Metadata = {
   title: 'SwiftLink | Instant Celo Payments',
@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={outfit.className}>
         <Web3Provider>
           <Toaster richColors position="top-center" />
           <div className="relative flex min-h-screen flex-col">
