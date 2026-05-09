@@ -104,7 +104,7 @@ export default function RequestPage() {
             <FileText className="h-4 w-4 text-primary" />
             <p className="text-sm font-bold">Invoice Details</p>
           </div>
-          <CardContent className="space-y-6 p-0">
+          <div className="space-y-6 p-0">
             <div className="space-y-2">
               <Label htmlFor="amount">Requested Amount (cUSD)</Label>
               <div className="relative">
@@ -155,7 +155,6 @@ export default function RequestPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-            </div>
             </div>
           </div>
         </div>
