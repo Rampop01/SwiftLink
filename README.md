@@ -49,10 +49,12 @@ SwiftLink allows anyone to generate a unique payment link (e.g., `swiftlink.me/p
 - [x] Live Payment Notifications (Toast Alerts)
 - [x] Premium Footer & Branded Navigation
 
-### 🔄 Week 4: Scale & Polish (IN PROGRESS)
+### ✅ Week 4: Scale & Polish (COMPLETED)
 - [x] Modern Typography System (Outfit Font)
 - [x] Custom Scrollbar & Micro-animations
 - [x] Registration Success Celebration Flow
+- [x] Cinematic Dark-Mode Overhaul (Glassmorphism & Glow Borders)
+- [x] Global Animated Mesh Background & Shiny Overlays
 - [ ] Demo Video & Final Submission
 
 ---
