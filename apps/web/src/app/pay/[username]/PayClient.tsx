@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Link2, Send, ShieldCheck, Wallet } from 'lucide-react';
@@ -18,7 +17,6 @@ export default function PayClient({ params, searchParams }: { params: { username
   const [amount, setAmount] = React.useState(searchParams.amount || '');
   const [description] = React.useState(searchParams.desc || '');
   
-  // Resolve address from username
   const { data: profileData, isLoading: isResolving } = useReadContract({
     address: SWIFTLINK_ADDRESS,
     abi: SWIFTLINK_ABI,
@@ -26,15 +24,11 @@ export default function PayClient({ params, searchParams }: { params: { username
     args: [username],
   });
 
-  const recipient = profileData?.[1]; // The address is the second field in the Profile struct
-
+  const recipient = profileData?.[1];
   const isValidUser = recipient && recipient !== '0x0000000000000000000000000000000000000000' && profileData?.[3] === true;
 
   const { writeContract, data: hash, isPending } = useWriteContract();
-  
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
-    hash,
-  });
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
   const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD');
 
@@ -43,10 +37,8 @@ export default function PayClient({ params, searchParams }: { params: { username
       toast.error('Please enter a valid amount');
       return;
     }
-    
     const tokenAddress = tokenType === 'cUSD' ? CUSD_ADDRESS : '0x0000000000000000000000000000000000000000';
     const amountInWei = parseUnits(amount, 18);
-
     writeContract({
       address: SWIFTLINK_ADDRESS,
       abi: SWIFTLINK_ABI,
@@ -74,15 +66,15 @@ export default function PayClient({ params, searchParams }: { params: { username
   if (!isValidUser) {
     return (
       <div className="container flex items-center justify-center min-h-[calc(100vh-64px)] py-12 text-center">
-        <div className="max-w-md space-y-6">
-          <div className="inline-flex p-4 bg-destructive/10 rounded-full">
-            <Link2 className="h-10 w-10 text-destructive" />
+        <div className="max-w-md glass rounded-2xl p-10 glow-border">
+          <div className="inline-flex p-4 bg-red-500/10 rounded-2xl mb-6">
+            <Link2 className="h-8 w-8 text-red-400" />
           </div>
-          <h1 className="text-3xl font-bold">User Not Found</h1>
-          <p className="text-muted-foreground">
-            The username <span className="font-bold text-foreground">@{username}</span> has not been registered on SwiftLink yet or is currently inactive.
+          <h1 className="text-2xl font-black mb-3">User Not Found</h1>
+          <p className="text-sm text-muted-foreground mb-6">
+            <span className="font-bold text-foreground">@{username}</span> hasn&apos;t registered on SwiftLink yet.
           </p>
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" className="rounded-xl border-white/10 hover:bg-white/5">
             <a href="/">Back to Home</a>
           </Button>
         </div>
@@ -93,106 +85,111 @@ export default function PayClient({ params, searchParams }: { params: { username
   return (
     <div className="container flex items-center justify-center min-h-[calc(100vh-64px)] py-12">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
         className="w-full max-w-md"
       >
-        <Card className="border-2 shadow-2xl overflow-hidden">
-          <div className="h-2 bg-primary" />
-          <CardHeader className="text-center pb-2">
-            <div className="flex justify-center mb-4">
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary border-4 border-background shadow-lg">
-                <span className="text-3xl font-bold uppercase">{username[0]}</span>
+        <div className="glass rounded-2xl overflow-hidden glow-border">
+          {/* Green accent bar */}
+          <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+          
+          {/* Header */}
+          <div className="text-center p-8 pb-4">
+            <div className="flex justify-center mb-5">
+              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
+                <span className="text-2xl font-black uppercase">{username[0]}</span>
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold">Pay @{username}</CardTitle>
-            <CardDescription className="flex items-center justify-center gap-1">
-              <ShieldCheck className="h-3 w-3 text-green-500" />
-              Verified SwiftLink User
-            </CardDescription>
+            <h1 className="text-2xl font-black mb-1">Pay @{username}</h1>
+            <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+              <ShieldCheck className="h-3 w-3 text-emerald-400" />
+              <span>Verified SwiftLink User</span>
+            </div>
             {description && (
-              <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/10 text-sm italic text-muted-foreground">
-                "{description}"
+              <div className="mt-5 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] text-sm italic text-muted-foreground">
+                &ldquo;{description}&rdquo;
               </div>
             )}
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="p-4 bg-muted/50 rounded-xl border border-border/50 text-center">
-              <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-1">Recipient Address</p>
-              <p className="text-sm font-mono break-all text-foreground/80">
+          </div>
+
+          {/* Body */}
+          <div className="px-8 pb-8 space-y-5">
+            <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] text-center">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-bold mb-1">Recipient</p>
+              <p className="text-xs font-mono text-muted-foreground">
                 {(recipient as string) || 'Resolving...'}
               </p>
             </div>
 
-            <div className="space-y-4">
-              <div className="flex p-1 bg-muted rounded-lg">
+            {/* Token Toggle */}
+            <div className="flex p-1 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+              {(['cUSD', 'CELO'] as const).map(token => (
                 <button 
-                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${tokenType === 'cUSD' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground'}`}
-                  onClick={() => setTokenType('cUSD')}
+                  key={token}
+                  className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all ${
+                    tokenType === token 
+                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  onClick={() => setTokenType(token)}
                 >
-                  cUSD
+                  {token}
                 </button>
-                <button 
-                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${tokenType === 'CELO' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground'}`}
-                  onClick={() => setTokenType('CELO')}
-                >
-                  CELO
-                </button>
-              </div>
+              ))}
+            </div>
 
-              <div className="space-y-3">
-                <Label htmlFor="amount" className="text-sm font-semibold flex justify-between">
-                  Amount to Send
-                  <span className="text-xs text-muted-foreground font-normal">{tokenType} (Celo Mainnet)</span>
-                </Label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-muted-foreground">
-                    {tokenType === 'cUSD' ? '$' : 'C'}
-                  </span>
-                  <Input
-                    id="amount"
-                    type="number"
-                    placeholder="0.00"
-                    className="pl-10 h-16 text-3xl font-bold bg-muted/30 border-2 focus-visible:ring-primary/20 transition-all"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    disabled={isPending || isConfirming}
-                  />
-                </div>
+            {/* Amount */}
+            <div className="space-y-2">
+              <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground flex justify-between">
+                Amount
+                <span className="text-[10px] normal-case font-normal tracking-normal">{tokenType} · Celo Mainnet</span>
+              </Label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-black text-muted-foreground/40">
+                  {tokenType === 'cUSD' ? '$' : 'Ⓒ'}
+                </span>
+                <Input
+                  id="amount"
+                  type="number"
+                  placeholder="0.00"
+                  className="pl-10 h-14 text-2xl font-black bg-white/[0.03] border-white/[0.08] rounded-xl focus-visible:ring-primary/30"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  disabled={isPending || isConfirming}
+                />
               </div>
             </div>
 
-            <div className="flex items-center gap-2 p-3 bg-primary/5 rounded-lg border border-primary/10 text-xs text-primary/80">
-              <Wallet className="h-4 w-4" />
-              <span>Payments are processed on the Celo network with near-zero fees.</span>
+            <div className="flex items-center gap-2 p-3 bg-primary/5 rounded-xl border border-primary/10 text-xs text-primary/80">
+              <Wallet className="h-3.5 w-3.5 flex-shrink-0" />
+              <span>Near-zero gas fees on the Celo network.</span>
             </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+
             <Button 
-              className="w-full h-14 text-xl font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
+              className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
               size="lg"
               disabled={!amount || isPending || isConfirming || !isConnected}
               onClick={handlePay}
             >
               {(isPending || isConfirming) ? (
                 <>
-                  <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                   {isPending ? 'Requesting...' : 'Sending...'}
                 </>
               ) : (
                 <>
                   Send Payment
-                  <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Send className="ml-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </>
               )}
             </Button>
+
             {!isConnected && (
-              <p className="text-xs text-center text-muted-foreground">
-                Connect your wallet to send payments.
-              </p>
+              <p className="text-xs text-center text-muted-foreground">Connect wallet to send.</p>
             )}
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </motion.div>
     </div>
   );
