@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
 import { Web3Provider } from '@/components/Web3Provider';
 import { Toaster } from 'sonner';
 
@@ -26,12 +27,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <Web3Provider>
           <Toaster richColors position="top-center" />
-          {/* Navbar is included on all pages */}
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">
               {children}
             </main>
+            <Footer />
           </div>
         </Web3Provider>
       </body>
