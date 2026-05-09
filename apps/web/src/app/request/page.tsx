@@ -91,14 +91,14 @@ export default function RequestPage() {
   }
 
   return (
-    <div className="container py-12 max-w-2xl">
-      <div className="mb-8 flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
+    <div className="container py-12 max-w-2xl animate-in">
+      <div className="mb-12 flex items-center gap-4">
+        <Button variant="ghost" size="icon" className="rounded-xl" asChild>
           <Link href="/dashboard"><ArrowLeft className="h-5 w-5" /></Link>
         </Button>
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Request Payment</h1>
-          <p className="text-muted-foreground">Generate a custom link for your client</p>
+          <h1 className="text-4xl font-black tracking-tighter">Request Payment</h1>
+          <p className="text-muted-foreground font-medium">Generate a custom invoice link for your client</p>
         </div>
       </div>
 
