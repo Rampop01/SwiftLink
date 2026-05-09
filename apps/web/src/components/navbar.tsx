@@ -22,25 +22,25 @@ export function Navbar() {
   const pathname = usePathname()
   
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-background/60 backdrop-blur-2xl">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4">
         <div className="flex items-center gap-3">
           {/* Mobile menu */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden h-9 w-9">
+              <Button variant="ghost" size="icon" className="md:hidden h-9 w-9 rounded-xl hover:bg-white/5">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80">
+            <SheetContent side="left" className="w-80 bg-background border-r border-white/[0.06]">
               <div className="flex items-center gap-2.5 mb-10">
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Link2 className="h-5 w-5 text-primary" />
+                <div className="h-9 w-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Link2 className="h-4 w-4 text-primary" />
                 </div>
-                <span className="font-black text-xl tracking-tight">SwiftLink</span>
+                <span className="font-black text-lg tracking-tight">SwiftLink</span>
               </div>
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-1">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -48,19 +48,15 @@ export function Navbar() {
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                       pathname === link.href
                         ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
                     {link.name}
                   </Link>
                 ))}
-                <div className="mt-8 pt-6 border-t">
-                  <ConnectButton 
-                    accountStatus="address"
-                    showBalance={false}
-                    chainStatus="none"
-                  />
+                <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                  <ConnectButton accountStatus="address" showBalance={false} chainStatus="none" />
                 </div>
               </nav>
             </SheetContent>
@@ -71,13 +67,13 @@ export function Navbar() {
             <div className="h-9 w-9 rounded-xl bg-primary/10 flex items-center justify-center">
               <Link2 className="h-4 w-4 text-primary" />
             </div>
-            <span className="hidden font-black text-xl tracking-tight sm:inline-block">
+            <span className="hidden font-black text-lg tracking-tight sm:inline-block">
               SwiftLink
             </span>
           </Link>
         </div>
         
-        {/* Desktop navigation */}
+        {/* Desktop */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href
@@ -85,27 +81,20 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                className={`relative flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                   isActive
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                 }`}
               >
                 <link.icon className="h-3.5 w-3.5" />
                 {link.name}
-                {isActive && (
-                  <span className="absolute -bottom-[17px] left-1/2 -translate-x-1/2 h-[2px] w-8 bg-primary rounded-full" />
-                )}
               </Link>
             )
           })}
           
-          <div className="flex items-center gap-3 ml-4 pl-4 border-l">
-            <ConnectButton 
-              accountStatus="address"
-              showBalance={false}
-              chainStatus="icon"
-            />
+          <div className="flex items-center gap-3 ml-3 pl-3 border-l border-white/[0.06]">
+            <ConnectButton accountStatus="address" showBalance={false} chainStatus="icon" />
           </div>
         </nav>
       </div>
