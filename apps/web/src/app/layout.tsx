@@ -32,11 +32,18 @@ export default function RootLayout({
             <div className="fixed inset-0 -z-10 bg-background overflow-hidden">
               {/* Custom Image Background */}
               <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 mix-blend-screen" 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-screen" 
                 style={{ backgroundImage: 'url(/bg-glow.png)' }} 
               />
-              {/* Optional: keep the subtle grid over the image for texture */}
-              <div className="absolute inset-0 bg-grid opacity-[0.1]" />
+              
+              {/* Shiny Overlay: Radial Gradient Spotlight */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(52,211,153,0.1),transparent_70%)]" />
+              
+              {/* Noise Texture for that premium feel */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+              {/* Grid texture */}
+              <div className="absolute inset-0 bg-grid opacity-[0.05]" />
             </div>
 
             <Navbar />
