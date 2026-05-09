@@ -9,7 +9,9 @@ import {
   ShieldCheck, 
   Sparkles, 
   QrCode, 
-  ArrowRight
+  ArrowRight,
+  Zap,
+  ChevronRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -18,26 +20,40 @@ const features = [
     title: "AI Invoicing",
     description: "Generate professional payment descriptions in seconds with our built-in AI assistant.",
     icon: Sparkles,
-    color: "bg-purple-500/10 text-purple-500",
+    gradient: "from-purple-500/20 to-purple-500/5",
+    iconColor: "text-purple-400",
+    borderColor: "group-hover:border-purple-500/30",
   },
   {
-    title: "QR Code Sharing",
-    description: "Instantly share your payment link via high-resolution QR codes, optimized for mobile.",
+    title: "QR Payments",
+    description: "Share your payment link via high-res QR codes, perfect for in-person transactions.",
     icon: QrCode,
-    color: "bg-blue-500/10 text-blue-500",
+    gradient: "from-blue-500/20 to-blue-500/5",
+    iconColor: "text-blue-400",
+    borderColor: "group-hover:border-blue-500/30",
   },
   {
-    title: "Global Settlements",
-    description: "Receive CELO, cUSD, or USDC from anywhere in the world with sub-cent gas fees.",
+    title: "Global Reach",
+    description: "Accept CELO and cUSD from anywhere in the world with sub-cent gas fees.",
     icon: Globe,
-    color: "bg-green-500/10 text-green-500",
+    gradient: "from-emerald-500/20 to-emerald-500/5",
+    iconColor: "text-emerald-400",
+    borderColor: "group-hover:border-emerald-500/30",
   },
   {
-    title: "Smart Security",
-    description: "Built on battle-tested Celo smart contracts with administrative safeguards.",
+    title: "Battle-Tested",
+    description: "Built on audited Celo smart contracts with admin safeguards and reentrancy protection.",
     icon: ShieldCheck,
-    color: "bg-orange-500/10 text-orange-500",
+    gradient: "from-amber-500/20 to-amber-500/5",
+    iconColor: "text-amber-400",
+    borderColor: "group-hover:border-amber-500/30",
   },
+];
+
+const steps = [
+  { step: "01", title: "Register", desc: "Pick a unique handle. Your wallet is instantly linked to your personal payment URL." },
+  { step: "02", title: "Share", desc: "Send your link anywhere — social media, invoices, QR codes, or direct messages." },
+  { step: "03", title: "Get Paid", desc: "Receive cUSD or CELO directly to your wallet. Instant, zero-fee settlements." },
 ];
 
 export default function Home() {
@@ -47,98 +63,109 @@ export default function Home() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
+      transition: { staggerChildren: 0.12 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
   };
 
   return (
     <main className="flex-1 overflow-x-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[140px]" />
-        <div className="absolute -bottom-[10%] left-[20%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[140px]" />
+      {/* Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[180px] animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[160px] animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[140px]" />
       </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-32">
-        <div className="container px-4 mx-auto max-w-7xl">
+      {/* Hero */}
+      <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24">
+        <div className="container px-4 mx-auto max-w-6xl">
           <motion.div 
-            className="text-center max-w-5xl mx-auto"
+            className="text-center max-w-4xl mx-auto"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
+            {/* Badge */}
+            <motion.div variants={itemVariants} className="flex justify-center mb-10">
+              <div className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold tracking-[0.15em] uppercase glass rounded-full text-primary">
+                <Zap className="h-3.5 w-3.5 fill-primary" />
+                Built on Celo
+                <ChevronRight className="h-3 w-3 opacity-40" />
+              </div>
+            </motion.div>
+
             {/* Main Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[1.1] md:leading-[1]"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.04em] mb-8 leading-[1.05]"
             >
-              The Simplest Way <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-400 to-primary animate-gradient-x">to Get Paid.</span>
+              The simplest way{" "}
+              <span className="text-gradient">to get paid</span>{" "}
+              in crypto.
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
+              className="text-lg md:text-xl text-muted-foreground mb-14 max-w-2xl mx-auto leading-relaxed"
             >
-              Generate a professional payment link and receive Celo native assets instantly. 
-              No complex addresses, no borders, just pure speed.
+              Generate a personal payment link, share it with anyone, and receive Celo native assets instantly. No complex addresses. No borders.
             </motion.p>
 
-            {/* CTA Section */}
-            <motion.div 
-              variants={itemVariants}
-              className="flex flex-col items-center gap-8 mb-32"
-            >
-              <div className="flex w-full max-w-xl items-center space-x-2 bg-background/50 backdrop-blur-xl p-2 rounded-full border-2 border-primary/20 shadow-2xl ring-4 ring-primary/5">
-                <div className="flex-1 flex items-center px-6 text-muted-foreground">
-                  <span className="text-lg font-bold text-primary/60 truncate">swiftlink.me/</span>
+            {/* CTA Input */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center gap-10 mb-24">
+              <div className="flex w-full max-w-lg items-center glass-strong rounded-2xl p-1.5 glow-border">
+                <div className="flex-1 flex items-center px-5">
+                  <span className="text-sm font-bold text-primary/60 whitespace-nowrap">swiftlink.me/</span>
                   <input 
                     type="text" 
                     placeholder="yourname" 
                     value={claimName}
                     onChange={(e) => setClaimName(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
-                    className="bg-transparent border-none outline-none text-foreground font-bold text-lg placeholder:text-muted-foreground/30 w-full ml-1"
+                    className="bg-transparent border-none outline-none text-foreground font-bold text-sm placeholder:text-muted-foreground/30 w-full ml-1"
                   />
                 </div>
-                <Button size="lg" className="rounded-full px-8 h-14 text-lg font-bold shadow-xl hover:scale-105 transition-transform" asChild>
-                  <Link href={`/register?username=${claimName}`}>Claim Now</Link>
+                <Button size="lg" className="rounded-xl px-8 h-12 text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all" asChild>
+                  <Link href={`/register?username=${claimName}`}>
+                    Claim Link
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
               
-              <div className="flex items-center gap-8 text-sm font-bold text-muted-foreground/60 uppercase tracking-widest">
-                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> Zero Fees</div>
-                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> Instant Settlement</div>
-                <div className="flex items-center gap-2 text-primary font-bold"><CheckCircle2 className="h-4 w-4" /> MiniPay Ready</div>
+              <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-bold text-muted-foreground uppercase tracking-[0.15em]">
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Zero Fees</div>
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Instant Settlement</div>
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> MiniPay Ready</div>
               </div>
             </motion.div>
 
             {/* Feature Grid */}
             <motion.div 
               variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left"
             >
               {features.map((feature, idx) => (
                 <div 
                   key={idx}
-                  className="group p-8 rounded-3xl bg-background/40 backdrop-blur-md border border-border/50 hover:border-primary/50 hover:bg-background/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1"
+                  className={`group relative p-7 rounded-2xl glass border border-white/[0.04] ${feature.borderColor} hover:bg-white/[0.04] transition-all duration-500`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                    <feature.icon className="h-7 w-7" />
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className="relative z-10 flex items-start gap-5">
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-white/[0.04] flex items-center justify-center ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                      <feature.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold mb-1.5 text-foreground">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
                 </div>
               ))}
             </motion.div>
@@ -147,78 +174,69 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-32 relative">
+      <section className="py-28 relative">
         <div className="container px-4 mx-auto max-w-5xl">
           <div className="text-center mb-20">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-primary mb-4">How It Works</p>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter">Three steps. That&apos;s it.</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">How It Works</p>
+            <h2 className="text-4xl md:text-5xl font-black tracking-[-0.03em]">Three steps. That&apos;s it.</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Connecting line */}
-            <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20" />
-            
-            {[
-              { step: "01", title: "Register", desc: "Pick a unique handle. Your wallet is instantly linked to your personal payment URL." },
-              { step: "02", title: "Share", desc: "Send your link anywhere — social media, invoices, QR codes, or direct messages." },
-              { step: "03", title: "Get Paid", desc: "Receive cUSD or CELO directly to your wallet. Instant, zero-fee settlements." },
-            ].map((item, idx) => (
-              <div key={idx} className="relative text-center group">
-                <div className="inline-flex items-center justify-center h-24 w-24 rounded-3xl bg-primary/10 text-primary text-3xl font-black mb-8 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 border-2 border-primary/10 shadow-xl shadow-primary/5">
-                  {item.step}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {steps.map((item, idx) => (
+              <div key={idx} className="relative group">
+                <div className="glass rounded-2xl p-8 h-full border border-white/[0.04] group-hover:border-primary/20 transition-all duration-500">
+                  <div className="text-5xl font-black text-primary/20 group-hover:text-primary/40 transition-colors mb-6">{item.step}</div>
+                  <h3 className="text-xl font-black mb-3">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="text-2xl font-black mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Social Proof / Stats Section */}
-      <section className="py-20 border-y bg-muted/30 relative overflow-hidden">
-        <div className="container px-4 mx-auto max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div className="space-y-2">
-              <div className="text-5xl font-black text-primary">0.001s</div>
-              <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Avg. Settlement Time</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-5xl font-black text-primary">$0.00</div>
-              <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Platform Fees</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-5xl font-black text-primary">24/7</div>
-              <div className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Global Availability</div>
+      {/* Stats */}
+      <section className="py-20 relative">
+        <div className="container px-4 mx-auto max-w-5xl">
+          <div className="glass-strong rounded-3xl p-12 glow-border">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-gradient mb-2">0.001s</div>
+                <div className="text-xs font-bold text-muted-foreground uppercase tracking-[0.15em]">Settlement Time</div>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-gradient mb-2">$0.00</div>
+                <div className="text-xs font-bold text-muted-foreground uppercase tracking-[0.15em]">Platform Fees</div>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-black text-gradient mb-2">24/7</div>
+                <div className="text-xs font-bold text-muted-foreground uppercase tracking-[0.15em]">Availability</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Footer Section */}
-      <section className="py-32 relative">
-        <div className="container px-4 mx-auto max-w-5xl">
-          <div className="relative p-12 lg:p-20 rounded-[4rem] bg-foreground text-background overflow-hidden text-center">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-transparent opacity-50" />
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-none text-white">
-                Ready to own your <br /> payment identity?
-              </h2>
-              <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto font-medium">
-                Join thousands of creators and freelancers who are simplifying their crypto payments with SwiftLink.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" variant="secondary" className="rounded-full px-10 h-16 text-lg font-bold group" asChild>
-                  <Link href="/register">
-                    Get Started Free
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" className="rounded-full px-10 h-16 text-lg font-bold border-white/20 text-white hover:bg-white/10" asChild>
-                  <Link href="/dashboard">View Dashboard</Link>
-                </Button>
-              </div>
-            </div>
+      {/* Final CTA */}
+      <section className="py-28 relative">
+        <div className="container px-4 mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl md:text-6xl font-black tracking-[-0.03em] mb-6 leading-tight">
+            Ready to own your<br />
+            <span className="text-gradient">payment identity?</span>
+          </h2>
+          <p className="text-lg text-muted-foreground mb-12 max-w-xl mx-auto">
+            Join creators and freelancers who are simplifying their crypto payments with SwiftLink.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" className="rounded-xl px-10 h-14 text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 group" asChild>
+              <Link href="/register">
+                Get Started Free
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="rounded-xl px-10 h-14 text-base font-bold border-white/10 hover:bg-white/5" asChild>
+              <Link href="/dashboard">View Dashboard</Link>
+            </Button>
           </div>
         </div>
       </section>
