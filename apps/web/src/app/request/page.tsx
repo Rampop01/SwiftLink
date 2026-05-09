@@ -156,8 +156,9 @@ export default function RequestPage() {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
-          </CardContent>
-        </Card>
+            </div>
+          </div>
+        </div>
 
         <AnimatePresence>
           {description && (
@@ -166,25 +167,25 @@ export default function RequestPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
             >
-              <Card className="bg-primary/5 border-dashed border-2 border-primary/30">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-bold uppercase tracking-wider text-primary">Your Shareable Link</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2 p-3 bg-background rounded-lg border shadow-sm">
+              <div className="glass rounded-2xl p-6 border-dashed border-primary/30 glow-border">
+                <div className="mb-4">
+                  <p className="text-sm font-bold uppercase tracking-wider text-primary">Your Shareable Link</p>
+                </div>
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm">
                     <span className="text-sm font-mono truncate flex-1">{generatedLink}</span>
-                    <Button size="icon" variant="ghost" onClick={copyLink}>
-                      {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                    <Button size="icon" variant="ghost" onClick={copyLink} className="h-8 w-8 hover:bg-white/10">
+                      {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
                     </Button>
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full gap-2" onClick={copyLink}>
+                </div>
+                <div>
+                  <Button className="w-full gap-2 h-12 rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30" onClick={copyLink}>
                     <Share2 className="h-4 w-4" />
                     Copy & Send to Client
                   </Button>
-                </CardFooter>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
