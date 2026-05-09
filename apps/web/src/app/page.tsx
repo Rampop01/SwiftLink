@@ -146,6 +146,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-32 relative">
+        <div className="container px-4 mx-auto max-w-5xl">
+          <div className="text-center mb-20">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-primary mb-4">How It Works</p>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter">Three steps. That&apos;s it.</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Connecting line */}
+            <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20" />
+            
+            {[
+              { step: "01", title: "Register", desc: "Pick a unique handle. Your wallet is instantly linked to your personal payment URL." },
+              { step: "02", title: "Share", desc: "Send your link anywhere — social media, invoices, QR codes, or direct messages." },
+              { step: "03", title: "Get Paid", desc: "Receive cUSD or CELO directly to your wallet. Instant, zero-fee settlements." },
+            ].map((item, idx) => (
+              <div key={idx} className="relative text-center group">
+                <div className="inline-flex items-center justify-center h-24 w-24 rounded-3xl bg-primary/10 text-primary text-3xl font-black mb-8 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 border-2 border-primary/10 shadow-xl shadow-primary/5">
+                  {item.step}
+                </div>
+                <h3 className="text-2xl font-black mb-3">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof / Stats Section */}
       <section className="py-20 border-y bg-muted/30 relative overflow-hidden">
         <div className="container px-4 mx-auto max-w-7xl relative z-10">
