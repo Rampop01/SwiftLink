@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sheet"
 
 const navLinks = [
-  { name: "Home", href: "/" },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Request", href: "/request", icon: Sparkles },
   { name: "Register", href: "/register", icon: UserPlus },
@@ -23,38 +22,40 @@ export function Navbar() {
   const pathname = usePathname()
   
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4">
-        <div className="flex items-center gap-2">
-          {/* Mobile menu button */}
+        <div className="flex items-center gap-3">
+          {/* Mobile menu */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon" className="md:hidden h-9 w-9">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-80">
-              <div className="flex items-center gap-2 mb-8 text-primary">
-                <Link2 className="h-6 w-6" />
-                <span className="font-bold text-lg text-foreground">
-                  SwiftLink
-                </span>
+              <div className="flex items-center gap-2.5 mb-10">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Link2 className="h-5 w-5 text-primary" />
+                </div>
+                <span className="font-black text-xl tracking-tight">SwiftLink</span>
               </div>
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`flex items-center gap-2 text-base font-medium transition-colors hover:text-primary ${
-                      pathname === link.href ? "text-foreground" : "text-foreground/70"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      pathname === link.href
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                   >
-                    {link.icon && <link.icon className="h-4 w-4" />}
+                    <link.icon className="h-4 w-4" />
                     {link.name}
                   </Link>
                 ))}
-                <div className="mt-6 pt-6 border-t flex justify-center">
+                <div className="mt-8 pt-6 border-t">
                   <ConnectButton 
                     accountStatus="address"
                     showBalance={false}
@@ -66,32 +67,40 @@ export function Navbar() {
           </Sheet>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Link2 className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold text-xl sm:inline-block">
+          <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+            <div className="h-9 w-9 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Link2 className="h-4 w-4 text-primary" />
+            </div>
+            <span className="hidden font-black text-xl tracking-tight sm:inline-block">
               SwiftLink
             </span>
           </Link>
         </div>
         
         {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href
-                  ? "text-foreground"
-                  : "text-foreground/70"
-              }`}
-            >
-              {link.icon && <link.icon className="h-4 w-4" />}
-              {link.name}
-            </Link>
-          ))}
+        <nav className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  isActive
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <link.icon className="h-3.5 w-3.5" />
+                {link.name}
+                {isActive && (
+                  <span className="absolute -bottom-[17px] left-1/2 -translate-x-1/2 h-[2px] w-8 bg-primary rounded-full" />
+                )}
+              </Link>
+            )
+          })}
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 ml-4 pl-4 border-l">
             <ConnectButton 
               accountStatus="address"
               showBalance={false}
