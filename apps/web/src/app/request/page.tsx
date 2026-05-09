@@ -75,17 +75,13 @@ export default function RequestPage() {
   if (!isConnected) {
     return (
       <div className="container py-24 flex justify-center">
-        <Card className="max-w-md w-full text-center p-8">
-          <CardHeader>
-            <CardTitle>Connect Wallet</CardTitle>
-            <CardDescription>You need to be connected to generate payment requests.</CardDescription>
-          </CardHeader>
-          <CardFooter>
-            <Button asChild className="w-full">
-              <Link href="/">Back Home</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+        <div className="max-w-md w-full text-center p-10 glass rounded-2xl glow-border">
+          <h2 className="text-2xl font-black mb-2">Connect Wallet</h2>
+          <p className="text-sm text-muted-foreground mb-6">You need to be connected to generate payment requests.</p>
+          <Button asChild className="rounded-xl font-semibold">
+            <Link href="/">Back Home</Link>
+          </Button>
+        </div>
       </div>
     )
   }
@@ -102,16 +98,13 @@ export default function RequestPage() {
         </div>
       </div>
 
-      <div className="grid gap-8">
-        <Card className="border-2 shadow-xl overflow-hidden">
-          <div className="h-2 bg-primary" />
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-primary" />
-              Invoice Details
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+      <div className="grid gap-6">
+        <div className="glass rounded-2xl p-6 glow-border">
+          <div className="flex items-center gap-2 mb-6">
+            <FileText className="h-4 w-4 text-primary" />
+            <p className="text-sm font-bold">Invoice Details</p>
+          </div>
+          <CardContent className="space-y-6 p-0">
             <div className="space-y-2">
               <Label htmlFor="amount">Requested Amount (cUSD)</Label>
               <div className="relative">
@@ -119,7 +112,7 @@ export default function RequestPage() {
                 <Input 
                   id="amount" 
                   placeholder="0.00" 
-                  className="pl-9 h-12 text-lg font-medium"
+                  className="pl-9 h-12 text-lg font-medium bg-white/[0.03] border-white/[0.08] rounded-xl"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
