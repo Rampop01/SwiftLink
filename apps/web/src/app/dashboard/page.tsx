@@ -113,93 +113,81 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="container flex items-center justify-center min-h-[calc(100vh-64px)]">
-        <Card className="max-w-md w-full text-center p-8 border-2 shadow-xl">
-          <Wallet className="h-16 w-16 mx-auto mb-6 text-primary opacity-20" />
+        <div className="max-w-md w-full text-center p-10 glass rounded-2xl glow-border">
+          <Wallet className="h-16 w-16 mx-auto mb-6 text-primary opacity-30" />
           <h2 className="text-3xl font-black mb-3">Connect Wallet</h2>
-          <p className="text-muted-foreground mb-8">Please connect your wallet to view your personalized SwiftLink dashboard.</p>
-          <div className="flex justify-center">
-             {/* RainbowKit button should be in the navbar, but we provide a hint here */}
-             <p className="text-sm font-bold text-primary">Use the button in the header to connect</p>
-          </div>
-        </Card>
+          <p className="text-muted-foreground mb-8">Connect your wallet to access your SwiftLink dashboard.</p>
+          <p className="text-sm font-bold text-primary">Use the button in the header →</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="container py-12 max-w-7xl animate-in fade-in duration-500">
+    <div className="container py-12 max-w-7xl animate-in">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
         <div>
-          <h1 className="text-5xl font-black tracking-tighter">Dashboard</h1>
-          <p className="text-lg text-muted-foreground font-medium">
+          <h1 className="text-4xl font-black tracking-[-0.03em]">Dashboard</h1>
+          <p className="text-muted-foreground font-medium">
             Welcome back{username ? `, @${username}` : ""}
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2">
           {username && <QRCodeModal username={username} url={paymentLink} />}
-          <Button variant="outline" asChild className="gap-2 h-12 px-6 rounded-xl font-bold">
+          <Button variant="outline" asChild className="gap-2 h-10 px-5 rounded-xl text-sm font-semibold border-white/10 hover:bg-white/5">
             <Link href="/request">
-              <FileText className="h-4 w-4" />
+              <FileText className="h-3.5 w-3.5" />
               Request
             </Link>
           </Button>
-          <Button className="gap-2 h-12 px-6 rounded-xl font-bold shadow-xl shadow-primary/20">
-            <TrendingUp className="h-4 w-4" />
+          <Button className="gap-2 h-10 px-5 rounded-xl text-sm font-semibold shadow-lg shadow-primary/20">
+            <TrendingUp className="h-3.5 w-3.5" />
             Withdraw
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Your Link Card */}
-        <Card className="md:col-span-2 border-2 border-primary/20 bg-primary/5 relative overflow-hidden group rounded-[2rem]">
-          <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Link2 className="h-40 w-40 -rotate-12" />
+        <div className="md:col-span-2 glass rounded-2xl p-6 relative overflow-hidden group glow-border">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Link2 className="h-32 w-32 -rotate-12" />
           </div>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Your Payment Link</CardTitle>
-            <CardDescription className="text-base">Share this link to receive cUSD and CELO instantly</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {username ? (
-              <div className="flex items-center gap-3 p-5 bg-background rounded-2xl border-2 border-primary/10 shadow-lg transition-all hover:border-primary/30">
-                <span className="text-xl font-bold truncate flex-1 text-primary">{paymentLink}</span>
-                <Button size="icon" variant="ghost" onClick={copyToClipboard} className="h-12 w-12 rounded-xl">
-                  <Copy className="h-5 w-5" />
-                </Button>
-                <Button size="icon" variant="ghost" className="h-12 w-12 rounded-xl">
-                  <Share2 className="h-5 w-5" />
-                </Button>
-              </div>
-            ) : (
-              <div className="p-8 bg-background/50 rounded-2xl border-2 border-dashed border-primary/20 text-center">
-                <p className="text-lg font-medium text-muted-foreground mb-6">You haven't registered a username yet</p>
-                <Button size="lg" className="rounded-full px-10 font-bold" asChild>
-                  <Link href="/register">Register My Handle</Link>
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+          <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1">Your Payment Link</p>
+          <p className="text-sm text-muted-foreground mb-5">Share this link to receive cUSD and CELO</p>
+          {username ? (
+            <div className="flex items-center gap-2 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] transition-all hover:border-primary/30">
+              <span className="text-base font-bold truncate flex-1 text-primary">{paymentLink}</span>
+              <Button size="icon" variant="ghost" onClick={copyToClipboard} className="h-9 w-9 rounded-lg hover:bg-white/10">
+                <Copy className="h-4 w-4" />
+              </Button>
+              <Button size="icon" variant="ghost" className="h-9 w-9 rounded-lg hover:bg-white/10">
+                <Share2 className="h-4 w-4" />
+              </Button>
+            </div>
+          ) : (
+            <div className="p-6 bg-white/[0.02] rounded-xl border border-dashed border-white/[0.08] text-center">
+              <p className="text-sm text-muted-foreground mb-4">Register a username to get your link</p>
+              <Button size="sm" className="rounded-xl font-semibold" asChild>
+                <Link href="/register">Register Handle</Link>
+              </Button>
+            </div>
+          )}
+        </div>
 
         {/* Balance Card */}
-        <Card className="bg-foreground text-background rounded-[2rem] shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[60px] -mr-16 -mt-16" />
-          <CardHeader>
-            <CardTitle className="text-xl flex items-center gap-2 font-bold opacity-80">
-              <Wallet className="h-5 w-5" />
-              Wallet Balance
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-4">
-            <div className="text-5xl font-black tracking-tighter mb-2">
-              {balanceData ? `${parseFloat(balanceData.formatted).toFixed(2)} ${balanceData.symbol}` : "0.00 CELO"}
-            </div>
-            <div className="inline-flex items-center gap-1 px-3 py-1 bg-background/10 rounded-full text-xs font-bold uppercase tracking-widest opacity-60">
-              Live from Celo Mainnet
-            </div>
-          </CardContent>
-        </Card>
+        <div className="glass-strong rounded-2xl p-6 relative overflow-hidden glow-border">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/15 blur-[50px] -mr-8 -mt-8" />
+          <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1 flex items-center gap-2">
+            <Wallet className="h-3.5 w-3.5" /> Wallet Balance
+          </p>
+          <div className="text-4xl font-black tracking-[-0.03em] mt-6 mb-3 text-gradient">
+            {balanceData ? `${parseFloat(balanceData.formatted).toFixed(2)}` : "0.00"}
+          </div>
+          <p className="text-xs text-muted-foreground font-semibold">
+            {balanceData?.symbol || "CELO"} · Celo Mainnet
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
