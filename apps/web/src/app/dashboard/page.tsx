@@ -102,7 +102,7 @@ export default function DashboardPage() {
   const totalVolume = events.reduce((acc, event) => acc + parseFloat(event.amount), 0);
   const uniquePayers = new Set(events.map(event => event.from)).size;
 
-  const paymentLink = username ? `swiftlink.me/pay/${username}` : ""
+  const paymentLink = username ? `swiftlink/pay/${username}` : ""
 
   const copyToClipboard = () => {
     if (!paymentLink) return

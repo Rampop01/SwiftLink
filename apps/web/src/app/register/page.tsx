@@ -65,7 +65,7 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
             <p className="text-muted-foreground mb-8">Your payment link is ready to share.</p>
             <div className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2">Your Link</p>
-              <p className="text-lg font-black text-gradient">swiftlink.me/pay/{username}</p>
+              <p className="text-lg font-black text-gradient">swiftlink/pay/{username}</p>
             </div>
             <Button className="w-full h-12 text-base font-bold rounded-xl shadow-lg shadow-primary/20 group" size="lg" asChild>
               <a href="/dashboard">
@@ -103,7 +103,7 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
               <Label htmlFor="username" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground">Username</Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-muted-foreground font-medium">
-                  swiftlink.me/pay/
+                  swiftlink/pay/
                 </span>
                 <Input
                   id="username"
