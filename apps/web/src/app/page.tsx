@@ -13,6 +13,7 @@ import {
   Zap,
   ChevronRight
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { LiveActivity } from "@/components/live-activity";
 import Image from "next/image";
 
