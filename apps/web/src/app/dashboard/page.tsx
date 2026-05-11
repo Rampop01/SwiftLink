@@ -161,7 +161,22 @@ export default function DashboardPage() {
               <Button size="icon" variant="ghost" onClick={copyToClipboard} className="h-9 w-9 rounded-lg hover:bg-white/10">
                 <Copy className="h-4 w-4" />
               </Button>
-              <Button size="icon" variant="ghost" className="h-9 w-9 rounded-lg hover:bg-white/10">
+              <Button 
+                size="icon" 
+                variant="ghost" 
+                className="h-9 w-9 rounded-lg hover:bg-white/10"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: 'SwiftLink Payment Link',
+                      text: `Pay me via SwiftLink:`,
+                      url: `https://${paymentLink}`,
+                    }).catch(console.error);
+                  } else {
+                    copyToClipboard();
+                  }
+                }}
+              >
                 <Share2 className="h-4 w-4" />
               </Button>
             </div>
