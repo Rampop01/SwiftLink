@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CheckCircle2, AlertCircle, Loader2, Link2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, Link2, ArrowRight, Share2 } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
 import { toast } from 'sonner';
@@ -63,15 +63,33 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
             </div>
             <h2 className="text-3xl font-black mb-2">You&apos;re Live! 🚀</h2>
             <p className="text-muted-foreground mb-8">Your payment link is ready to share.</p>
-            <div 
-              className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8 cursor-pointer hover:bg-white/[0.06] transition-all group/link"
-              onClick={() => {
-                navigator.clipboard.writeText(`https://swiftlink/pay/${username}`);
-                toast.success("Link copied to clipboard!");
-              }}
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2 group-hover/link:text-primary transition-colors">Your Link (Click to Copy)</p>
-              <p className="text-lg font-black text-gradient">swiftlink/pay/{username}</p>
+            <div className="flex gap-3 mb-8">
+              <div 
+                className="flex-1 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] cursor-pointer hover:bg-white/[0.06] transition-all group/link"
+                onClick={() => {
+                  navigator.clipboard.writeText(`https://swiftlink/pay/${username}`);
+                  toast.success("Link copied to clipboard!");
+                }}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1 group-hover/link:text-primary transition-colors">Click to Copy</p>
+                <p className="text-base font-black text-gradient">swiftlink/pay/{username}</p>
+              </div>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-auto w-14 rounded-xl border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06]"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: 'My SwiftLink',
+                      text: 'Pay me via SwiftLink:',
+                      url: `https://swiftlink/pay/${username}`,
+                    });
+                  }
+                }}
+              >
+                <Share2 className="h-5 w-5" />
+              </Button>
             </div>
             <Button className="w-full h-12 text-base font-bold rounded-xl shadow-lg shadow-primary/20 group" size="lg" asChild>
               <a href="/dashboard">
