@@ -248,27 +248,33 @@ export default function DashboardPage() {
                   <div className="h-4 w-32 bg-primary/10 rounded" />
                 </div>
               ) : events.length > 0 ? (
-                <div className="space-y-4">
-                  {events.map((event, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group">
-                      <div className="flex items-center gap-4">
-                        <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <ArrowDownLeft className="h-5 w-5 text-green-600" />
+                  <div className="space-y-4">
+                    {events.map((event, idx) => (
+                      <motion.div 
+                        key={event.hash}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.05 }}
+                        className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <ArrowDownLeft className="h-5 w-5 text-green-600" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm">Payment Received</p>
+                            <p className="text-xs text-muted-foreground font-mono">from {event.from.slice(0, 6)}...{event.from.slice(-4)}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-bold text-sm">Payment Received</p>
-                          <p className="text-xs text-muted-foreground font-mono">from {event.from.slice(0, 6)}...{event.from.slice(-4)}</p>
+                        <div className="text-right">
+                          <p className="font-black text-green-600">+{parseFloat(event.amount).toFixed(2)}</p>
+                          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
+                            {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
                         </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-black text-green-600">+{parseFloat(event.amount).toFixed(2)}</p>
-                        <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
-                          {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                      </motion.div>
+                    ))}
+                  </div>
               ) : username ? (
                 <div className="text-center py-20 border-2 border-dashed border-primary/10 rounded-[2rem] bg-primary/[0.02]">
                   <ArrowDownLeft className="h-16 w-16 mx-auto mb-6 text-primary opacity-10" />
