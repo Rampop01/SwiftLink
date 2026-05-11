@@ -79,9 +79,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24">
         <div className="container px-4 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div 
-              className="text-left"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
@@ -96,7 +95,7 @@ export default function Home() {
               {/* Main Heading */}
               <motion.h1
                 variants={itemVariants}
-                className="text-5xl sm:text-6xl md:text-7xl font-black tracking-[-0.04em] mb-8 leading-[1.05]"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.04em] mb-8 leading-[1.05]"
               >
                 The simplest way{" "}
                 <br />
@@ -107,16 +106,16 @@ export default function Home() {
               {/* Subtitle */}
               <motion.p
                 variants={itemVariants}
-                className="text-lg md:text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed"
+                className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
               >
                 Generate a personal payment link, share it with anyone, and receive Celo native assets instantly. No complex addresses. No borders.
               </motion.p>
 
               {/* CTA Input */}
-              <motion.div variants={itemVariants} className="flex flex-col gap-8 mb-16">
+              <motion.div variants={itemVariants} className="flex flex-col items-center gap-8 mb-16">
                 <div className="flex w-full max-w-lg items-center glass-strong rounded-2xl p-1.5 glow-border">
                   <div className="flex-1 flex items-center px-5">
-                    <span className="text-sm font-bold text-primary/60 whitespace-nowrap">swiftlink.me/</span>
+                    <span className="text-sm font-bold text-primary/60 whitespace-nowrap">swiftlink/pay/</span>
                     <input 
                       type="text" 
                       placeholder="yourname" 
@@ -133,39 +132,16 @@ export default function Home() {
                   </Button>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-6 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
+                <div className="flex flex-wrap items-center justify-center gap-6 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
                   <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Zero Fees</div>
                   <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Instant Settlement</div>
                   <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> MiniPay Ready</div>
                 </div>
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="mb-24">
                 <LiveActivity />
               </motion.div>
-            </motion.div>
-
-            {/* Hero Visual */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, x: 50 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <div className="relative z-10 w-full max-w-[500px] mx-auto animate-float">
-                <Image 
-                  src="/mockup.png" 
-                  alt="MiniPay Mockup" 
-                  width={1000} 
-                  height={1000} 
-                  className="w-full h-auto drop-shadow-[0_0_50px_rgba(53,208,127,0.2)]"
-                  priority
-                />
-              </div>
-              
-              {/* Decorative Glows */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10" />
-              <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px] -z-10" />
             </motion.div>
           </div>
 
