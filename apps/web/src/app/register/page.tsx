@@ -63,8 +63,14 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
             </div>
             <h2 className="text-3xl font-black mb-2">You&apos;re Live! 🚀</h2>
             <p className="text-muted-foreground mb-8">Your payment link is ready to share.</p>
-            <div className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2">Your Link</p>
+            <div 
+              className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8 cursor-pointer hover:bg-white/[0.06] transition-all group/link"
+              onClick={() => {
+                navigator.clipboard.writeText(`https://swiftlink/pay/${username}`);
+                toast.success("Link copied to clipboard!");
+              }}
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-2 group-hover/link:text-primary transition-colors">Your Link (Click to Copy)</p>
               <p className="text-lg font-black text-gradient">swiftlink/pay/{username}</p>
             </div>
             <Button className="w-full h-12 text-base font-bold rounded-xl shadow-lg shadow-primary/20 group" size="lg" asChild>
