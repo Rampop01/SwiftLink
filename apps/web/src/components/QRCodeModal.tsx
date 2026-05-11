@@ -85,7 +85,7 @@ export function QRCodeModal({ username, url }: QRCodeModalProps) {
               value={fullUrl}
               size={240}
               level="H"
-              includeMargin={false}
+              margin={4}
               imageSettings={{
                 src: "/logo-icon.png", // We'll need to add a logo later
                 x: undefined,
