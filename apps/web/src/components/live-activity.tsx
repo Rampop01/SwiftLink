@@ -10,6 +10,11 @@ const activities = [
   { id: 3, user: "mike_dev", amount: "25 cUSD", time: "5m ago" },
   { id: 4, user: "crypto_queen", amount: "100 cUSD", time: "8m ago" },
   { id: 5, user: "web3_builder", amount: "2 CELO", time: "12m ago" },
+  { id: 6, user: "lucas_design", amount: "50 cUSD", time: "15m ago" },
+  { id: 7, user: "elena.stable", amount: "15 cUSD", time: "18m ago" },
+  { id: 8, user: "vitalik.fans", amount: "1 CELO", time: "22m ago" },
+  { id: 9, user: "nomad_pay", amount: "200 cUSD", time: "25m ago" },
+  { id: 10, user: "celo_maxi", amount: "50 CELO", time: "30m ago" },
 ];
 
 export function LiveActivity() {
