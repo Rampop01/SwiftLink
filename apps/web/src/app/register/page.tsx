@@ -141,21 +141,21 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
                 />
               </div>
               
-              <div className="min-h-[20px]">
+              <div className="min-h-[24px]">
                 {isChecking && (
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground animate-pulse">
+                  <div className="flex items-center gap-2 text-[10px] text-muted-foreground animate-pulse font-bold uppercase tracking-widest">
                     <Loader2 className="h-3 w-3 animate-spin" />
                     Checking...
                   </div>
                 )}
-                {isAvailable && (
-                  <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold">
+                {isAvailable && username.length > 2 && (
+                  <div className="flex items-center gap-2 text-[10px] text-emerald-400 font-black uppercase tracking-widest animate-in">
                     <CheckCircle2 className="h-3 w-3" />
                     Available!
                   </div>
                 )}
                 {isTaken && (
-                  <div className="flex items-center gap-2 text-xs text-red-400 font-semibold">
+                  <div className="flex items-center gap-2 text-[10px] text-rose-400 font-black uppercase tracking-widest animate-in">
                     <AlertCircle className="h-3 w-3" />
                     Already taken
                   </div>
@@ -170,18 +170,22 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
             )}
 
             <Button 
-              className="w-full h-12 text-base font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-[0.98]" 
+              className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-[0.98] group relative overflow-hidden" 
               size="lg"
-              disabled={!isAvailable || !isConnected || isPending || isConfirming}
+              disabled={!isAvailable || !isConnected || isPending || isConfirming || username.length < 3}
               onClick={handleRegister}
             >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               {(isPending || isConfirming) ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   {isPending ? 'Requesting...' : 'Confirming...'}
                 </>
               ) : (
-                'Register Username'
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-4 w-4" />
+                  Claim My Handle
+                </div>
               )}
             </Button>
           </div>
