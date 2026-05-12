@@ -97,14 +97,16 @@ export function QRCodeModal({ username, url }: QRCodeModalProps) {
           </div>
           
           <div className="w-full grid grid-cols-2 gap-4">
-            <Button variant="secondary" className="gap-2 h-12" onClick={downloadQR}>
+          <div className="w-full grid grid-cols-2 gap-4">
+            <Button variant="secondary" className="gap-2 h-12 rounded-xl font-bold hover-glow hover-shine transition-all" onClick={downloadQR}>
               <Download className="h-4 w-4" />
-              Download
+              Download PNG
             </Button>
-            <Button variant="default" className="gap-2 h-12" onClick={shareQR}>
+            <Button variant="default" className="gap-2 h-12 rounded-xl font-bold shadow-lg shadow-primary/20 hover-glow hover-shine transition-all" onClick={shareQR}>
               <Share2 className="h-4 w-4" />
               Share Link
             </Button>
+          </div>
           </div>
         </div>
       </DialogContent>
