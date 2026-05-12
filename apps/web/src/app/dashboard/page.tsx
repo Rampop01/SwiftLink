@@ -236,9 +236,42 @@ export default function DashboardPage() {
 
         {/* Activity Table */}
         <Card className="md:col-span-3 rounded-[2rem]">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
-            <CardDescription className="font-medium text-primary/60">Live updates from the Celo network</CardDescription>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
+            <div>
+              <CardTitle className="text-2xl font-bold">Recent Activity</CardTitle>
+              <CardDescription className="font-medium text-primary/60">Live updates from the Celo network</CardDescription>
+            </div>
+            {events.length > 0 && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="h-8 px-3 rounded-lg text-xs font-bold border-white/5 hover:bg-white/5 gap-2"
+                onClick={() => {
+                  const csv = [
+                    ["Date", "From", "Amount", "Hash"].join(","),
+                    ...events.map(e => [
+                      new Date(e.timestamp).toISOString(),
+                      e.from,
+                      e.amount,
+                      e.hash
+                    ].join(","))
+                  ].join("\n");
+                  const blob = new Blob([csv], { type: 'text/csv' });
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.setAttribute('hidden', '');
+                  a.setAttribute('href', url);
+                  a.setAttribute('download', `swiftlink_activity_${username}.csv`);
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                  toast.success("Transaction history exported!");
+                }}
+              >
+                <ArrowDownLeft className="h-3 w-3 rotate-180" />
+                Export CSV
+              </Button>
+            )}
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
