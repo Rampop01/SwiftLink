@@ -17,6 +17,7 @@ import {
 import { useAccount, useReadContract, useBalance, usePublicClient, useWatchContractEvent } from "wagmi"
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
 import { QRCodeModal } from "@/components/QRCodeModal"
+import { Skeleton } from "@/components/ui/skeleton"
 import { toast } from "sonner"
 import Link from "next/link"
 import { formatUnits } from "viem"
@@ -276,9 +277,22 @@ export default function DashboardPage() {
           <CardContent>
             <div className="space-y-6">
               {isLoadingEvents ? (
-                <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 mb-4" />
-                  <div className="h-4 w-32 bg-primary/10 rounded" />
+                <div className="space-y-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                      <div className="flex items-center gap-4">
+                        <Skeleton className="h-10 w-10 rounded-full" />
+                        <div className="space-y-2">
+                          <Skeleton className="h-4 w-32" />
+                          <Skeleton className="h-3 w-48" />
+                        </div>
+                      </div>
+                      <div className="space-y-2 text-right">
+                        <Skeleton className="h-4 w-16 ml-auto" />
+                        <Skeleton className="h-3 w-12 ml-auto" />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               ) : events.length > 0 ? (
                   <div className="space-y-4">
