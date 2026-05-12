@@ -64,16 +64,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/5 border border-primary/10">
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary">Built on Celo</span>
+          </div>
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} SwiftLink. Built for the Celo Proof of Ship contest.
+            &copy; {new Date().getFullYear()} SwiftLink. Proof of Ship Contest.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="text-xs text-muted-foreground font-semibold">All systems operational</span>
+            <span className="text-xs text-muted-foreground font-semibold">Celo Mainnet Active</span>
           </div>
         </div>
       </div>
