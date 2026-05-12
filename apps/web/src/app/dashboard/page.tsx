@@ -20,6 +20,7 @@ import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
 import { QRCodeModal } from "@/components/QRCodeModal"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip } from "@/components/ui/tooltip"
+import { TransactionModal } from "@/components/TransactionModal"
 import { toast } from "sonner"
 import Link from "next/link"
 import { formatUnits } from "viem"
@@ -53,6 +54,9 @@ export default function DashboardPage() {
   const publicClient = usePublicClient()
   const [events, setEvents] = React.useState<ActivityEvent[]>([])
   const [isLoadingEvents, setIsLoadingEvents] = React.useState(true)
+  const [selectedEvent, setSelectedEvent] = React.useState<ActivityEvent | null>(null)
+  const [isTxModalOpen, setIsTxModalOpen] = React.useState(false)
+  const [isQRModalOpen, setIsQRModalOpen] = React.useState(false)
 
   const fetchEvents = React.useCallback(async () => {
     if (!address || !publicClient) return
@@ -314,7 +318,11 @@ export default function DashboardPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.05 }}
-                        className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group"
+                        className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group cursor-pointer"
+                        onClick={() => {
+                          setSelectedEvent(event);
+                          setIsTxModalOpen(true);
+                        }}
                       >
                         <div className="flex items-center gap-4">
                           <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -364,6 +372,12 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <TransactionModal 
+        isOpen={isTxModalOpen} 
+        onClose={() => setIsTxModalOpen(false)} 
+        event={selectedEvent} 
+      />
     </div>
   )
 }
