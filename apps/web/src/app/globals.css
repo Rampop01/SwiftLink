@@ -61,6 +61,34 @@
     mask-composite: exclude;
     pointer-events: none;
   }
+  .hover-glow {
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(53, 208, 127, 0.15);
+    border-color: rgba(53, 208, 127, 0.3);
+    transform: translateY(-2px);
+  }
+  .hover-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .hover-shine::after {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+    transform: rotate(45deg);
+    transition: all 0.8s ease;
+    pointer-events: none;
+  }
+  .hover-shine:hover::after {
+    top: 50%;
+    left: 50%;
+  }
 }
 
 @keyframes gradient-x {

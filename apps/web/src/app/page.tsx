@@ -157,7 +157,7 @@ export default function Home() {
               <motion.div 
                 key={idx}
                 variants={itemVariants}
-                className={`group relative p-7 rounded-2xl glass border border-white/[0.04] ${feature.borderColor} hover:bg-white/[0.04] transition-all duration-500`}
+                className={`group relative p-7 rounded-2xl glass border border-white/[0.04] ${feature.borderColor} hover:bg-white/[0.04] hover-glow hover-shine transition-all duration-500`}
               >
                 <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative z-10">
