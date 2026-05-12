@@ -18,6 +18,7 @@ import { useAccount, useReadContract, useBalance, usePublicClient, useWatchContr
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
 import { QRCodeModal } from "@/components/QRCodeModal"
 import { Skeleton } from "@/components/ui/skeleton"
+import { Tooltip } from "@/components/ui/tooltip"
 import { toast } from "sonner"
 import Link from "next/link"
 import { formatUnits } from "viem"
@@ -212,7 +213,9 @@ export default function DashboardPage() {
           <Card className="rounded-[1.5rem]">
             <CardContent className="pt-8 pb-8">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Total Volume</p>
+                <Tooltip content="Sum of all payments received in CELO">
+                  <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground border-b border-dashed border-white/20 cursor-help">Total Volume</p>
+                </Tooltip>
                 <div className="h-8 w-8 rounded-full bg-green-500/10 flex items-center justify-center">
                   <ArrowDownLeft className="h-4 w-4 text-green-500" />
                 </div>
@@ -224,7 +227,9 @@ export default function DashboardPage() {
           <Card className="rounded-[1.5rem]">
             <CardContent className="pt-8 pb-8">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Unique Payers</p>
+                <Tooltip content="Number of unique wallet addresses that paid you">
+                  <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground border-b border-dashed border-white/20 cursor-help">Unique Payers</p>
+                </Tooltip>
                 <div className="h-8 w-8 rounded-full bg-blue-500/10 flex items-center justify-center">
                   <Users className="h-4 w-4 text-blue-500" />
                 </div>
