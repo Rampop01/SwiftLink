@@ -343,12 +343,31 @@ export default function DashboardPage() {
                     ))}
                   </div>
               ) : username ? (
-                <div className="text-center py-20 border-2 border-dashed border-primary/10 rounded-[2rem] bg-primary/[0.02]">
-                  <ArrowDownLeft className="h-16 w-16 mx-auto mb-6 text-primary opacity-10" />
-                  <p className="text-xl font-bold text-muted-foreground/60">No recent transactions yet</p>
-                  <p className="text-sm text-muted-foreground/40 mt-2 max-w-xs mx-auto">
-                    Share your payment link to start receiving funds instantly.
-                  </p>
+                <div className="text-center py-24 border border-dashed border-white/5 rounded-[2.5rem] bg-white/[0.01] hover:bg-white/[0.02] transition-colors group">
+                  <div className="relative inline-flex mb-8">
+                    <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative h-20 w-20 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                      <ArrowDownLeft className="h-10 w-10 text-primary opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">No payments yet</h3>
+                  <p className="text-sm text-muted-foreground max-w-xs mx-auto mb-8 font-medium">Your activity feed is waiting for its first transaction. Share your link to get started!</p>
+                  <Button 
+                    variant="outline" 
+                    className="rounded-xl border-white/10 hover:bg-white/5 font-bold"
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({
+                          title: 'My SwiftLink',
+                          text: 'Pay me via SwiftLink:',
+                          url: `https://${paymentLink}`,
+                        });
+                      }
+                    }}
+                  >
+                    <Share2 className="mr-2 h-4 w-4" />
+                    Share My Link
+                  </Button>
                 </div>
               ) : (
                 <div className="p-8 rounded-2xl bg-yellow-500/5 border-2 border-yellow-500/10 text-yellow-700 font-bold flex flex-col items-center gap-4 text-center">
