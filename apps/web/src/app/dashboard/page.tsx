@@ -12,7 +12,8 @@ import {
   ArrowDownLeft,
   Share2,
   Link2,
-  FileText
+  FileText,
+  ShieldCheck
 } from "lucide-react"
 import { useAccount, useReadContract, useBalance, usePublicClient, useWatchContractEvent } from "wagmi"
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
@@ -155,11 +156,17 @@ export default function DashboardPage() {
           <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
             <Link2 className="h-32 w-32 -rotate-12" />
           </div>
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1">Your Payment Link</p>
+          <div className="flex items-center gap-3 mb-1">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">Your Payment Link</p>
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20">
+              <ShieldCheck className="h-2.5 w-2.5 text-primary" />
+              <span className="text-[9px] font-black uppercase tracking-wider text-primary">Verified</span>
+            </div>
+          </div>
           <p className="text-sm text-muted-foreground mb-5">Share this link to receive cUSD and CELO</p>
           {username ? (
-            <div className="flex items-center gap-2 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] transition-all hover:border-primary/30">
-              <span className="text-base font-bold truncate flex-1 text-primary">{paymentLink}</span>
+            <div className="flex items-center gap-2 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] transition-all hover:border-primary/30 hover-glow hover-shine group/link">
+              <span className="text-base font-bold truncate flex-1 text-primary group-hover/link:text-foreground transition-colors">{paymentLink}</span>
               <Button size="icon" variant="ghost" onClick={copyToClipboard} className="h-9 w-9 rounded-lg hover:bg-white/10">
                 <Copy className="h-4 w-4" />
               </Button>
