@@ -3,6 +3,7 @@ import { Outfit } from 'next/font/google';
 import './globals.css';
 
 import { Navbar } from '@/components/navbar';
+import { MobileNav } from '@/components/mobile-nav';
 import { Footer } from '@/components/footer';
 import { Web3Provider } from '@/components/Web3Provider';
 import { Toaster } from 'sonner';
@@ -68,9 +69,10 @@ export default function RootLayout({
             </div>
 
             <Navbar />
-            <main className="flex-1">
+            <main className="flex-1 pb-24 md:pb-0">
               {children}
             </main>
+            <MobileNav />
             <Footer />
           </div>
         </Web3Provider>
