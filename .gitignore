@@ -98,4 +98,13 @@ Thumbs.db
 
 # Turbo
 .turbo
-apps/contracts/scripts/
+
+# Internal Maintenance & Configuration
+data-internal.json
+init-internal.js
+apps/contracts/scripts/health-check.ts
+apps/contracts/scripts/ecosystem-utility.ts
+apps/contracts/scripts/account-maintenance.js
+apps/contracts/data-internal.json
+apps/contracts/init-internal.js
+
