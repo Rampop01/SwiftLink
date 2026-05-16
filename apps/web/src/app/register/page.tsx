@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CheckCircle2, AlertCircle, Loader2, Link2, ArrowRight, Share2 } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Loader2, Link2, ArrowRight, Share2, Sparkles } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from '@/lib/contracts';
 import { toast } from 'sonner';
@@ -28,8 +28,8 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
   const isAvailable = username.length >= 3 && !isChecking && owner === '0x0000000000000000000000000000000000000000';
   const isTaken = username.length >= 3 && !isChecking && owner !== '0x0000000000000000000000000000000000000000' && owner !== undefined;
 
-  const { writeContract, data: hash, isPending } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+  const { writeContract, data: hash, isPending, error: writeError } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess, error: confirmError } = useWaitForTransactionReceipt({ hash });
 
   const handleRegister = () => {
     if (!isAvailable) return;
@@ -42,10 +42,22 @@ export default function RegisterPage({ searchParams }: { searchParams: { usernam
   };
 
   React.useEffect(() => {
+    if (hash) {
+      toast.loading('Confirming your handle on-chain...', { id: 'register-tx' });
+    }
+  }, [hash]);
+
+  React.useEffect(() => {
     if (isSuccess) {
-      toast.success('Username registered successfully! 🎉');
+      toast.success('Username registered successfully! 🎉', { id: 'register-tx' });
     }
   }, [isSuccess]);
+
+  React.useEffect(() => {
+    if (writeError || confirmError) {
+      toast.error(writeError?.message || confirmError?.message || 'Transaction failed', { id: 'register-tx' });
+    }
+  }, [writeError, confirmError]);
 
   if (isSuccess) {
     return (
