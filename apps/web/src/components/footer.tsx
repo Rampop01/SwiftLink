@@ -64,6 +64,7 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/5 border border-primary/10">
             <span className="text-[10px] font-black uppercase tracking-widest text-primary">Built on Celo</span>
           </div>
