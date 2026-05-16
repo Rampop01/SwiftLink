@@ -40,7 +40,6 @@ export function LiveActivity() {
           ],
         },
         fromBlock: BigInt(20000000), // Recent blocks
-        maxBlocks: 10000,
       });
 
       const formatted = await Promise.all(logs.slice(-5).map(async (log: any) => {
