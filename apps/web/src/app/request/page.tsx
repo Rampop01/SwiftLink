@@ -60,8 +60,16 @@ export default function RequestPage() {
     toast.success("AI generated a professional description!")
   }
 
+  const [baseUrl, setBaseUrl] = React.useState("swiftlink.me")
+  
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setBaseUrl(window.location.host)
+    }
+  }, [])
+
   const generatedLink = username 
-    ? `swiftlink.me/pay/${username}?amount=${amount}&desc=${encodeURIComponent(description)}`
+    ? `${baseUrl}/pay/${username}?amount=${amount}&desc=${encodeURIComponent(description)}`
     : ""
 
   const copyLink = () => {
