@@ -109,7 +109,15 @@ export default function DashboardPage() {
   const totalVolume = events.reduce((acc, event) => acc + parseFloat(event.amount), 0);
   const uniquePayers = new Set(events.map(event => event.from)).size;
 
-  const paymentLink = username ? `swiftlink/pay/${username}` : ""
+  const [baseUrl, setBaseUrl] = React.useState("swiftlink.me")
+  
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setBaseUrl(window.location.host)
+    }
+  }, [])
+
+  const paymentLink = username ? `${baseUrl}/pay/${username}` : ""
 
   const copyToClipboard = () => {
     if (!paymentLink) return
