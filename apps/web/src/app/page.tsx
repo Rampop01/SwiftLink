@@ -3,12 +3,12 @@
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { 
-  CheckCircle2, 
-  Globe, 
-  ShieldCheck, 
-  Sparkles, 
-  QrCode, 
+import {
+  CheckCircle2,
+  Globe,
+  ShieldCheck,
+  Sparkles,
+  QrCode,
   ArrowRight,
   Zap,
   ChevronRight
@@ -80,17 +80,12 @@ export default function Home() {
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24">
         <div className="container px-4 mx-auto max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={containerVariants}
             >
-              {/* Badge */}
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold tracking-[0.15em] uppercase glass rounded-full text-primary mb-10">
-                <Zap className="h-3.5 w-3.5 fill-primary" />
-                Built on Celo
-                <ChevronRight className="h-3 w-3 opacity-40" />
-              </motion.div>
+
 
               {/* Main Heading */}
               <motion.h1
@@ -116,9 +111,9 @@ export default function Home() {
                 <div className="flex w-full max-w-lg items-center glass-strong rounded-2xl p-1.5 glow-border">
                   <div className="flex-1 flex items-center px-5">
                     <span className="text-sm font-bold text-primary/60 whitespace-nowrap">swiftlink/pay/</span>
-                    <input 
-                      type="text" 
-                      placeholder="yourname" 
+                    <input
+                      type="text"
+                      placeholder="yourname"
                       value={claimName}
                       onChange={(e) => setClaimName(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
                       className="bg-transparent border-none outline-none text-foreground font-bold text-sm placeholder:text-muted-foreground/30 w-full ml-1"
@@ -131,7 +126,7 @@ export default function Home() {
                     </Link>
                   </Button>
                 </div>
-                
+
                 <div className="flex flex-wrap items-center justify-center gap-6 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
                   <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Zero Fees</div>
                   <div className="flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Instant Settlement</div>
@@ -146,7 +141,7 @@ export default function Home() {
           </div>
 
           {/* Feature Grid */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -154,7 +149,7 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-32"
           >
             {features.map((feature, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 variants={itemVariants}
                 className={`group relative p-7 rounded-2xl glass border border-white/[0.04] ${feature.borderColor} hover:bg-white/[0.04] hover-glow hover-shine transition-all duration-500`}
@@ -180,7 +175,7 @@ export default function Home() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">How It Works</p>
             <h2 className="text-4xl md:text-5xl font-black tracking-[-0.03em]">Three steps. That&apos;s it.</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {steps.map((item, idx) => (
               <div key={idx} className="relative group">
@@ -222,8 +217,11 @@ export default function Home() {
         <div className="container px-4 mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">Community</p>
-              <h2 className="text-4xl md:text-5xl font-black tracking-[-0.03em] mb-6">Trusted by the next <br/><span className="text-gradient">generation of creators.</span></h2>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-[0.15em] text-primary">Verified Ecosystem</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-[-0.03em] mb-6">Designed for the next <br /><span className="text-gradient">generation of creators.</span></h2>
             </div>
             <Button variant="ghost" className="text-primary font-bold gap-2 group" asChild>
               <Link href="/register">
@@ -242,7 +240,7 @@ export default function Home() {
               { name: "elena_yoga", role: "Wellness Coach", emoji: "🧘", color: "bg-rose-500/10 text-rose-400" },
               { name: "web3_agency", role: "Service Business", emoji: "🏢", color: "bg-indigo-500/10 text-indigo-400" },
             ].map((creator, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
