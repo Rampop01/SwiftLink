@@ -425,7 +425,7 @@ export const SWIFTLINK_ABI = [
   }
 ] as const;
 
-export const SWIFTLINK_BATCH_ADDRESS = "0xe1EE791eEf6a4Ac05084129F81c9458d78728573";
+export const SWIFTLINK_BATCH_ADDRESS = "0x6b27F7300d72C7F5Ff5e172d646ac96C78f131f9";
 
 export const SWIFTLINK_BATCH_ABI = [
   {"inputs":[{"internalType":"address","name":"_registryAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},
