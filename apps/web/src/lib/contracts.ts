@@ -428,3 +428,20 @@ export const SWIFTLINK_ABI = [
 export const CELO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const CUSD_ADDRESS = "0x765DE816845861e75A25fCA122bb6898B8B1282a"; // Celo Mainnet cUSD
 export const CUSD_SEPOLIA_ADDRESS = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"; // Celo Sepolia cUSD
+
+export const SUPPORTED_TOKENS = [
+  {
+    symbol: "CELO",
+    name: "Celo Native Asset",
+    address: CELO_ADDRESS,
+    decimals: 18,
+    icon: "https://cryptologos.cc/logos/celo-celo-logo.png",
+  },
+  {
+    symbol: "cUSD",
+    name: "Celo Dollar",
+    address: CUSD_ADDRESS, // Assuming Mainnet for now
+    decimals: 18,
+    icon: "https://valoraapp.com/assets/images/cusd-icon.svg",
+  }
+];
