@@ -41,18 +41,19 @@ export function Navbar() {
                 </div>
                 <span className="font-black text-lg tracking-tight">SwiftLink</span>
               </div>
-              <nav className="flex flex-col gap-1">
+              <nav className="flex flex-col gap-1" aria-label="Mobile Navigation">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                       pathname === link.href
                         ? "bg-primary/10 text-primary"
                         : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                     }`}
                   >
-                    <link.icon className="h-4 w-4" />
+                    <link.icon className="h-4 w-4" aria-hidden="true" />
                     {link.name}
                   </Link>
                 ))}
@@ -75,20 +76,21 @@ export function Navbar() {
         </div>
         
         {/* Desktop */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href
             return (
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`relative flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                   isActive
                     ? "text-primary bg-primary/5"
                     : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                 }`}
               >
-                <link.icon className="h-3.5 w-3.5" />
+                <link.icon className="h-3.5 w-3.5" aria-hidden="true" />
                 {link.name}
               </Link>
             )
