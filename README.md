@@ -62,6 +62,16 @@ SwiftLink allows anyone to generate a unique payment link (e.g., `swiftlink/pay/
 - [x] Global Animated Mesh Background & Shiny Overlays
 - [x] High-Res QR Code PNG Export
 
+### 🚧 Phase 5: Explorer & Growth (IN PROGRESS)
+- [x] On-Chain Transaction Explorer
+- [x] Pain-point driven hero section
+- [x] Enhanced feature grid (6 features)
+- [x] Real-world use case profiles
+- [x] Enhanced CSS animation system
+- [ ] Batch payment support
+- [ ] Recurring payment subscriptions
+- [ ] Multi-token selector (cUSD, CELO, cEUR)
+
 ---
 
 ## 🚀 Getting Started
