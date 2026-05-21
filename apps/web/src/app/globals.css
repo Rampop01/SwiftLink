@@ -42,6 +42,14 @@
     background-clip: text;
     animation: gradient-x 4s ease infinite;
   }
+  .text-gradient-red {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FF6B6B 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-x 4s ease infinite;
+  }
   .glow-green {
     box-shadow: 0 0 80px rgba(53, 208, 127, 0.15), 0 0 160px rgba(53, 208, 127, 0.05);
   }
