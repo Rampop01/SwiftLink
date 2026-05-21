@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Link2, Send, ShieldCheck, Wallet } from 'lucide-react';
+import { Loader2, Link2, Send, ShieldCheck, Wallet, CheckCircle2 } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_ADDRESS } from '@/lib/contracts';
+import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_ADDRESS, ERC20_ABI } from '@/lib/contracts';
 import { toast } from 'sonner';
 import { parseUnits } from 'viem';
 
@@ -27,10 +27,45 @@ export default function PayClient({ params, searchParams }: { params: { username
   const recipient = profileData?.[1];
   const isValidUser = recipient && recipient !== '0x0000000000000000000000000000000000000000' && profileData?.[3] === true;
 
+  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD');
+
+  // Check allowance for ERC20
+  const { data: allowanceData, refetch: refetchAllowance } = useReadContract({
+    address: tokenType === 'cUSD' ? CUSD_ADDRESS : undefined,
+    abi: ERC20_ABI,
+    functionName: 'allowance',
+    args: address ? [address, SWIFTLINK_ADDRESS] : undefined,
+    query: {
+      enabled: !!address && tokenType === 'cUSD',
+    }
+  });
+
+  const amountInWei = React.useMemo(() => {
+    try {
+      return amount ? parseUnits(amount, 18) : 0n;
+    } catch {
+      return 0n;
+    }
+  }, [amount]);
+
+  const needsApproval = tokenType === 'cUSD' && (allowanceData as bigint || 0n) < amountInWei;
+
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
-  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD');
+  // Distinguish between approval and payment based on state
+  const [isApproving, setIsApproving] = React.useState(false);
+
+  const handleApprove = () => {
+    if (!amount || isNaN(Number(amount))) return;
+    setIsApproving(true);
+    writeContract({
+      address: CUSD_ADDRESS,
+      abi: ERC20_ABI,
+      functionName: 'approve',
+      args: [SWIFTLINK_ADDRESS, amountInWei],
+    });
+  };
 
   const handlePay = () => {
     if (!amount || isNaN(Number(amount))) {
@@ -38,7 +73,7 @@ export default function PayClient({ params, searchParams }: { params: { username
       return;
     }
     const tokenAddress = tokenType === 'cUSD' ? CUSD_ADDRESS : '0x0000000000000000000000000000000000000000';
-    const amountInWei = parseUnits(amount, 18);
+    setIsApproving(false);
     writeContract({
       address: SWIFTLINK_ADDRESS,
       abi: SWIFTLINK_ABI,
@@ -50,10 +85,15 @@ export default function PayClient({ params, searchParams }: { params: { username
 
   React.useEffect(() => {
     if (isSuccess) {
-      toast.success(`Sent ${amount} ${tokenType} to ${username}!`);
-      setAmount('');
+      if (isApproving) {
+        toast.success(`Approved ${amount} ${tokenType}`);
+        refetchAllowance();
+      } else {
+        toast.success(`Sent ${amount} ${tokenType} to ${username}!`);
+        setAmount('');
+      }
     }
-  }, [isSuccess, amount, username, tokenType]);
+  }, [isSuccess, isApproving, amount, tokenType, username, refetchAllowance]);
 
   if (isResolving) {
     return (
@@ -166,24 +206,45 @@ export default function PayClient({ params, searchParams }: { params: { username
               <span>Near-zero gas fees on the Celo network.</span>
             </div>
 
-            <Button 
-              className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
-              size="lg"
-              disabled={!amount || isPending || isConfirming || !isConnected}
-              onClick={handlePay}
-            >
-              {(isPending || isConfirming) ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  {isPending ? 'Requesting...' : 'Sending...'}
-                </>
-              ) : (
-                <>
-                  Send Payment
-                  <Send className="ml-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </>
-              )}
-            </Button>
+            {needsApproval ? (
+              <Button 
+                className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
+                size="lg"
+                disabled={!amount || isPending || isConfirming || !isConnected || amountInWei === 0n}
+                onClick={handleApprove}
+              >
+                {(isPending || isConfirming) ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {isPending ? 'Approving...' : 'Confirming...'}
+                  </>
+                ) : (
+                  <>
+                    Approve {tokenType}
+                    <CheckCircle2 className="ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            ) : (
+              <Button 
+                className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
+                size="lg"
+                disabled={!amount || isPending || isConfirming || !isConnected || amountInWei === 0n}
+                onClick={handlePay}
+              >
+                {(isPending || isConfirming) ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {isPending ? 'Requesting...' : 'Sending...'}
+                  </>
+                ) : (
+                  <>
+                    Send Payment
+                    <Send className="ml-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </>
+                )}
+              </Button>
+            )}
 
             {!isConnected && (
               <p className="text-xs text-center text-muted-foreground">Connect wallet to send.</p>
