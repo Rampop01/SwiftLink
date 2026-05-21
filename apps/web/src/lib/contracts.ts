@@ -425,6 +425,16 @@ export const SWIFTLINK_ABI = [
   }
 ] as const;
 
+export const SWIFTLINK_BATCH_ADDRESS = "0xe1EE791eEf6a4Ac05084129F81c9458d78728573";
+
+export const SWIFTLINK_BATCH_ABI = [
+  {"inputs":[{"internalType":"address","name":"_registryAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},
+  {"inputs":[],"name":"ReentrancyGuardReentrantCall","type":"error"},
+  {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"totalAmount","type":"uint256"},{"indexed":false,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"recipientCount","type":"uint256"}],"name":"BatchPaymentCompleted","type":"event"},
+  {"inputs":[{"internalType":"string[]","name":"_usernames","type":"string[]"},{"internalType":"address","name":"_token","type":"address"},{"internalType":"uint256[]","name":"_amounts","type":"uint256[]"}],"name":"batchPayUsers","outputs":[],"stateMutability":"payable","type":"function"},
+  {"inputs":[],"name":"registry","outputs":[{"internalType":"contract ISwiftLink","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+] as const;
+
 export const CELO_ADDRESS = "0x0000000000000000000000000000000000000000";
 export const CUSD_ADDRESS = "0x765DE816845861e75A25fCA122bb6898B8B1282a"; // Celo Mainnet cUSD
 export const CUSD_SEPOLIA_ADDRESS = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"; // Celo Sepolia cUSD
@@ -445,3 +455,52 @@ export const SUPPORTED_TOKENS = [
     icon: "https://valoraapp.com/assets/images/cusd-icon.svg",
   }
 ];
+
+export const ERC20_ABI = [
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_spender",
+        "type": "address"
+      },
+      {
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "name": "_spender",
+        "type": "address"
+      }
+    ],
+    "name": "allowance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+] as const;
