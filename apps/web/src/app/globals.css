@@ -19,6 +19,14 @@
     border-right: 2px solid hsl(var(--primary));
     animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
   }
+  .animate-count-up {
+    animation: count-up 2s ease-out forwards;
+  }
+  .border-glow-green {
+    box-shadow: 0 0 10px rgba(53, 208, 127, 0.5), inset 0 0 10px rgba(53, 208, 127, 0.2);
+    border-color: rgba(53, 208, 127, 0.8);
+    transition: all 0.3s ease;
+  }
   .animate-glow {
     animation: glow-pulse 3s ease-in-out infinite;
   }
@@ -133,6 +141,11 @@
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: hsl(var(--primary)) }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @layer base {
