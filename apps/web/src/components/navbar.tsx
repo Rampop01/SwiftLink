@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, Link2, LayoutDashboard, UserPlus, Sparkles } from "lucide-react"
+import { Menu, Link2, LayoutDashboard, UserPlus, Sparkles, Search } from "lucide-react"
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,7 @@ import {
 
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Explorer", href: "/explorer", icon: Search },
   { name: "Request", href: "/request", icon: Sparkles },
   { name: "Register", href: "/register", icon: UserPlus },
 ]
