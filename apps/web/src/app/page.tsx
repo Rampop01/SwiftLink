@@ -139,14 +139,6 @@ export default function Home() {
               animate="visible"
               variants={containerVariants}
             >
-              {/* Problem Badge */}
-              <motion.div variants={itemVariants} className="mb-8">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
-                  <div className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-red-400">Crypto payments are broken</span>
-                </div>
-              </motion.div>
-
               {/* Main Heading - Pain-driven */}
               <motion.h1
                 variants={itemVariants}
