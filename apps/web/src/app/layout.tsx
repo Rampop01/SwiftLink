@@ -11,11 +11,12 @@ import { Toaster } from 'sonner';
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 export const metadata: Metadata = {
-  title: 'SwiftLink | Instant Celo Payments',
-  description: 'Send and receive crypto payments instantly on Celo with professional payment links.',
+  title: 'SwiftLink | Get Paid Instantly on Celo — No Hex Addresses',
+  description: 'Turn your wallet into a human-readable payment link. Claim swiftlink/pay/yourname and receive cUSD or CELO instantly. Zero fees. Built for MiniPay.',
+  keywords: 'celo, payments, crypto, minipay, payment link, cusd, swiftlink',
   openGraph: {
-    title: 'SwiftLink | Instant Celo Payments',
-    description: 'The simplest way to get paid in crypto on the Celo network.',
+    title: 'SwiftLink | Get Paid Instantly on Celo — No Hex Addresses',
+    description: 'Turn your wallet into a human-readable payment link. Claim swiftlink/pay/yourname and receive cUSD or CELO instantly. Zero fees. Built for MiniPay.',
     url: 'https://swiftlink.me',
     siteName: 'SwiftLink',
     images: [
@@ -30,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SwiftLink | Instant Celo Payments',
-    description: 'The simplest way to get paid in crypto on the Celo network.',
+    title: 'SwiftLink | Get Paid Instantly on Celo — No Hex Addresses',
+    description: 'Turn your wallet into a human-readable payment link. Claim swiftlink/pay/yourname and receive cUSD or CELO instantly. Zero fees. Built for MiniPay.',
     images: ['https://swiftlink.me/og-image.png'],
   },
   other: {
