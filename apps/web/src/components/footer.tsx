@@ -21,12 +21,14 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-2 pt-2">
               <a href="https://github.com/Rampop01/SwiftLink" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub"
                 className="h-9 w-9 rounded-xl glass flex items-center justify-center hover:bg-white/10 transition-colors">
-                <Github className="h-4 w-4" />
+                <Github className="h-4 w-4" aria-hidden="true" />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                aria-label="Twitter"
                 className="h-9 w-9 rounded-xl glass flex items-center justify-center hover:bg-white/10 transition-colors">
-                <Twitter className="h-4 w-4" />
+                <Twitter className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
           </div>
