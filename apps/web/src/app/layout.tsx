@@ -47,10 +47,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={outfit.className}>
+      <body className={`${outfit.className} overflow-x-hidden`}>
         <Web3Provider>
           <Toaster richColors position="top-center" />
-          <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
             {/* Global Background */}
             <div className="fixed inset-0 -z-10 bg-background overflow-hidden">
               {/* Custom Image Background */}

@@ -106,13 +106,13 @@ export default function RequestPage() {
         </div>
       </div>
 
-      <div className="grid gap-6">
-        <div className="glass rounded-2xl p-6 glow-border">
+      <div className="grid gap-6 w-full min-w-0">
+        <div className="glass rounded-2xl p-4 sm:p-6 glow-border overflow-hidden">
           <div className="flex items-center gap-2 mb-6">
-            <FileText className="h-4 w-4 text-primary" />
+            <FileText className="h-4 w-4 text-primary shrink-0" />
             <p className="text-sm font-bold">Invoice Details</p>
           </div>
-          <div className="space-y-6 p-0">
+          <div className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="amount">Requested Amount (cUSD)</Label>
               <div className="relative">
@@ -120,7 +120,7 @@ export default function RequestPage() {
                 <Input 
                   id="amount" 
                   placeholder="0.00" 
-                  className="pl-9 h-12 text-lg font-medium bg-white/[0.03] border-white/[0.08] rounded-xl"
+                  className="pl-9 h-12 text-lg font-medium bg-white/[0.03] border-white/[0.08] rounded-xl w-full"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
@@ -133,14 +133,14 @@ export default function RequestPage() {
                 <Input 
                   id="concept" 
                   placeholder="e.g. Website Development" 
-                  className="h-12 flex-1"
+                  className="h-12 flex-1 min-w-0"
                   value={concept}
                   onChange={(e) => setConcept(e.target.value)}
                 />
                 <Button 
                   type="button" 
                   variant="secondary" 
-                  className="h-12 w-full sm:w-auto gap-2 px-6 bg-primary/10 text-primary hover:bg-primary/20 border-primary/20 border transition-all"
+                  className="h-12 w-full sm:w-auto gap-2 px-6 bg-primary/10 text-primary hover:bg-primary/20 border-primary/20 border transition-all shrink-0"
                   onClick={generateAIDescription}
                   disabled={isGenerating}
                 >
@@ -159,7 +159,7 @@ export default function RequestPage() {
               <Textarea 
                 id="description" 
                 placeholder="The AI will help you write something professional here..." 
-                className="min-h-[120px] resize-none focus-visible:ring-primary/20"
+                className="min-h-[120px] resize-none focus-visible:ring-primary/20 w-full"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -173,16 +173,18 @@ export default function RequestPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
+              className="min-w-0"
             >
-              <div className="glass rounded-2xl p-6 border-dashed border-primary/30 glow-border">
+              <div className="glass rounded-2xl p-4 sm:p-6 border-dashed border-primary/30 glow-border overflow-hidden">
                 <div className="mb-4">
                   <p className="text-sm font-bold uppercase tracking-wider text-primary">Your Shareable Link</p>
                 </div>
                 <div className="mb-6">
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
-                    <span className="text-xs sm:text-sm font-mono truncate flex-1 min-w-0">{generatedLink}</span>
-                    <Button size="icon" variant="ghost" onClick={copyLink} className="h-10 w-full sm:w-10 hover:bg-white/10 shrink-0">
+                  <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
+                    <p className="text-xs sm:text-sm font-mono break-all text-muted-foreground mb-3">{generatedLink}</p>
+                    <Button variant="outline" onClick={copyLink} className="w-full h-10 hover:bg-white/10 gap-2 text-xs">
                       {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
+                      {copied ? "Copied!" : "Copy Link"}
                     </Button>
                   </div>
                 </div>
