@@ -179,8 +179,8 @@ export default function RequestPage() {
                   <p className="text-sm font-bold uppercase tracking-wider text-primary">Your Shareable Link</p>
                 </div>
                 <div className="mb-6">
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm">
-                    <span className="text-xs sm:text-sm font-mono truncate flex-1 overflow-hidden">{generatedLink}</span>
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
+                    <span className="text-xs sm:text-sm font-mono truncate flex-1 min-w-0">{generatedLink}</span>
                     <Button size="icon" variant="ghost" onClick={copyLink} className="h-10 w-full sm:w-10 hover:bg-white/10 shrink-0">
                       {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
                     </Button>
