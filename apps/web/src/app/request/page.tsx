@@ -82,8 +82,8 @@ export default function RequestPage() {
 
   if (!isConnected) {
     return (
-      <div className="container py-24 flex justify-center">
-        <div className="max-w-md w-full text-center p-10 glass rounded-2xl glow-border">
+      <div className="container px-4 py-12 sm:py-24 flex justify-center">
+        <div className="max-w-md w-full text-center p-6 sm:p-10 glass rounded-2xl glow-border">
           <h2 className="text-2xl font-black mb-2">Connect Wallet</h2>
           <p className="text-sm text-muted-foreground mb-6">You need to be connected to generate payment requests.</p>
           <Button asChild className="rounded-xl font-semibold">
@@ -95,13 +95,13 @@ export default function RequestPage() {
   }
 
   return (
-    <div className="container py-12 max-w-2xl animate-in">
-      <div className="mb-12 flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="rounded-xl" asChild>
+    <div className="container px-4 sm:px-8 py-8 sm:py-12 max-w-2xl animate-in mx-auto">
+      <div className="mb-8 sm:mb-12 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <Button variant="ghost" size="icon" className="rounded-xl shrink-0" asChild>
           <Link href="/dashboard"><ArrowLeft className="h-5 w-5" /></Link>
         </Button>
         <div>
-          <h1 className="text-4xl font-black tracking-tighter">Request Payment</h1>
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tighter">Request Payment</h1>
           <p className="text-muted-foreground font-medium">Generate a custom invoice link for your client</p>
         </div>
       </div>
@@ -129,18 +129,18 @@ export default function RequestPage() {
 
             <div className="space-y-2">
               <Label htmlFor="concept">What is this for?</Label>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Input 
                   id="concept" 
                   placeholder="e.g. Website Development" 
-                  className="h-12"
+                  className="h-12 flex-1"
                   value={concept}
                   onChange={(e) => setConcept(e.target.value)}
                 />
                 <Button 
                   type="button" 
                   variant="secondary" 
-                  className="h-12 gap-2 px-6 bg-primary/10 text-primary hover:bg-primary/20 border-primary/20 border transition-all"
+                  className="h-12 w-full sm:w-auto gap-2 px-6 bg-primary/10 text-primary hover:bg-primary/20 border-primary/20 border transition-all"
                   onClick={generateAIDescription}
                   disabled={isGenerating}
                 >
@@ -179,9 +179,9 @@ export default function RequestPage() {
                   <p className="text-sm font-bold uppercase tracking-wider text-primary">Your Shareable Link</p>
                 </div>
                 <div className="mb-6">
-                  <div className="flex items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm">
-                    <span className="text-sm font-mono truncate flex-1">{generatedLink}</span>
-                    <Button size="icon" variant="ghost" onClick={copyLink} className="h-8 w-8 hover:bg-white/10">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm">
+                    <span className="text-xs sm:text-sm font-mono truncate flex-1 overflow-hidden">{generatedLink}</span>
+                    <Button size="icon" variant="ghost" onClick={copyLink} className="h-10 w-full sm:w-10 hover:bg-white/10 shrink-0">
                       {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
                     </Button>
                   </div>
