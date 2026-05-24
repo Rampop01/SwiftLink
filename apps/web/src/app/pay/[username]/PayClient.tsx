@@ -14,7 +14,9 @@ import { parseUnits } from 'viem';
 export default function PayClient({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string } }) {
   const { username } = params;
   const { address, isConnected } = useAccount();
-  const [amount, setAmount] = React.useState(searchParams.amount || '');
+  // Strip any non-numeric characters (e.g. "$ 5" -> "5") from the incoming amount param
+  const sanitizedAmount = (searchParams.amount || '').replace(/[^0-9.]/g, '').trim();
+  const [amount, setAmount] = React.useState(sanitizedAmount);
   const [description] = React.useState(searchParams.desc || '');
   
   const { data: profileData, isLoading: isResolving } = useReadContract({

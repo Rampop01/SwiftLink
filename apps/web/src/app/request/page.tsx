@@ -68,13 +68,16 @@ export default function RequestPage() {
     }
   }, [])
 
+  // Only put raw numeric amount in the URL
+  const numericAmount = amount.replace(/[^0-9.]/g, '').trim()
+
   const generatedLink = username 
-    ? `${baseUrl}/pay/${username}?amount=${amount}&desc=${encodeURIComponent(description)}`
+    ? `https://${baseUrl}/pay/${username}?amount=${encodeURIComponent(numericAmount)}&desc=${encodeURIComponent(description)}`
     : ""
 
   const copyLink = () => {
     if (!generatedLink) return
-    navigator.clipboard.writeText(`https://${generatedLink}`)
+    navigator.clipboard.writeText(generatedLink)
     setCopied(true)
     toast.success("Request link copied!")
     setTimeout(() => setCopied(false), 2000)
