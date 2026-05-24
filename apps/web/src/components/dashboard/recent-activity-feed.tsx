@@ -117,8 +117,8 @@ export function RecentActivityFeed({
                     className="flex items-center justify-between p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 hover:border-primary/20 transition-all group cursor-pointer"
                     onClick={() => onEventClick(event)}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <ArrowDownLeft className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
