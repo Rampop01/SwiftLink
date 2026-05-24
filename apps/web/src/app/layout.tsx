@@ -6,6 +6,7 @@ import { Navbar } from '@/components/navbar';
 import { MobileNav } from '@/components/mobile-nav';
 import { Footer } from '@/components/footer';
 import { Web3Provider } from '@/components/Web3Provider';
+import { NetworkBanner } from '@/components/network-banner';
 import { Toaster } from 'sonner';
 
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
@@ -69,6 +70,7 @@ export default function RootLayout({
               <div className="absolute inset-0 bg-grid opacity-[0.05]" />
             </div>
 
+            <NetworkBanner />
             <Navbar />
             <main className="flex-1 pb-24 md:pb-0">
               {children}
