@@ -107,7 +107,7 @@ export default function BatchClient() {
         <div className="glass rounded-2xl overflow-hidden glow-border">
           <div className="h-1 bg-gradient-to-r from-accent via-primary to-accent" />
           
-          <div className="text-center p-8 pb-4">
+          <div className="text-center p-6 sm:p-8 pb-4">
             <div className="flex justify-center mb-5">
               <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent border border-accent/20">
                 <Users className="h-8 w-8" />
@@ -117,7 +117,7 @@ export default function BatchClient() {
             <p className="text-sm text-muted-foreground">Send tokens to multiple users in one transaction.</p>
           </div>
 
-          <div className="px-8 pb-8 space-y-5">
+          <div className="px-6 sm:px-8 pb-6 sm:pb-8 space-y-5">
             <div className="space-y-2">
               <Label htmlFor="usernames" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground">
                 Recipients (Comma separated)
@@ -153,9 +153,11 @@ export default function BatchClient() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground flex justify-between">
-                Amount per user
-                <span className="text-[10px] normal-case font-normal tracking-normal text-muted-foreground">Total: {amountPerUser && usernames.length ? (Number(amountPerUser) * usernames.length).toFixed(4) : '0.00'} {tokenType}</span>
+              <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground flex flex-col sm:flex-row sm:justify-between gap-1">
+                <span>Amount per user</span>
+                <span className="text-[10px] normal-case font-normal tracking-normal text-muted-foreground">
+                  Total: {amountPerUser && usernames.length ? (Number(amountPerUser) * usernames.length).toFixed(4) : '0.00'} {tokenType}
+                </span>
               </Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-black text-muted-foreground/40">
