@@ -92,6 +92,9 @@ export function Navbar() {
               >
                 <link.icon className="h-3.5 w-3.5" aria-hidden="true" />
                 {link.name}
+                {isActive && (
+                  <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full bg-primary shadow-[0_0_8px_2px_rgba(7,149,95,0.4)]" />
+                )}
               </Link>
             )
           })}
