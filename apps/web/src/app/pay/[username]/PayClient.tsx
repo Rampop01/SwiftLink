@@ -16,8 +16,8 @@ export default function PayClient({ params, searchParams }: { params: { username
   const { username } = params;
   const { address, isConnected } = useAccount();
   // Strip any non-numeric characters (e.g. "$ 5" -> "5") from the incoming amount param
-  const sanitizedAmount = (searchParams.amount || '').replace(/[^0-9.]/g, '').trim();
-  const [amount, setAmount] = React.useState(sanitizedAmount);
+  const requestedAmount = (searchParams.amount || '').replace(/[^0-9.]/g, '').trim();
+  const [amount, setAmount] = React.useState(requestedAmount);
   const [description] = React.useState(searchParams.desc || '');
   
   const { data: profileData, isLoading: isResolving } = useReadContract({
@@ -149,6 +149,22 @@ export default function PayClient({ params, searchParams }: { params: { username
                 {paymentSuccessData.amount} <span className="text-lg">{paymentSuccessData.token}</span>
               </div>
               <p className="text-sm font-medium mt-2">to @{username}</p>
+              
+              {requestedAmount && (
+                <div className="mt-4 pt-4 border-t border-white/[0.06]">
+                  {Number(paymentSuccessData.amount) >= Number(requestedAmount) ? (
+                    <div className="inline-flex items-center gap-1.5 text-emerald-400 text-sm font-medium bg-emerald-400/10 px-3 py-1.5 rounded-lg border border-emerald-400/20">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Requested amount paid in full
+                    </div>
+                  ) : (
+                    <div className="inline-flex items-center gap-1.5 text-amber-400 text-sm font-medium bg-amber-400/10 px-3 py-1.5 rounded-lg border border-amber-400/20">
+                      <ShieldCheck className="w-4 h-4" />
+                      Partial payment (Requested: {requestedAmount} {paymentSuccessData.token})
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="space-y-3">
