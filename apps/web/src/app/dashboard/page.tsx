@@ -132,7 +132,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <DashboardStats totalCusd={totalCusd} totalCelo={totalCelo} uniquePayers={uniquePayers} />
+        <DashboardStats totalCusd={totalCusd} totalCelo={totalCelo} uniquePayers={uniquePayers} totalTxns={events.length} />
         
         <RecentActivityFeed 
           events={events} 
