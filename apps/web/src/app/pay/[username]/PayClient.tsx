@@ -5,11 +5,12 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Link2, Send, ShieldCheck, Wallet, CheckCircle2 } from 'lucide-react';
+import { Loader2, Link2, Send, ShieldCheck, Wallet, CheckCircle2, ArrowUpRight, PlusCircle } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_ADDRESS, ERC20_ABI } from '@/lib/contracts';
 import { toast } from 'sonner';
 import { parseUnits } from 'viem';
+import Link from 'next/link';
 
 export default function PayClient({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string } }) {
   const { username } = params;
@@ -85,6 +86,8 @@ export default function PayClient({ params, searchParams }: { params: { username
     });
   };
 
+  const [paymentSuccessData, setPaymentSuccessData] = React.useState<{ hash: string, amount: string, token: string } | null>(null);
+
   React.useEffect(() => {
     if (isSuccess) {
       if (isApproving) {
@@ -92,10 +95,10 @@ export default function PayClient({ params, searchParams }: { params: { username
         refetchAllowance();
       } else {
         toast.success(`Sent ${amount} ${tokenType} to ${username}!`);
-        setAmount('');
+        setPaymentSuccessData({ hash: hash as string, amount, token: tokenType });
       }
     }
-  }, [isSuccess, isApproving, amount, tokenType, username, refetchAllowance]);
+  }, [isSuccess, isApproving, amount, tokenType, username, refetchAllowance, hash]);
 
   if (isResolving) {
     return (
@@ -132,7 +135,40 @@ export default function PayClient({ params, searchParams }: { params: { username
         transition={{ duration: 0.4 }}
         className="w-full max-w-md"
       >
-        <div className="glass rounded-2xl overflow-hidden glow-border">
+        {paymentSuccessData ? (
+          <div className="glass rounded-2xl overflow-hidden glow-border p-8 text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/10 mb-6">
+              <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+            </div>
+            
+            <h2 className="text-3xl font-black mb-2 text-foreground">Payment Successful!</h2>
+            
+            <div className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8 mt-6">
+              <p className="text-sm text-muted-foreground mb-1">You sent</p>
+              <div className="text-3xl font-black text-primary flex items-center justify-center gap-2">
+                {paymentSuccessData.amount} <span className="text-lg">{paymentSuccessData.token}</span>
+              </div>
+              <p className="text-sm font-medium mt-2">to @{username}</p>
+            </div>
+
+            <div className="space-y-3">
+              <Button asChild variant="outline" className="w-full h-12 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border-white/10 group">
+                <a href={`https://celoscan.io/tx/${paymentSuccessData.hash}`} target="_blank" rel="noopener noreferrer">
+                  View on Explorer
+                  <ArrowUpRight className="ml-2 h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </a>
+              </Button>
+              
+              <Button asChild className="w-full h-12 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 group">
+                <Link href="/register">
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Create your own SwiftLink
+                </Link>
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="glass rounded-2xl overflow-hidden glow-border">
           {/* Green accent bar */}
           <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary" />
           
@@ -253,6 +289,7 @@ export default function PayClient({ params, searchParams }: { params: { username
             )}
           </div>
         </div>
+        )}
       </motion.div>
     </div>
   );
