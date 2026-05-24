@@ -15,7 +15,8 @@ import {
   DollarSign, 
   FileText,
   Loader2,
-  Share2
+  Share2,
+  Link2
 } from "lucide-react"
 import { useAccount, useReadContract } from "wagmi"
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS } from "@/lib/contracts"
@@ -72,15 +73,22 @@ export default function RequestPage() {
   const numericAmount = amount.replace(/[^0-9.]/g, '').trim()
 
   const generatedLink = username 
-    ? `${baseUrl}/pay/${username}?amount=${encodeURIComponent(numericAmount)}&desc=${encodeURIComponent(description)}`
+    ? `${baseUrl}/pay/${username}${numericAmount ? `?amount=${encodeURIComponent(numericAmount)}` : ''}`
     : ""
 
   const copyLink = () => {
     if (!generatedLink) return
     navigator.clipboard.writeText(generatedLink)
     setCopied(true)
-    toast.success("Request link copied!")
+    toast.success("Short link copied!")
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const copyFullMessage = () => {
+    if (!generatedLink) return
+    const textToCopy = `${description}\n\nPay here: ${generatedLink}`
+    navigator.clipboard.writeText(textToCopy)
+    toast.success("Full message copied to clipboard!")
   }
 
   if (!isConnected) {
@@ -184,17 +192,19 @@ export default function RequestPage() {
                 </div>
                 <div className="mb-6">
                   <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
-                    <p className="text-xs sm:text-sm font-mono break-all text-muted-foreground mb-3">{generatedLink}</p>
-                    <Button variant="outline" onClick={copyLink} className="w-full h-10 hover:bg-white/10 gap-2 text-xs">
-                      {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
-                      {copied ? "Copied!" : "Copy Link"}
-                    </Button>
+                    <p className="text-sm font-mono break-all text-foreground font-bold mb-3">{generatedLink}</p>
+                    <div className="flex gap-2">
+                      <Button variant="outline" onClick={copyLink} className="flex-1 h-10 hover:bg-white/10 gap-2 text-xs">
+                        {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Link2 className="h-4 w-4" />}
+                        {copied ? "Copied!" : "Copy Short Link"}
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div>
-                  <Button className="w-full gap-2 h-12 rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30" onClick={copyLink}>
-                    <Share2 className="h-4 w-4" />
-                    Copy & Send to Client
+                  <Button className="w-full gap-2 h-12 rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30" onClick={copyFullMessage}>
+                    <Copy className="h-4 w-4" />
+                    Copy Full Message to Send
                   </Button>
                 </div>
               </div>
