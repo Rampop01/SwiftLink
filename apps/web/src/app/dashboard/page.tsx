@@ -96,11 +96,11 @@ export default function DashboardPage() {
   const totalVolume = events.reduce((acc, event) => acc + parseFloat(event.amount), 0);
   const uniquePayers = new Set(events.map(event => event.from)).size;
 
-  const [baseUrl, setBaseUrl] = React.useState("swiftlink.me")
+  const [baseUrl, setBaseUrl] = React.useState("https://swiftlink.me")
   
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      setBaseUrl(window.location.host)
+      setBaseUrl(`${window.location.protocol}//${window.location.host}`)
     }
   }, [])
 

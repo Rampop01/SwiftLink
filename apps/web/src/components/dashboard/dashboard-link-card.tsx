@@ -11,7 +11,7 @@ interface DashboardLinkCardProps {
 export function DashboardLinkCard({ username, paymentLink }: DashboardLinkCardProps) {
   const copyToClipboard = () => {
     if (!paymentLink) return;
-    navigator.clipboard.writeText(`https://${paymentLink}`);
+    navigator.clipboard.writeText(paymentLink);
     toast.success("Link copied to clipboard!");
   };
 
@@ -20,7 +20,7 @@ export function DashboardLinkCard({ username, paymentLink }: DashboardLinkCardPr
       navigator.share({
         title: 'SwiftLink Payment Link',
         text: `Pay me via SwiftLink:`,
-        url: `https://${paymentLink}`,
+        url: paymentLink,
       }).catch(console.error);
     } else {
       copyToClipboard();

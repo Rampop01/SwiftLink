@@ -60,11 +60,11 @@ export default function RequestPage() {
     toast.success("AI generated a professional description!")
   }
 
-  const [baseUrl, setBaseUrl] = React.useState("swiftlink.me")
+  const [baseUrl, setBaseUrl] = React.useState("https://swiftlink.me")
   
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      setBaseUrl(window.location.host)
+      setBaseUrl(`${window.location.protocol}//${window.location.host}`)
     }
   }, [])
 
@@ -72,7 +72,7 @@ export default function RequestPage() {
   const numericAmount = amount.replace(/[^0-9.]/g, '').trim()
 
   const generatedLink = username 
-    ? `https://${baseUrl}/pay/${username}?amount=${encodeURIComponent(numericAmount)}&desc=${encodeURIComponent(description)}`
+    ? `${baseUrl}/pay/${username}?amount=${encodeURIComponent(numericAmount)}&desc=${encodeURIComponent(description)}`
     : ""
 
   const copyLink = () => {
