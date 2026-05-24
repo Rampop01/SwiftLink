@@ -79,20 +79,14 @@ export function QRCodeModal({ username, url }: QRCodeModalProps) {
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center justify-center space-y-8 py-6">
-          <div className="p-4 bg-white rounded-2xl shadow-inner border-8 border-primary/5">
+          <div className="p-5 bg-white rounded-2xl shadow-inner border-8 border-primary/10">
             <QRCodeSVG
               id="swiftlink-qr"
               value={fullUrl}
               size={240}
               level="H"
-              imageSettings={{
-                src: "/logo-icon.png", // We'll need to add a logo later
-                x: undefined,
-                y: undefined,
-                height: 40,
-                width: 40,
-                excavate: true,
-              }}
+              fgColor="#07955F"
+              bgColor="#FFFFFF"
             />
           </div>
           
