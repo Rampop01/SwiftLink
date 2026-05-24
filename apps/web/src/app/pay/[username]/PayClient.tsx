@@ -69,6 +69,12 @@ export default function PayClient({ params, searchParams }: { params: { username
       abi: ERC20_ABI,
       functionName: 'approve',
       args: [SWIFTLINK_ADDRESS, amountInWei],
+    }, {
+      onError: (error) => {
+        console.error(error);
+        setIsApproving(false);
+        toast.error(error.message.split('\n')[0] || 'Approval failed');
+      }
     });
   };
 
@@ -85,6 +91,11 @@ export default function PayClient({ params, searchParams }: { params: { username
       functionName: 'payUser',
       args: [username, tokenAddress, amountInWei],
       value: tokenType === 'CELO' ? amountInWei : 0n,
+    }, {
+      onError: (error) => {
+        console.error(error);
+        toast.error(error.message.split('\n')[0] || 'Payment failed to initiate');
+      }
     });
   };
 
