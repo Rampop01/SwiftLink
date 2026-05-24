@@ -46,13 +46,13 @@ export function EventFeed({ isLoading, events }: EventFeedProps) {
                   transition={{ delay: Math.min(idx * 0.05, 0.5) }}
                   className="p-4 sm:p-6 hover:bg-white/[0.02] transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     {event.type === 'payment' ? (
-                      <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 group-hover:scale-110 transition-transform">
+                      <div className="h-12 w-12 shrink-0 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 group-hover:scale-110 transition-transform">
                         <ArrowDownLeft className="h-5 w-5 text-green-500" />
                       </div>
                     ) : (
-                      <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform">
+                      <div className="h-12 w-12 shrink-0 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform">
                         <UserPlus className="h-5 w-5 text-blue-500" />
                       </div>
                     )}
@@ -80,7 +80,7 @@ export function EventFeed({ isLoading, events }: EventFeedProps) {
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-2">
                     {event.type === 'payment' ? (
-                      <p className="font-black text-green-500 text-lg">+{parseFloat(event.amount).toFixed(2)} CELO</p>
+                      <p className="font-black text-green-500 text-lg">+{parseFloat(event.amount).toFixed(2)} {event.token || 'CELO'}</p>
                     ) : (
                       <p className="font-bold text-blue-400 text-sm tracking-widest uppercase">Verified</p>
                     )}

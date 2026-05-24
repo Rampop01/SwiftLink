@@ -12,7 +12,7 @@ export default function ExplorerPage() {
   const publicClient = usePublicClient()
   const [events, setEvents] = React.useState<any[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [stats, setStats] = React.useState({ txns: 0, volume: 0, users: 0 })
+  const [stats, setStats] = React.useState({ txns: 0, volumeCusd: 0, volumeCelo: 0, users: 0 })
 
   const fetchEvents = React.useCallback(async () => {
     if (!publicClient) return
@@ -22,21 +22,29 @@ export default function ExplorerPage() {
       const paymentLogs = await publicClient.getLogs({
         address: SWIFTLINK_ADDRESS,
         event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'PaymentReceived') as any,
-        fromBlock: 'earliest' // In production, we'd limit this or use an indexer
+        fromBlock: 67700000n
       })
 
       // Fetch latest Registration events
       const registrationLogs = await publicClient.getLogs({
         address: SWIFTLINK_ADDRESS,
         event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'ProfileRegistered') as any,
-        fromBlock: 'earliest'
+        fromBlock: 67700000n
       })
 
       // Calculate stats
-      const volume = paymentLogs.reduce((acc, log: any) => acc + parseFloat(formatUnits(log.args.amount, 18)), 0)
+      const volumeCusd = paymentLogs
+        .filter((log: any) => log.args.token && log.args.token.toLowerCase() !== '0x0000000000000000000000000000000000000000')
+        .reduce((acc, log: any) => acc + parseFloat(formatUnits(log.args.amount, 18)), 0)
+        
+      const volumeCelo = paymentLogs
+        .filter((log: any) => !log.args.token || log.args.token.toLowerCase() === '0x0000000000000000000000000000000000000000')
+        .reduce((acc, log: any) => acc + parseFloat(formatUnits(log.args.amount, 18)), 0)
+
       setStats({
         txns: paymentLogs.length,
-        volume: volume,
+        volumeCusd,
+        volumeCelo,
         users: registrationLogs.length
       })
 
@@ -48,6 +56,7 @@ export default function ExplorerPage() {
           from: log.args.from,
           to: log.args.to,
           amount: formatUnits(log.args.amount, 18),
+          token: (!log.args.token || log.args.token === '0x0000000000000000000000000000000000000000') ? 'CELO' : 'cUSD',
           timestamp: Number(block.timestamp) * 1000,
           hash: log.transactionHash
         }
