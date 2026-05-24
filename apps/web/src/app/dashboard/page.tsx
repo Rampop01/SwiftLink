@@ -53,7 +53,7 @@ export default function DashboardPage() {
         address: SWIFTLINK_ADDRESS,
         event: SWIFTLINK_ABI.find(x => x.type === 'event' && x.name === 'PaymentReceived') as any,
         args: { to: address },
-        fromBlock: 'earliest'
+        fromBlock: 67700000n // Celo mainnet safe recent block
       })
 
       const formattedEvents = await Promise.all(logs.map(async (log: any) => {
@@ -95,7 +95,8 @@ export default function DashboardPage() {
     },
   })
 
-  const totalVolume = events.reduce((acc, event) => acc + parseFloat(event.amount), 0);
+  const totalCusd = events.filter(e => e.token === 'cUSD').reduce((acc, event) => acc + parseFloat(event.amount), 0);
+  const totalCelo = events.filter(e => e.token === 'CELO').reduce((acc, event) => acc + parseFloat(event.amount), 0);
   const uniquePayers = new Set(events.map(event => event.from)).size;
 
   const [baseUrl, setBaseUrl] = React.useState("https://swiftlink.me")
@@ -131,7 +132,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <DashboardStats totalVolume={totalVolume} uniquePayers={uniquePayers} />
+        <DashboardStats totalCusd={totalCusd} totalCelo={totalCelo} uniquePayers={uniquePayers} />
         
         <RecentActivityFeed 
           events={events} 

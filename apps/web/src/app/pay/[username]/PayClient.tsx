@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import { parseUnits } from 'viem';
 import Link from 'next/link';
 
-export default function PayClient({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string } }) {
+export default function PayClient({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string, token?: string } }) {
   const { username } = params;
   const { address, isConnected } = useAccount();
   // Strip any non-numeric characters (e.g. "$ 5" -> "5") from the incoming amount param
@@ -30,7 +30,8 @@ export default function PayClient({ params, searchParams }: { params: { username
   const recipient = profileData?.[1];
   const isValidUser = recipient && recipient !== '0x0000000000000000000000000000000000000000' && profileData?.[3] === true;
 
-  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD');
+  const requestedToken = (searchParams.token === 'cUSD' || searchParams.token === 'CELO') ? searchParams.token : null;
+  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>(requestedToken || 'cUSD');
 
   // Check allowance for ERC20
   const { data: allowanceData, refetch: refetchAllowance } = useReadContract({
@@ -225,8 +226,11 @@ export default function PayClient({ params, searchParams }: { params: { username
                     tokenType === token 
                       ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
                       : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => setTokenType(token)}
+                  } ${requestedToken ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  onClick={() => {
+                    if (!requestedToken) setTokenType(token)
+                  }}
+                  disabled={!!requestedToken}
                 >
                   {token}
                 </button>

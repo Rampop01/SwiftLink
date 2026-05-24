@@ -62,6 +62,7 @@ export default function RequestPage() {
   }
 
   const [baseUrl, setBaseUrl] = React.useState("https://swiftlink.me")
+  const [tokenType, setTokenType] = React.useState<'cUSD' | 'CELO'>('cUSD')
   
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -73,7 +74,7 @@ export default function RequestPage() {
   const numericAmount = amount.replace(/[^0-9.]/g, '').trim()
 
   const generatedLink = username 
-    ? `${baseUrl}/pay/${username}${numericAmount ? `?amount=${encodeURIComponent(numericAmount)}` : ''}`
+    ? `${baseUrl}/pay/${username}${numericAmount ? `?amount=${encodeURIComponent(numericAmount)}&token=${tokenType}` : `?token=${tokenType}`}`
     : ""
 
   const copyLink = () => {
@@ -124,17 +125,37 @@ export default function RequestPage() {
             <p className="text-sm font-bold">Invoice Details</p>
           </div>
           <div className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="amount">Requested Amount (cUSD)</Label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  id="amount" 
-                  placeholder="0.00" 
-                  className="pl-9 h-12 text-lg font-medium bg-white/[0.03] border-white/[0.08] rounded-xl w-full"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="amount">Requested Amount</Label>
+                <div className="relative">
+                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input 
+                    id="amount" 
+                    placeholder="0.00" 
+                    className="pl-9 h-12 text-lg font-medium bg-white/[0.03] border-white/[0.08] rounded-xl w-full"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Token</Label>
+                <div className="flex p-1 h-12 bg-white/[0.03] rounded-xl border border-white/[0.08]">
+                  {(['cUSD', 'CELO'] as const).map(token => (
+                    <button 
+                      key={token}
+                      className={`flex-1 text-sm font-bold rounded-lg transition-all ${
+                        tokenType === token 
+                          ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
+                          : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                      }`}
+                      onClick={() => setTokenType(token)}
+                    >
+                      {token}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
