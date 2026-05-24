@@ -5,12 +5,13 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Link2, Send, ShieldCheck, Wallet, CheckCircle2, ArrowUpRight, PlusCircle } from 'lucide-react';
+import { Loader2, Link2, Send, ShieldCheck, Wallet, CheckCircle2, ArrowUpRight, PlusCircle, Copy } from 'lucide-react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { SWIFTLINK_ABI, SWIFTLINK_ADDRESS, CUSD_ADDRESS, ERC20_ABI } from '@/lib/contracts';
 import { toast } from 'sonner';
 import { parseUnits } from 'viem';
 import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function PayClient({ params, searchParams }: { params: { username: string }, searchParams: { amount?: string, desc?: string, token?: string } }) {
   const { username } = params;
@@ -103,8 +104,20 @@ export default function PayClient({ params, searchParams }: { params: { username
 
   if (isResolving) {
     return (
-      <div className="container flex items-center justify-center min-h-[calc(100vh-64px)]">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="container flex items-center justify-center min-h-[calc(100vh-64px)] py-12">
+        <div className="w-full max-w-md glass rounded-2xl p-8 glow-border">
+          <div className="flex flex-col items-center mb-8">
+            <Skeleton className="w-16 h-16 rounded-2xl mb-4 bg-white/5" />
+            <Skeleton className="w-48 h-8 mb-2 bg-white/5" />
+            <Skeleton className="w-32 h-4 bg-white/5" />
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Skeleton className="w-full h-14 rounded-xl bg-white/5" />
+            </div>
+            <Skeleton className="w-full h-14 rounded-xl bg-white/5" />
+          </div>
+        </div>
       </div>
     );
   }
@@ -210,11 +223,25 @@ export default function PayClient({ params, searchParams }: { params: { username
 
           {/* Body */}
           <div className="px-8 pb-8 space-y-5">
-            <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] text-center">
+            <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] text-center relative group">
               <p className="text-[10px] text-muted-foreground uppercase tracking-[0.15em] font-bold mb-1">Recipient</p>
-              <p className="text-xs font-mono text-muted-foreground">
-                {(recipient as string) || 'Resolving...'}
-              </p>
+              <div className="flex items-center justify-center gap-2">
+                <p className="text-xs font-mono text-muted-foreground">
+                  {(recipient as string) || 'Resolving...'}
+                </p>
+                {recipient && (
+                  <button 
+                    onClick={() => {
+                      navigator.clipboard.writeText(recipient as string);
+                      toast.success('Address copied!');
+                    }}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-white/10 rounded-md"
+                    title="Copy Address"
+                  >
+                    <Copy className="h-3 w-3 text-muted-foreground" />
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Token Toggle */}
