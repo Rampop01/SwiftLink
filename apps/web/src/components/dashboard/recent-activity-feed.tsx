@@ -10,6 +10,7 @@ interface ActivityEvent {
   amount: string;
   timestamp: number;
   hash: string;
+  token?: string;
 }
 
 interface RecentActivityFeedProps {
@@ -32,11 +33,12 @@ export function RecentActivityFeed({
   
   const exportCsv = () => {
     const csv = [
-      ["Date", "From", "Amount", "Hash"].join(","),
+      ["Date", "From", "Amount", "Token", "Hash"].join(","),
       ...events.map(e => [
         new Date(e.timestamp).toISOString(),
         e.from,
         e.amount,
+        e.token || 'Unknown',
         e.hash
       ].join(","))
     ].join("\n");
@@ -125,7 +127,9 @@ export function RecentActivityFeed({
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-black text-green-600">+{parseFloat(event.amount).toFixed(2)}</p>
+                      <p className="font-black text-green-600">
+                        +{parseFloat(event.amount).toFixed(2)} <span className="text-xs">{event.token || ''}</span>
+                      </p>
                       <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
                         {new Date(event.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </p>

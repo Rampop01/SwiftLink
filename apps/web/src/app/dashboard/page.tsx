@@ -62,7 +62,8 @@ export default function DashboardPage() {
           from: log.args.from,
           amount: formatUnits(log.args.amount, 18),
           timestamp: Number(block.timestamp) * 1000,
-          hash: log.transactionHash
+          hash: log.transactionHash,
+          token: log.args.token === '0x0000000000000000000000000000000000000000' ? 'CELO' : 'cUSD'
         }
       }))
 
@@ -87,7 +88,8 @@ export default function DashboardPage() {
     onLogs(logs) {
       const newEvent = logs[0] as any;
       if (newEvent.args.to === address) {
-        toast.success(`Received ${formatUnits(newEvent.args.amount, 18)} CELO! ✨`);
+        const tokenSymbol = newEvent.args.token === '0x0000000000000000000000000000000000000000' ? 'CELO' : 'cUSD';
+        toast.success(`Received ${formatUnits(newEvent.args.amount, 18)} ${tokenSymbol}! ✨`);
         fetchEvents();
       }
     },
