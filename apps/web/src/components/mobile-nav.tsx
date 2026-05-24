@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Sparkles, UserPlus, Home, Search } from "lucide-react"
+import { LayoutDashboard, Sparkles, UserPlus, Home, Search, Layers } from "lucide-react"
 
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Explorer", href: "/explorer", icon: Search },
+  { name: "Batch Pay", href: "/batch", icon: Layers },
   { name: "Request", href: "/request", icon: Sparkles },
   { name: "Register", href: "/register", icon: UserPlus },
 ]
