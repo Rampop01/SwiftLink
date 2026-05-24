@@ -18,6 +18,7 @@ interface ActivityEvent {
   amount: string;
   timestamp: number;
   hash: string;
+  token?: string;
 }
 
 export default function DashboardPage() {
