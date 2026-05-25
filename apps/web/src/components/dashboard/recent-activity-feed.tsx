@@ -104,7 +104,7 @@ export function RecentActivityFeed({
               </div>
             ) : events.length > 0 ? (
               <div className="space-y-4">
-                {events.map((event, idx) => (
+                {events.slice(0, 10).map((event, idx) => (
                   <motion.div 
                     key={event.hash}
                     initial={{ opacity: 0, x: -20 }}
