@@ -209,9 +209,9 @@ export default function PayClient({ params, searchParams }: { params: { username
             </div>
           </div>
         ) : (
-          <div className="glass rounded-2xl overflow-hidden glow-border">
-          {/* Green accent bar */}
-          <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+          <div className="glass rounded-none [clip-path:polygon(0_20px,20px_0,100%_0,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%)] overflow-hidden glow-border relative border-none">
+          {/* Animated Neon accent bar */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-transparent via-primary to-transparent shimmer absolute top-0 inset-x-0 z-20" />
           
           {/* Header */}
           <div className="text-center p-8 pb-4">
