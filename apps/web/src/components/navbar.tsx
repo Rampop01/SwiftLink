@@ -207,7 +207,7 @@ export function Navbar() {
                             type="button"
                             className="relative inline-flex h-11 items-center justify-center px-8 font-black uppercase tracking-[0.2em] text-xs text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/80 overflow-hidden group [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-95"
                           >
-                            <span className="relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Connect</span>
+                            <span className="relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Connect Wallet</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite] transition-transform" />
                             <div className="absolute inset-0 border-2 border-white/20 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)]" />
                           </button>
