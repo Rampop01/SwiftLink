@@ -94,9 +94,10 @@ export function Navbar() {
                                 <button 
                                   onClick={openConnectModal} 
                                   type="button"
-                                  className="w-full relative inline-flex h-12 items-center justify-center px-6 font-black uppercase tracking-widest text-sm text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/90 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm overflow-hidden group shadow-[0_0_15px_rgba(7,149,95,0.4)]"
+                                  className="w-full relative inline-flex h-12 items-center justify-center px-6 font-black uppercase tracking-[0.2em] text-sm text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/80 overflow-hidden group [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-95"
                                 >
-                                  <span className="relative z-10">Connect Wallet</span>
+                                  <span className="relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Connect Wallet</span>
+                                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite] transition-transform" />
                                 </button>
                               );
                             }
@@ -106,7 +107,7 @@ export function Navbar() {
                                 <button 
                                   onClick={openChainModal} 
                                   type="button"
-                                  className="w-full relative inline-flex h-12 items-center justify-center px-4 font-black uppercase tracking-widest text-sm text-destructive-foreground transition-all duration-300 bg-destructive hover:bg-destructive/90 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
+                                  className="w-full relative inline-flex h-12 items-center justify-center px-4 font-black uppercase tracking-[0.2em] text-sm text-white transition-all duration-300 bg-destructive hover:bg-destructive/80 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-95"
                                 >
                                   Wrong network
                                 </button>
@@ -117,9 +118,10 @@ export function Navbar() {
                               <button 
                                 onClick={openAccountModal} 
                                 type="button"
-                                className="w-full relative inline-flex h-12 items-center justify-center px-5 font-black tracking-wide text-base text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
+                                className="w-full relative inline-flex h-12 items-center justify-center px-5 font-black tracking-widest text-base text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] group active:scale-95"
                               >
                                 {account.displayName}
+                                <div className="absolute inset-0 bg-primary/20 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                               </button>
                             );
                           })()}
@@ -203,10 +205,11 @@ export function Navbar() {
                           <button 
                             onClick={openConnectModal} 
                             type="button"
-                            className="relative inline-flex h-10 items-center justify-center px-6 font-black uppercase tracking-widest text-xs text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/90 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm overflow-hidden group shadow-[0_0_15px_rgba(7,149,95,0.4)] hover:shadow-[0_0_25px_rgba(7,149,95,0.8)] hover:-translate-y-0.5 border border-primary-foreground/20"
+                            className="relative inline-flex h-11 items-center justify-center px-8 font-black uppercase tracking-[0.2em] text-xs text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/80 overflow-hidden group [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-95"
                           >
-                            <span className="relative z-10">Connect</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                            <span className="relative z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Connect</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite] transition-transform" />
+                            <div className="absolute inset-0 border-2 border-white/20 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)]" />
                           </button>
                         );
                       }
@@ -216,7 +219,7 @@ export function Navbar() {
                           <button 
                             onClick={openChainModal} 
                             type="button"
-                            className="relative inline-flex h-10 items-center justify-center px-4 font-black uppercase tracking-widest text-xs text-destructive-foreground transition-all duration-300 bg-destructive hover:bg-destructive/90 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm overflow-hidden shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                            className="relative inline-flex h-11 items-center justify-center px-6 font-black uppercase tracking-[0.2em] text-xs text-white transition-all duration-300 bg-destructive hover:bg-destructive/80 overflow-hidden group [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-95"
                           >
                             Wrong network
                           </button>
@@ -224,19 +227,19 @@ export function Navbar() {
                       }
 
                       return (
-                        <div style={{ display: 'flex', gap: 12 }}>
+                        <div style={{ display: 'flex', gap: 10 }}>
                           <button
                             onClick={openChainModal}
                             type="button"
-                            className="flex items-center gap-2 h-10 px-3 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm font-bold text-sm"
+                            className="flex items-center justify-center h-11 w-11 bg-white/5 hover:bg-white/10 transition-colors [clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)] font-bold text-sm group"
                           >
                             {chain.hasIcon && (
-                              <div className="w-5 h-5 rounded-full overflow-hidden bg-white/10">
+                              <div className="w-5 h-5 overflow-hidden group-hover:scale-110 transition-transform">
                                 {chain.iconUrl && (
                                   <img
                                     alt={chain.name ?? 'Chain icon'}
                                     src={chain.iconUrl}
-                                    className="w-5 h-5"
+                                    className="w-full h-full object-cover"
                                   />
                                 )}
                               </div>
@@ -246,9 +249,10 @@ export function Navbar() {
                           <button 
                             onClick={openAccountModal} 
                             type="button"
-                            className="relative inline-flex h-10 items-center justify-center px-5 font-black tracking-wide text-sm text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/60 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm group shadow-[0_0_10px_rgba(7,149,95,0.2)] hover:shadow-[0_0_20px_rgba(7,149,95,0.4)]"
+                            className="relative inline-flex h-11 items-center justify-center px-6 font-black tracking-widest text-sm text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] group active:scale-95"
                           >
                             {account.displayName}
+                            <div className="absolute inset-0 bg-primary/20 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
                           </button>
                         </div>
                       );
