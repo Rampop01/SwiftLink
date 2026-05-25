@@ -58,8 +58,75 @@ export function Navbar() {
                     {link.name}
                   </Link>
                 ))}
-                <div className="mt-8 pt-6 border-t border-white/[0.06]">
-                  <ConnectButton accountStatus="address" showBalance={false} chainStatus="none" />
+                  <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                  <ConnectButton.Custom>
+                    {({
+                      account,
+                      chain,
+                      openAccountModal,
+                      openChainModal,
+                      openConnectModal,
+                      authenticationStatus,
+                      mounted,
+                    }) => {
+                      const ready = mounted && authenticationStatus !== 'loading';
+                      const connected =
+                        ready &&
+                        account &&
+                        chain &&
+                        (!authenticationStatus ||
+                          authenticationStatus === 'authenticated');
+
+                      return (
+                        <div
+                          {...(!ready && {
+                            'aria-hidden': true,
+                            'style': {
+                              opacity: 0,
+                              pointerEvents: 'none',
+                              userSelect: 'none',
+                            },
+                          })}
+                        >
+                          {(() => {
+                            if (!connected) {
+                              return (
+                                <button 
+                                  onClick={openConnectModal} 
+                                  type="button"
+                                  className="w-full relative inline-flex h-12 items-center justify-center px-6 font-black uppercase tracking-widest text-sm text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/90 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm overflow-hidden group shadow-[0_0_15px_rgba(7,149,95,0.4)]"
+                                >
+                                  <span className="relative z-10">Connect Wallet</span>
+                                </button>
+                              );
+                            }
+
+                            if (chain.unsupported) {
+                              return (
+                                <button 
+                                  onClick={openChainModal} 
+                                  type="button"
+                                  className="w-full relative inline-flex h-12 items-center justify-center px-4 font-black uppercase tracking-widest text-sm text-destructive-foreground transition-all duration-300 bg-destructive hover:bg-destructive/90 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
+                                >
+                                  Wrong network
+                                </button>
+                              );
+                            }
+
+                            return (
+                              <button 
+                                onClick={openAccountModal} 
+                                type="button"
+                                className="w-full relative inline-flex h-12 items-center justify-center px-5 font-black tracking-wide text-base text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
+                              >
+                                {account.displayName}
+                              </button>
+                            );
+                          })()}
+                        </div>
+                      );
+                    }}
+                  </ConnectButton.Custom>
                 </div>
               </nav>
             </SheetContent>
@@ -101,7 +168,95 @@ export function Navbar() {
           })}
           
           <div className="flex items-center gap-3 ml-3 pl-3 border-l border-white/[0.06]">
-            <ConnectButton accountStatus="address" showBalance={false} chainStatus="icon" />
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                authenticationStatus,
+                mounted,
+              }) => {
+                const ready = mounted && authenticationStatus !== 'loading';
+                const connected =
+                  ready &&
+                  account &&
+                  chain &&
+                  (!authenticationStatus ||
+                    authenticationStatus === 'authenticated');
+
+                return (
+                  <div
+                    {...(!ready && {
+                      'aria-hidden': true,
+                      'style': {
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <button 
+                            onClick={openConnectModal} 
+                            type="button"
+                            className="relative inline-flex h-10 items-center justify-center px-6 font-black uppercase tracking-widest text-xs text-primary-foreground transition-all duration-300 bg-primary hover:bg-primary/90 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm overflow-hidden group shadow-[0_0_15px_rgba(7,149,95,0.4)] hover:shadow-[0_0_25px_rgba(7,149,95,0.8)] hover:-translate-y-0.5 border border-primary-foreground/20"
+                          >
+                            <span className="relative z-10">Connect</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                          </button>
+                        );
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <button 
+                            onClick={openChainModal} 
+                            type="button"
+                            className="relative inline-flex h-10 items-center justify-center px-4 font-black uppercase tracking-widest text-xs text-destructive-foreground transition-all duration-300 bg-destructive hover:bg-destructive/90 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm overflow-hidden shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                          >
+                            Wrong network
+                          </button>
+                        );
+                      }
+
+                      return (
+                        <div style={{ display: 'flex', gap: 12 }}>
+                          <button
+                            onClick={openChainModal}
+                            type="button"
+                            className="flex items-center gap-2 h-10 px-3 bg-white/5 hover:bg-white/10 transition-colors border border-white/10 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm font-bold text-sm"
+                          >
+                            {chain.hasIcon && (
+                              <div className="w-5 h-5 rounded-full overflow-hidden bg-white/10">
+                                {chain.iconUrl && (
+                                  <img
+                                    alt={chain.name ?? 'Chain icon'}
+                                    src={chain.iconUrl}
+                                    className="w-5 h-5"
+                                  />
+                                )}
+                              </div>
+                            )}
+                          </button>
+
+                          <button 
+                            onClick={openAccountModal} 
+                            type="button"
+                            className="relative inline-flex h-10 items-center justify-center px-5 font-black tracking-wide text-sm text-primary transition-all duration-300 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/60 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm group shadow-[0_0_10px_rgba(7,149,95,0.2)] hover:shadow-[0_0_20px_rgba(7,149,95,0.4)]"
+                          >
+                            {account.displayName}
+                          </button>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                );
+              }}
+            </ConnectButton.Custom>
           </div>
         </nav>
       </div>
