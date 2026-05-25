@@ -15,13 +15,19 @@ export function DashboardLinkCard({ username, paymentLink }: DashboardLinkCardPr
     toast.success("Link copied to clipboard!");
   };
 
-  const shareLink = () => {
+  const shareLink = async () => {
     if (navigator.share) {
-      navigator.share({
-        title: 'SwiftLink Payment Link',
-        text: `Pay me via SwiftLink:`,
-        url: paymentLink,
-      }).catch(console.error);
+      try {
+        await navigator.share({
+          title: 'SwiftLink Payment Link',
+          text: `Pay me via SwiftLink:`,
+          url: paymentLink,
+        });
+      } catch (error: any) {
+        if (error.name !== 'AbortError') {
+          copyToClipboard();
+        }
+      }
     } else {
       copyToClipboard();
     }

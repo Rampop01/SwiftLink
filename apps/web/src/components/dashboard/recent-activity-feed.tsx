@@ -54,15 +54,22 @@ export function RecentActivityFeed({
     toast.success("Transaction history exported!");
   };
 
-  const shareLink = () => {
+  const shareLink = async () => {
     if (navigator.share) {
-      navigator.share({
-        title: 'My SwiftLink',
-        text: 'Pay me via SwiftLink:',
-        url: `https://${paymentLink}`,
-      });
+      try {
+        await navigator.share({
+          title: 'My SwiftLink',
+          text: 'Pay me via SwiftLink:',
+          url: paymentLink,
+        });
+      } catch (error: any) {
+        if (error.name !== 'AbortError') {
+          navigator.clipboard.writeText(paymentLink);
+          toast.success("Link copied to clipboard!");
+        }
+      }
     } else {
-      navigator.clipboard.writeText(`https://${paymentLink}`);
+      navigator.clipboard.writeText(paymentLink);
       toast.success("Link copied to clipboard!");
     }
   };
