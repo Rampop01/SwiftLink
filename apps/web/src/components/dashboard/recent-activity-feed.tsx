@@ -166,7 +166,11 @@ export function RecentActivityFeed({
             )}
             
             {address && events.length > 0 && (
-              <Button variant="ghost" className="w-full h-12 rounded-xl text-sm font-bold text-muted-foreground hover:text-primary transition-colors" asChild>
+              <Button 
+                variant="outline" 
+                className="w-full h-12 rounded-xl text-sm font-bold text-muted-foreground border-white/5 bg-transparent hover:bg-primary/10 hover:border-primary/20 hover:text-primary transition-all duration-300" 
+                asChild
+              >
                 <a href={`https://celoscan.io/address/${address}`} target="_blank" rel="noopener noreferrer">
                   View all on Celoscan <ExternalLink className="ml-1 h-3 w-3" />
                 </a>
