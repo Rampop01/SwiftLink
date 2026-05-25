@@ -161,52 +161,79 @@ export default function PayClient({ params, searchParams }: { params: { username
         className="w-full max-w-md"
       >
         {paymentSuccessData ? (
-          <div className="glass rounded-2xl overflow-hidden glow-border p-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/10 mb-6">
-              <CheckCircle2 className="w-10 h-10 text-emerald-500" />
-            </div>
+          <div className="glass rounded-none [clip-path:polygon(0_20px,20px_0,100%_0,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%)] overflow-hidden glow-border p-10 text-center relative border-none">
+            <div className="absolute inset-0 bg-emerald-500/5 glow-green pointer-events-none" />
             
-            <h2 className="text-3xl font-black mb-2 text-foreground">Payment Successful!</h2>
+            <motion.div 
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="inline-flex items-center justify-center w-24 h-24 rounded-none [clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)] bg-emerald-500/10 mb-8 border border-emerald-500/30 relative shadow-[0_0_30px_rgba(16,185,129,0.2)]"
+            >
+              <div className="absolute inset-0 bg-emerald-400/20 blur-xl" />
+              <CheckCircle2 className="w-12 h-12 text-emerald-400 relative z-10" />
+            </motion.div>
             
-            <div className="p-4 bg-white/[0.03] rounded-xl border border-white/[0.06] mb-8 mt-6">
-              <p className="text-sm text-muted-foreground mb-1">You sent</p>
-              <div className="text-3xl font-black text-primary flex items-center justify-center gap-2">
-                {paymentSuccessData.amount} <span className="text-lg">{paymentSuccessData.token}</span>
+            <motion.h2 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl font-black mb-3 text-white tracking-tight"
+            >
+              PAYMENT SENT
+            </motion.h2>
+            
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="p-6 bg-white/[0.02] rounded-none [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)] border border-white/[0.08] mb-10 mt-6 relative overflow-hidden"
+            >
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+              <p className="text-xs text-muted-foreground uppercase tracking-[0.2em] font-bold mb-2">Transaction Value</p>
+              <div className="text-4xl font-black text-primary flex items-center justify-center gap-2 glow-text">
+                {paymentSuccessData.amount} <span className="text-xl text-primary/70">{paymentSuccessData.token}</span>
               </div>
-              <p className="text-sm font-medium mt-2">to @{username}</p>
+              <p className="text-sm font-medium mt-3 text-white/80">Delivered to @{username}</p>
               
               {requestedAmount && (
-                <div className="mt-4 pt-4 border-t border-white/[0.06]">
+                <div className="mt-5 pt-5 border-t border-white/[0.06]">
                   {Number(paymentSuccessData.amount) >= Number(requestedAmount) ? (
-                    <div className="inline-flex items-center gap-1.5 text-emerald-400 text-sm font-medium bg-emerald-400/10 px-3 py-1.5 rounded-lg border border-emerald-400/20">
+                    <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider bg-emerald-400/10 px-4 py-2 rounded-none [clip-path:polygon(0_5px,5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%)] border border-emerald-400/20">
                       <CheckCircle2 className="w-4 h-4" />
-                      Requested amount paid in full
+                      Requested Amount Paid
                     </div>
                   ) : (
-                    <div className="inline-flex items-center gap-1.5 text-amber-400 text-sm font-medium bg-amber-400/10 px-3 py-1.5 rounded-lg border border-amber-400/20">
+                    <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider bg-amber-400/10 px-4 py-2 rounded-none [clip-path:polygon(0_5px,5px_0,100%_0,100%_calc(100%-5px),calc(100%-5px)_100%,0_100%)] border border-amber-400/20">
                       <ShieldCheck className="w-4 h-4" />
-                      Partial payment (Requested: {requestedAmount} {paymentSuccessData.token})
+                      Partial Payment (Req: {requestedAmount})
                     </div>
                   )}
                 </div>
               )}
-            </div>
+            </motion.div>
 
-            <div className="space-y-3">
-              <Button asChild variant="outline" className="w-full h-12 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border-white/10 group">
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="space-y-4"
+            >
+              <Button asChild variant="outline" className="w-full h-14 rounded-none [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)] bg-white/[0.03] hover:bg-white/[0.08] border-white/10 group text-sm uppercase tracking-widest font-bold">
                 <a href={`https://celoscan.io/tx/${paymentSuccessData.hash}`} target="_blank" rel="noopener noreferrer">
                   View on Explorer
-                  <ArrowUpRight className="ml-2 h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <ArrowUpRight className="ml-2 h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
                 </a>
               </Button>
               
-              <Button asChild className="w-full h-12 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 group">
+              <Button asChild className="w-full h-14 rounded-none [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)] shadow-lg shadow-primary/20 hover:shadow-primary/40 group bg-primary/20 hover:bg-primary/30 text-primary border-none relative overflow-hidden text-sm uppercase tracking-widest font-bold glow-green">
                 <Link href="/register">
+                  <span className="absolute inset-0 border border-primary/50 [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)] pointer-events-none" />
                   <PlusCircle className="mr-2 h-4 w-4" />
                   Create your own SwiftLink
                 </Link>
               </Button>
-            </div>
+            </motion.div>
           </div>
         ) : (
           <div className="glass rounded-none [clip-path:polygon(0_20px,20px_0,100%_0,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%)] overflow-hidden glow-border relative border-none">
