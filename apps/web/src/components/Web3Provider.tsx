@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { RainbowKitProvider, connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, connectorsForWallets, darkTheme } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { injectedWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -63,7 +63,12 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider theme={darkTheme({
+          accentColor: '#07955F',
+          accentColorForeground: 'white',
+          borderRadius: 'large',
+          overlayBlur: 'small',
+        })}>
           <MiniPayAutoConnect>
             {children}
           </MiniPayAutoConnect>
