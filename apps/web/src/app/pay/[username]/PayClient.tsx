@@ -256,20 +256,23 @@ export default function PayClient({ params, searchParams }: { params: { username
             </div>
 
             {/* Token Toggle */}
-            <div className="flex p-1 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+            <div className="flex p-1 bg-white/[0.03] rounded-none [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)] border border-white/[0.06] relative">
               {(['cUSD', 'CELO'] as const).map(token => (
                 <button 
                   key={token}
-                  className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all ${
+                  className={`flex-1 py-2.5 text-sm font-bold rounded-none transition-all duration-300 relative ${
                     tokenType === token 
-                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
-                      : 'text-muted-foreground hover:text-foreground'
-                  } ${requestedToken ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      ? 'text-primary-foreground shadow-lg shadow-primary/20 z-10' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                  } ${requestedToken ? 'opacity-50 cursor-not-allowed' : ''} [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)]`}
                   onClick={() => {
                     if (!requestedToken) setTokenType(token)
                   }}
                   disabled={!!requestedToken}
                 >
+                  {tokenType === token && (
+                    <div className="absolute inset-0 bg-primary/20 border border-primary/50 -z-10 [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)]" />
+                  )}
                   {token}
                 </button>
               ))}
@@ -279,17 +282,18 @@ export default function PayClient({ params, searchParams }: { params: { username
             <div className="space-y-2">
               <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground flex justify-between">
                 Amount
-                <span className="text-[10px] normal-case font-normal tracking-normal">{tokenType} · Celo Mainnet</span>
+                <span className="text-[10px] normal-case font-normal tracking-normal text-primary/70">{tokenType} · Celo Mainnet</span>
               </Label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-black text-muted-foreground/40">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-primary/20 blur-md opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 rounded-none [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)]" />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-black text-primary/60 z-10 transition-colors group-focus-within:text-primary glow-text">
                   {tokenType === 'cUSD' ? '$' : 'Ⓒ'}
                 </span>
                 <Input
                   id="amount"
                   type="number"
                   placeholder="0.00"
-                  className="pl-10 h-14 text-2xl font-black bg-white/[0.03] border-white/[0.08] rounded-xl focus-visible:ring-primary/30"
+                  className="pl-12 h-16 text-3xl font-black bg-white/[0.02] border-white/[0.08] rounded-none [clip-path:polygon(0_10px,10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%)] focus-visible:ring-0 focus-visible:border-primary/50 relative z-10 tracking-wider shadow-[inset_0_0_20px_rgba(255,255,255,0.02)] focus:shadow-[inset_0_0_20px_rgba(53,208,127,0.1)] transition-all placeholder:text-white/10"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   disabled={isPending || isConfirming}
@@ -304,46 +308,52 @@ export default function PayClient({ params, searchParams }: { params: { username
 
             {needsApproval ? (
               <Button 
-                className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
+                className="w-full h-16 text-base font-bold rounded-none relative overflow-hidden bg-primary/10 hover:bg-primary/20 text-primary border-none [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-[0.98] transition-all group glow-green" 
                 size="lg"
                 disabled={!amount || isPending || isConfirming || !isConnected || amountInWei === 0n}
                 onClick={handleApprove}
               >
-                {(isPending || isConfirming) ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    {isPending ? 'Approving...' : 'Confirming...'}
-                  </>
-                ) : (
-                  <>
-                    Approve {tokenType}
-                    <CheckCircle2 className="ml-2 h-4 w-4" />
-                  </>
-                )}
+                <span className="absolute inset-0 border border-primary/50 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] pointer-events-none" />
+                <span className="relative z-10 flex items-center justify-center font-black tracking-widest uppercase">
+                  {(isPending || isConfirming) ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      {isPending ? 'Approving...' : 'Confirming...'}
+                    </>
+                  ) : (
+                    <>
+                      Approve {tokenType}
+                      <CheckCircle2 className="ml-2 h-5 w-5 group-hover:text-white transition-colors" />
+                    </>
+                  )}
+                </span>
               </Button>
             ) : (
               <Button 
-                className="w-full h-14 text-base font-bold rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all group" 
+                className="w-full h-16 text-base font-bold rounded-none relative overflow-hidden bg-primary/10 hover:bg-primary/20 text-primary border-none [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] active:scale-[0.98] transition-all group glow-green" 
                 size="lg"
                 disabled={!amount || isPending || isConfirming || !isConnected || amountInWei === 0n}
                 onClick={handlePay}
               >
-                {(isPending || isConfirming) ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    {isPending ? 'Requesting...' : 'Sending...'}
-                  </>
-                ) : (
-                  <>
-                    Send Payment
-                    <Send className="ml-2 h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </>
-                )}
+                <span className="absolute inset-0 border border-primary/50 [clip-path:polygon(15px_0,100%_0,100%_calc(100%-15px),calc(100%-15px)_100%,0_100%,0_15px)] pointer-events-none" />
+                <span className="relative z-10 flex items-center justify-center font-black tracking-widest uppercase">
+                  {(isPending || isConfirming) ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      {isPending ? 'Requesting...' : 'Sending...'}
+                    </>
+                  ) : (
+                    <>
+                      Send Payment
+                      <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white transition-all" />
+                    </>
+                  )}
+                </span>
               </Button>
             )}
 
             {!isConnected && (
-              <p className="text-xs text-center text-muted-foreground">Connect wallet to send.</p>
+              <p className="text-xs text-center text-muted-foreground uppercase tracking-wider font-bold">Connect wallet to send.</p>
             )}
           </div>
         </div>
