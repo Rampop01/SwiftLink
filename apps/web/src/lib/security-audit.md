@@ -18,3 +18,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(contracts): patch edge case in fallback routing
 - [2026-06-13T23:17:47Z] Applied patch: chore(security): implement strict Content-Security-Policy headers
 - [2026-06-13T23:17:47Z] Applied patch: fix(api): validate token addresses to prevent spoofing
+- [2026-06-13T23:17:47Z] Applied patch: refactor(web): harden local storage access patterns
