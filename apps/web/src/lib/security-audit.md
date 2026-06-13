@@ -24,3 +24,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: chore(contracts): add NatSpec comments for security audit
 - [2026-06-13T23:17:47Z] Applied patch: fix(web): resolve memory leak in blockchain event listener
 - [2026-06-13T23:17:47Z] Applied patch: fix(security): tighten regular expressions for username parsing
+- [2026-06-13T23:17:48Z] Applied patch: refactor(api): implement strict payload size limits
