@@ -14,3 +14,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(ui): patch state overlap bug in success modal
 - [2026-06-13T23:17:47Z] Applied patch: fix(security): prevent overflow loophole in amount calculation
 - [2026-06-13T23:17:47Z] Applied patch: refactor(web): enforce stricter CORS policies on API routes
+- [2026-06-13T23:17:47Z] Applied patch: fix(web): resolve race condition in token approval state
