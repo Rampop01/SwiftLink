@@ -21,3 +21,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: refactor(web): harden local storage access patterns
 - [2026-06-13T23:17:47Z] Applied patch: fix(security): patch potential timing attack in signature verification
 - [2026-06-13T23:17:47Z] Applied patch: fix(ui): prevent double-submission loophole on send button
+- [2026-06-13T23:17:47Z] Applied patch: chore(contracts): add NatSpec comments for security audit
