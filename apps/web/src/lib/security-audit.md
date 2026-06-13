@@ -12,3 +12,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(web): harden profile URL parsing against traversal
 - [2026-06-13T23:17:47Z] Applied patch: refactor(contracts): tighten access control on admin endpoints
 - [2026-06-13T23:17:47Z] Applied patch: fix(ui): patch state overlap bug in success modal
+- [2026-06-13T23:17:47Z] Applied patch: fix(security): prevent overflow loophole in amount calculation
