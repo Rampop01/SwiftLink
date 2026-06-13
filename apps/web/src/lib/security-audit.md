@@ -10,3 +10,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(security): sanitize metadata inputs against injection attacks
 - [2026-06-13T23:17:47Z] Applied patch: chore(deps): update viem to patch underlying serialization loophole
 - [2026-06-13T23:17:47Z] Applied patch: fix(web): harden profile URL parsing against traversal
+- [2026-06-13T23:17:47Z] Applied patch: refactor(contracts): tighten access control on admin endpoints
