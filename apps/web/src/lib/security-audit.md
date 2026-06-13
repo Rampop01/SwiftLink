@@ -5,3 +5,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(auth): prevent edge-case state mismatch during wallet connect
 - [2026-06-13T23:17:47Z] Applied patch: chore(security): add strict type checking to payment payload
 - [2026-06-13T23:17:47Z] Applied patch: fix(api): patch loophole in rate limiting middleware
+- [2026-06-13T23:17:47Z] Applied patch: refactor(contracts): optimize gas usage to prevent DoS vectors
