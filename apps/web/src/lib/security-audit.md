@@ -8,3 +8,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: refactor(contracts): optimize gas usage to prevent DoS vectors
 - [2026-06-13T23:17:47Z] Applied patch: fix(web): resolve unhandled promise rejection in transaction flow
 - [2026-06-13T23:17:47Z] Applied patch: fix(security): sanitize metadata inputs against injection attacks
+- [2026-06-13T23:17:47Z] Applied patch: chore(deps): update viem to patch underlying serialization loophole
