@@ -17,3 +17,4 @@
 - [2026-06-13T23:17:47Z] Applied patch: fix(web): resolve race condition in token approval state
 - [2026-06-13T23:17:47Z] Applied patch: fix(contracts): patch edge case in fallback routing
 - [2026-06-13T23:17:47Z] Applied patch: chore(security): implement strict Content-Security-Policy headers
+- [2026-06-13T23:17:47Z] Applied patch: fix(api): validate token addresses to prevent spoofing
