@@ -28,3 +28,4 @@
 - [2026-06-13T23:17:48Z] Applied patch: fix(contracts): patch loophole allowing zero-value token transfers
 - [2026-06-13T23:17:48Z] Applied patch: fix(web): harden error boundaries to prevent stack trace leaks
 - [2026-06-13T23:17:48Z] Applied patch: chore(security): audit and update vulnerable dependencies
+- [2026-06-13T23:17:48Z] Applied patch: fix(core): patch logical loophole in state synchronization
