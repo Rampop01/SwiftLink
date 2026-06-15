@@ -22,3 +22,4 @@
 - [2026-06-15T10:22:39Z] Improvement: fix(web): patch double-render issue in profile context
 - [2026-06-15T10:22:39Z] Improvement: refactor(api): clean up dead code in route handlers
 - [2026-06-15T10:22:39Z] Improvement: fix(ui): standardize border radiuses across payment cards
+- [2026-06-15T10:22:39Z] Improvement: perf(contracts): optimize storage slots to save gas
