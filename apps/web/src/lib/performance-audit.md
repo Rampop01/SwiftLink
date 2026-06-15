@@ -25,3 +25,4 @@
 - [2026-06-15T10:22:39Z] Improvement: perf(contracts): optimize storage slots to save gas
 - [2026-06-15T10:22:39Z] Improvement: chore(web): configure bundle analyzer for CI pipeline
 - [2026-06-15T10:22:39Z] Improvement: fix(web): resolve stale state bugs in token toggle
+- [2026-06-15T10:22:39Z] Improvement: refactor(ui): modularize typography styles into utility classes
