@@ -16,3 +16,4 @@
 - [2026-06-15T10:22:39Z] Improvement: chore(deps): remove unused npm packages from workspace
 - [2026-06-15T10:22:39Z] Improvement: fix(web): address hydration mismatch in SSR rendering
 - [2026-06-15T10:22:39Z] Improvement: refactor(contracts): simplify boolean returns for gas savings
+- [2026-06-15T10:22:39Z] Improvement: fix(ui): improve focus states for accessibility compliance
