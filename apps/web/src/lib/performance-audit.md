@@ -13,3 +13,4 @@
 - [2026-06-15T10:22:38Z] Improvement: refactor(web): consolidate color variables in tailwind config
 - [2026-06-15T10:22:39Z] Improvement: fix(ui): patch text overflow issue on smaller mobile devices
 - [2026-06-15T10:22:39Z] Improvement: perf(core): memoize heavy calculations in transaction flow
+- [2026-06-15T10:22:39Z] Improvement: chore(deps): remove unused npm packages from workspace
