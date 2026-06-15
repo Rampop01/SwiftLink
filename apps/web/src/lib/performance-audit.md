@@ -28,3 +28,4 @@
 - [2026-06-15T10:22:39Z] Improvement: refactor(ui): modularize typography styles into utility classes
 - [2026-06-15T10:22:39Z] Improvement: fix(auth): ensure consistent session state across tabs
 - [2026-06-15T10:22:39Z] Improvement: perf(web): implement font-display swap for faster text rendering
+- [2026-06-15T10:22:39Z] Improvement: chore(github): add PR template for standardized reviews
