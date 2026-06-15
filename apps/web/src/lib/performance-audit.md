@@ -26,3 +26,4 @@
 - [2026-06-15T10:22:39Z] Improvement: chore(web): configure bundle analyzer for CI pipeline
 - [2026-06-15T10:22:39Z] Improvement: fix(web): resolve stale state bugs in token toggle
 - [2026-06-15T10:22:39Z] Improvement: refactor(ui): modularize typography styles into utility classes
+- [2026-06-15T10:22:39Z] Improvement: fix(auth): ensure consistent session state across tabs
