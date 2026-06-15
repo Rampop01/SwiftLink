@@ -6,3 +6,4 @@
 - [2026-06-15T10:22:38Z] Improvement: perf(api): reduce payload size on initial profile fetch
 - [2026-06-15T10:22:38Z] Improvement: fix(contracts): gas optimization in public getter functions
 - [2026-06-15T10:22:38Z] Improvement: refactor(web): extract layout logic into reusable components
+- [2026-06-15T10:22:38Z] Improvement: fix(ui): correct z-index stacking context for modal overlays
