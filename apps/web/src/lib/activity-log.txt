@@ -21,3 +21,4 @@ Activity recorded at 2026-06-16T20:43:16.567Z - refactor: move types to shared f
 Activity recorded at 2026-06-16T20:43:16.596Z - fix: prevent default form submission
 Activity recorded at 2026-06-16T20:43:16.627Z - style: add hover state to primary button
 Activity recorded at 2026-06-16T20:43:16.654Z - perf: memoize expensive calculation
+Activity recorded at 2026-06-16T20:43:16.684Z - feat: add support for dark mode variants
