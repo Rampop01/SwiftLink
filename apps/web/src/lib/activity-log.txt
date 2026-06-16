@@ -17,3 +17,4 @@ Activity recorded at 2026-06-16T20:43:16.439Z - feat: improve error handling in 
 Activity recorded at 2026-06-16T20:43:16.466Z - style: fix alignment in footer
 Activity recorded at 2026-06-16T20:43:16.501Z - chore: bump version number
 Activity recorded at 2026-06-16T20:43:16.538Z - docs: add inline comments for complex regex
+Activity recorded at 2026-06-16T20:43:16.567Z - refactor: move types to shared folder
