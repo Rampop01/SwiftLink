@@ -13,3 +13,4 @@ Activity recorded at 2026-06-16T20:43:16.259Z - test: add unit tests for date pa
 Activity recorded at 2026-06-16T20:43:16.289Z - refactor: simplify conditional logic in header
 Activity recorded at 2026-06-16T20:43:16.349Z - perf: reduce bundle size by removing lodash
 Activity recorded at 2026-06-16T20:43:16.376Z - fix: typo in variable name
+Activity recorded at 2026-06-16T20:43:16.439Z - feat: improve error handling in API route
