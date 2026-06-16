@@ -32,3 +32,4 @@ Activity recorded at 2026-06-16T20:43:16.869Z - feat: implement infinite scroll
 Activity recorded at 2026-06-16T20:43:16.900Z - fix: resolve memory leak in effect
 Activity recorded at 2026-06-16T20:43:16.925Z - chore: update lockfile
 Activity recorded at 2026-06-16T20:43:16.950Z - docs: document environment variables
+Activity recorded at 2026-06-16T20:43:16.979Z - refactor: decouple logic from UI components
