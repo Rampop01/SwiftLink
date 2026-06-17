@@ -89,3 +89,4 @@ Activity at 2026-06-17T20:55:26.627Z - refactor: use Context for theme
 Activity at 2026-06-17T20:55:26.651Z - style: add loading spinner
 Activity at 2026-06-17T20:55:26.695Z - fix: routing edge case
 Activity at 2026-06-17T20:55:26.768Z - chore: update gitignore
+Activity at 2026-06-17T20:55:26.796Z - feat: responsive grid layout
