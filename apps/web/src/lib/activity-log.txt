@@ -85,3 +85,4 @@ Activity at 2026-06-17T20:55:26.531Z - style: refine button border radius
 Activity at 2026-06-17T20:55:26.555Z - fix: alignment in table headers
 Activity at 2026-06-17T20:55:26.580Z - perf: avoid prop drilling
 Activity at 2026-06-17T20:55:26.604Z - feat: copy to clipboard hook
+Activity at 2026-06-17T20:55:26.627Z - refactor: use Context for theme
