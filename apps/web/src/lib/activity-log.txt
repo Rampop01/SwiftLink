@@ -58,3 +58,4 @@ Activity at 2026-06-17T20:55:25.758Z - fix: prevent form double sub
 Activity at 2026-06-17T20:55:25.791Z - style: hover animation on card
 Activity at 2026-06-17T20:55:25.879Z - perf: memo callback
 Activity at 2026-06-17T20:55:25.927Z - feat: dark mode toggle prep
+Activity at 2026-06-17T20:55:25.956Z - fix: outdated viem signature
