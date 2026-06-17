@@ -44,3 +44,4 @@ Activity at 2026-06-17T20:55:25.361Z - docs: update API endpoints doc
 Activity at 2026-06-17T20:55:25.391Z - feat: skeleton for profile load
 Activity at 2026-06-17T20:55:25.421Z - fix: format numeric strings
 Activity at 2026-06-17T20:55:25.450Z - style: update active link color
+Activity at 2026-06-17T20:55:25.479Z - chore: remove unused vars
