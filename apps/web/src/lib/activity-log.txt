@@ -69,3 +69,4 @@ Activity at 2026-06-17T20:55:26.143Z - fix: useLayoutEffect memory leak
 Activity at 2026-06-17T20:55:26.168Z - chore: pnpm lockfile refresh
 Activity at 2026-06-17T20:55:26.201Z - docs: deployment checklist
 Activity at 2026-06-17T20:55:26.228Z - refactor: clean up switch cases
+Activity at 2026-06-17T20:55:26.252Z - style: subtle box shadow
