@@ -81,3 +81,4 @@ Activity at 2026-06-17T20:55:26.439Z - feat: add tooltip to address
 Activity at 2026-06-17T20:55:26.462Z - docs: update dev script notes
 Activity at 2026-06-17T20:55:26.485Z - chore: remove console.logs
 Activity at 2026-06-17T20:55:26.508Z - test: snapshot tests for UI
+Activity at 2026-06-17T20:55:26.531Z - style: refine button border radius
