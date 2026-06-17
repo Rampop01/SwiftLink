@@ -64,3 +64,4 @@ Activity at 2026-06-17T20:55:26.020Z - test: mock client in vitest
 Activity at 2026-06-17T20:55:26.044Z - refactor: split massive component
 Activity at 2026-06-17T20:55:26.069Z - style: smaller font on mobile
 Activity at 2026-06-17T20:55:26.095Z - perf: defer non-critical CSS
+Activity at 2026-06-17T20:55:26.119Z - feat: virtualize long lists
