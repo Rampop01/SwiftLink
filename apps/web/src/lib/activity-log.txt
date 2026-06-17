@@ -62,3 +62,4 @@ Activity at 2026-06-17T20:55:25.956Z - fix: outdated viem signature
 Activity at 2026-06-17T20:55:25.989Z - chore: eslint ignore
 Activity at 2026-06-17T20:55:26.020Z - test: mock client in vitest
 Activity at 2026-06-17T20:55:26.044Z - refactor: split massive component
+Activity at 2026-06-17T20:55:26.069Z - style: smaller font on mobile
