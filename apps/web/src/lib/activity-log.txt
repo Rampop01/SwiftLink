@@ -38,3 +38,4 @@ Activity recorded at 2026-06-16T20:43:17.099Z - fix: correct padding in modal
 Activity at 2026-06-17T20:55:24.989Z - chore: bump versions
 Activity at 2026-06-17T20:55:25.206Z - fix: hydration mismatch on mobile
 Activity at 2026-06-17T20:55:25.256Z - style: adjust nav margin
+Activity at 2026-06-17T20:55:25.298Z - perf: add lazy loading to avatars
