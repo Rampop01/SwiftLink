@@ -71,3 +71,4 @@ Activity at 2026-06-17T20:55:26.201Z - docs: deployment checklist
 Activity at 2026-06-17T20:55:26.228Z - refactor: clean up switch cases
 Activity at 2026-06-17T20:55:26.252Z - style: subtle box shadow
 Activity at 2026-06-17T20:55:26.276Z - fix: modal z-index clash
+Activity at 2026-06-17T20:55:26.299Z - feat: add missing metadata tags
