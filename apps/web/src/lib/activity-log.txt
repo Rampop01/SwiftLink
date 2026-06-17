@@ -78,3 +78,4 @@ Activity at 2026-06-17T20:55:26.371Z - perf: reduce image sizes
 Activity at 2026-06-17T20:55:26.394Z - refactor: centralize wagmi config
 Activity at 2026-06-17T20:55:26.416Z - fix: handle empty states properly
 Activity at 2026-06-17T20:55:26.439Z - feat: add tooltip to address
+Activity at 2026-06-17T20:55:26.462Z - docs: update dev script notes
