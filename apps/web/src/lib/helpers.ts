@@ -128,3 +128,5 @@ export const subDays = (d: Date, days: number) => new Date(d.getTime() - days * 
 export const isFuture = (d: Date) => d.getTime() > Date.now();
 
 export const isPast = (d: Date) => d.getTime() < Date.now();
+
+export const getYear = (d: Date) => d.getFullYear();
