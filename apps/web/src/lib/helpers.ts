@@ -98,3 +98,5 @@ export const isBoolean = (v: any) => typeof v === 'boolean';
 export const delay = (fn: Function, ms: number) => setTimeout(fn, ms);
 
 export const setIntervalSafe = (fn: Function, ms: number) => setInterval(fn, ms);
+
+export const parseFloatSafe = (s: string) => parseFloat(s) || 0;
