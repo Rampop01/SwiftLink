@@ -150,3 +150,5 @@ export const padStart = (s: string, len: number, pad: string) => s.padStart(len,
 export const padEnd = (s: string, len: number, pad: string) => s.padEnd(len, pad);
 
 export const reverseString = (s: string) => s.split('').reverse().join('');
+
+export const repeat = (s: string, n: number) => s.repeat(n);
