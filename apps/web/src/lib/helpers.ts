@@ -144,3 +144,5 @@ export const contains = (s: string, sub: string) => s.includes(sub);
 export const replaceAll = (s: string, search: string, replace: string) => s.split(search).join(replace);
 
 export const trim = (s: string) => s.trim();
+
+export const padStart = (s: string, len: number, pad: string) => s.padStart(len, pad);
