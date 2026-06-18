@@ -58,3 +58,5 @@ export const first = <T>(arr: T[]) => arr[0];
 export const last = <T>(arr: T[]) => arr[arr.length - 1];
 
 export const isEmpty = (arr: any[]) => arr.length === 0;
+
+export const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
