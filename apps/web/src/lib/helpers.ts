@@ -138,3 +138,5 @@ export const getDay = (d: Date) => d.getDate();
 export const startsWith = (s: string, sub: string) => s.startsWith(sub);
 
 export const endsWith = (s: string, sub: string) => s.endsWith(sub);
+
+export const contains = (s: string, sub: string) => s.includes(sub);
