@@ -90,3 +90,5 @@ export const getValues = (obj: object) => Object.values(obj);
 export const hasKey = (obj: object, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
 
 export const merge = (a: object, b: object) => ({...a, ...b});
+
+export const isFunction = (v: any) => typeof v === 'function';
