@@ -122,3 +122,5 @@ export const toPercentage = (n: number) => `${(n * 100).toFixed(2)}%`;
 export const toCurrency = (n: number) => `$${n.toFixed(2)}`;
 
 export const addDays = (d: Date, days: number) => new Date(d.getTime() + days * 86400000);
+
+export const subDays = (d: Date, days: number) => new Date(d.getTime() - days * 86400000);
