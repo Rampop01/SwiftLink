@@ -88,3 +88,5 @@ export const getKeys = (obj: object) => Object.keys(obj);
 export const getValues = (obj: object) => Object.values(obj);
 
 export const hasKey = (obj: object, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
+
+export const merge = (a: object, b: object) => ({...a, ...b});
