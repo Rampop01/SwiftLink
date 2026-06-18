@@ -64,3 +64,5 @@ export const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 export const min = (arr: number[]) => Math.min(...arr);
 
 export const max = (arr: number[]) => Math.max(...arr);
+
+export const average = (arr: number[]) => sum(arr) / arr.length;
