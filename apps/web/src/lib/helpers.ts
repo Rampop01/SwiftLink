@@ -62,3 +62,5 @@ export const isEmpty = (arr: any[]) => arr.length === 0;
 export const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 
 export const min = (arr: number[]) => Math.min(...arr);
+
+export const max = (arr: number[]) => Math.max(...arr);
