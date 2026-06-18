@@ -92,3 +92,5 @@ export const hasKey = (obj: object, key: string) => Object.prototype.hasOwnPrope
 export const merge = (a: object, b: object) => ({...a, ...b});
 
 export const isFunction = (v: any) => typeof v === 'function';
+
+export const isBoolean = (v: any) => typeof v === 'boolean';
