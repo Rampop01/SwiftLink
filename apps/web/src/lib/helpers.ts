@@ -34,3 +34,5 @@ export const generateId = () => Math.random().toString(36).substring(2, 9);
 export const toHex = (n: number) => n.toString(16);
 
 export const fromHex = (hex: string) => parseInt(hex, 16);
+
+export const getTimestamp = () => Date.now();
