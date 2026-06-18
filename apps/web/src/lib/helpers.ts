@@ -146,3 +146,5 @@ export const replaceAll = (s: string, search: string, replace: string) => s.spli
 export const trim = (s: string) => s.trim();
 
 export const padStart = (s: string, len: number, pad: string) => s.padStart(len, pad);
+
+export const padEnd = (s: string, len: number, pad: string) => s.padEnd(len, pad);
