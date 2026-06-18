@@ -76,3 +76,5 @@ export const compact = (arr: any[]) => arr.filter(Boolean);
 export const toBoolean = (v: any) => !!v;
 
 export const toggleBoolean = (v: boolean) => !v;
+
+export const parseJSON = (s: string) => { try { return JSON.parse(s); } catch { return null; } };
