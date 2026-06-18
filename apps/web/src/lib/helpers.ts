@@ -130,3 +130,5 @@ export const isFuture = (d: Date) => d.getTime() > Date.now();
 export const isPast = (d: Date) => d.getTime() < Date.now();
 
 export const getYear = (d: Date) => d.getFullYear();
+
+export const getMonth = (d: Date) => d.getMonth() + 1;
