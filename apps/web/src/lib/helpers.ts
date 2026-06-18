@@ -82,3 +82,5 @@ export const parseJSON = (s: string) => { try { return JSON.parse(s); } catch { 
 export const stringifyJSON = (v: any) => JSON.stringify(v);
 
 export const copy = (v: any) => parseJSON(stringifyJSON(v));
+
+export const getKeys = (obj: object) => Object.keys(obj);
