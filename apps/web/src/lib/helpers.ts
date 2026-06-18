@@ -104,3 +104,5 @@ export const parseFloatSafe = (s: string) => parseFloat(s) || 0;
 export const parseIntSafe = (s: string) => parseInt(s, 10) || 0;
 
 export const round = (n: number) => Math.round(n);
+
+export const ceil = (n: number) => Math.ceil(n);
