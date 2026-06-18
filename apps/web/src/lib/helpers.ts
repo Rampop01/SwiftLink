@@ -80,3 +80,5 @@ export const toggleBoolean = (v: boolean) => !v;
 export const parseJSON = (s: string) => { try { return JSON.parse(s); } catch { return null; } };
 
 export const stringifyJSON = (v: any) => JSON.stringify(v);
+
+export const copy = (v: any) => parseJSON(stringifyJSON(v));
