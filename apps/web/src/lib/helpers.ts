@@ -134,3 +134,5 @@ export const getYear = (d: Date) => d.getFullYear();
 export const getMonth = (d: Date) => d.getMonth() + 1;
 
 export const getDay = (d: Date) => d.getDate();
+
+export const startsWith = (s: string, sub: string) => s.startsWith(sub);
