@@ -108,3 +108,5 @@ export const round = (n: number) => Math.round(n);
 export const ceil = (n: number) => Math.ceil(n);
 
 export const floor = (n: number) => Math.floor(n);
+
+export const abs = (n: number) => Math.abs(n);
