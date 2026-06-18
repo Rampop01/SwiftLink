@@ -42,3 +42,5 @@ export const isValidEmail = (e: string) => /^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}
 export const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
 export const unslugify = (s: string) => s.replace(/-/g, ' ');
+
+export const removeWhitespace = (s: string) => s.replace(/\\s/g, '');
