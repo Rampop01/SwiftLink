@@ -8,3 +8,5 @@ export const isObject = (val: any) => val !== null && typeof val === 'object';
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 export const lowercase = (s: string) => s.toLowerCase();
+
+export const uppercase = (s: string) => s.toUpperCase();
