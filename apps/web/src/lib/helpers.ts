@@ -116,3 +116,5 @@ export const isPositive = (n: number) => n > 0;
 export const isNegative = (n: number) => n < 0;
 
 export const isZero = (n: number) => n === 0;
+
+export const toPercentage = (n: number) => `${(n * 100).toFixed(2)}%`;
