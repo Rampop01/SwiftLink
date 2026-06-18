@@ -12,3 +12,5 @@ export const lowercase = (s: string) => s.toLowerCase();
 export const uppercase = (s: string) => s.toUpperCase();
 
 export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+export const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
