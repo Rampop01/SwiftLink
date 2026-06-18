@@ -54,3 +54,5 @@ export const isNil = (v: any) => v == null;
 export const isArray = (v: any) => Array.isArray(v);
 
 export const first = <T>(arr: T[]) => arr[0];
+
+export const last = <T>(arr: T[]) => arr[arr.length - 1];
