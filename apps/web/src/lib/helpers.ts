@@ -70,3 +70,5 @@ export const average = (arr: number[]) => sum(arr) / arr.length;
 export const flatten = <T>(arr: T[][]) => arr.reduce((a, b) => a.concat(b), []);
 
 export const unique = <T>(arr: T[]) => Array.from(new Set(arr));
+
+export const compact = (arr: any[]) => arr.filter(Boolean);
