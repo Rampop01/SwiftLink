@@ -46,3 +46,5 @@ export const unslugify = (s: string) => s.replace(/-/g, ' ');
 export const removeWhitespace = (s: string) => s.replace(/\\s/g, '');
 
 export const isNull = (v: any) => v === null;
+
+export const isUndefined = (v: any) => v === undefined;
