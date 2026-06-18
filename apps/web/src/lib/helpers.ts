@@ -48,3 +48,5 @@ export const removeWhitespace = (s: string) => s.replace(/\\s/g, '');
 export const isNull = (v: any) => v === null;
 
 export const isUndefined = (v: any) => v === undefined;
+
+export const isNil = (v: any) => v == null;
