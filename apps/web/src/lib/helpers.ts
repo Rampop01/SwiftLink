@@ -52,3 +52,5 @@ export const isUndefined = (v: any) => v === undefined;
 export const isNil = (v: any) => v == null;
 
 export const isArray = (v: any) => Array.isArray(v);
+
+export const first = <T>(arr: T[]) => arr[0];
