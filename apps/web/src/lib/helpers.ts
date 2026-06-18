@@ -112,3 +112,5 @@ export const floor = (n: number) => Math.floor(n);
 export const abs = (n: number) => Math.abs(n);
 
 export const isPositive = (n: number) => n > 0;
+
+export const isNegative = (n: number) => n < 0;
