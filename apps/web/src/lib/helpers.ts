@@ -10,3 +10,5 @@ export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 export const lowercase = (s: string) => s.toLowerCase();
 
 export const uppercase = (s: string) => s.toUpperCase();
+
+export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
