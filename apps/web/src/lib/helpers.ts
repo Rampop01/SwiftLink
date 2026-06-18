@@ -66,3 +66,5 @@ export const min = (arr: number[]) => Math.min(...arr);
 export const max = (arr: number[]) => Math.max(...arr);
 
 export const average = (arr: number[]) => sum(arr) / arr.length;
+
+export const flatten = <T>(arr: T[][]) => arr.reduce((a, b) => a.concat(b), []);
