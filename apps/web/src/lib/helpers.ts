@@ -140,3 +140,5 @@ export const startsWith = (s: string, sub: string) => s.startsWith(sub);
 export const endsWith = (s: string, sub: string) => s.endsWith(sub);
 
 export const contains = (s: string, sub: string) => s.includes(sub);
+
+export const replaceAll = (s: string, search: string, replace: string) => s.split(search).join(replace);
