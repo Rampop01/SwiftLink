@@ -36,3 +36,5 @@ export const toHex = (n: number) => n.toString(16);
 export const fromHex = (hex: string) => parseInt(hex, 16);
 
 export const getTimestamp = () => Date.now();
+
+export const isValidEmail = (e: string) => /^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/.test(e);
