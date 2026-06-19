@@ -128,3 +128,5 @@ export const isSameMonth = (d1: Date, d2: Date) => d1.getFullYear() === d2.getFu
 export const formatCurrency = (n: number, locale = 'en-US', currency = 'USD') => new Intl.NumberFormat(locale, { style: 'currency', currency }).format(n);
 
 export const formatNumber = (n: number, locale = 'en-US') => new Intl.NumberFormat(locale).format(n);
+
+export const parseQueryString = (qs: string) => Object.fromEntries(new URLSearchParams(qs));
