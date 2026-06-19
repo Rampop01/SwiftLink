@@ -134,3 +134,5 @@ export const parseQueryString = (qs: string) => Object.fromEntries(new URLSearch
 export const buildQueryString = (params: any) => new URLSearchParams(params).toString();
 
 export const escapeRegex = (s: string) => s.replace(/[.*+?^$\{\}()|[\]\\]/g, '\\$&');
+
+export const isBase64 = (s: string) => /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(s);
