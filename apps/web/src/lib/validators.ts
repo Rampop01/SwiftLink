@@ -58,3 +58,5 @@ export const hexToRgb = (h: string) => { const r = parseInt(h.slice(1, 3), 16), 
 export const rgbToHex = (r: number, g: number, b: number) => '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
 
 export const clampArray = (arr: number[], min: number, max: number) => arr.map(x => Math.min(Math.max(x, min), max));
+
+export const chunkArray = <T>(arr: T[], s: number) => Array.from({ length: Math.ceil(arr.length / s) }, (v, i) => arr.slice(i * s, i * s + s));
