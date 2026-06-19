@@ -62,3 +62,5 @@ export const clampArray = (arr: number[], min: number, max: number) => arr.map(x
 export const chunkArray = <T>(arr: T[], s: number) => Array.from({ length: Math.ceil(arr.length / s) }, (v, i) => arr.slice(i * s, i * s + s));
 
 export const shuffleArray = <T>(arr: T[]) => arr.sort(() => Math.random() - 0.5);
+
+export const sampleArray = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
