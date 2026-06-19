@@ -60,3 +60,5 @@ export const rgbToHex = (r: number, g: number, b: number) => '#' + [r, g, b].map
 export const clampArray = (arr: number[], min: number, max: number) => arr.map(x => Math.min(Math.max(x, min), max));
 
 export const chunkArray = <T>(arr: T[], s: number) => Array.from({ length: Math.ceil(arr.length / s) }, (v, i) => arr.slice(i * s, i * s + s));
+
+export const shuffleArray = <T>(arr: T[]) => arr.sort(() => Math.random() - 0.5);
