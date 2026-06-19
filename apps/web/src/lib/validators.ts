@@ -106,3 +106,5 @@ export const addYears = (d: Date, y: number) => { const n = new Date(d); n.setFu
 export const subYears = (d: Date, y: number) => addYears(d, -y);
 
 export const diffDays = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime() - d2.getTime()) / 86400000);
+
+export const diffHours = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime() - d2.getTime()) / 3600000);
