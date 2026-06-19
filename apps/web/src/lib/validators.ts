@@ -78,3 +78,5 @@ export const getType = (v: any) => Object.prototype.toString.call(v).slice(8, -1
 export const omit = (obj: any, keys: string[]) => Object.keys(obj).filter(k => !keys.includes(k)).reduce((res: any, k) => { res[k] = obj[k]; return res; }, {});
 
 export const pick = (obj: any, keys: string[]) => keys.reduce((res: any, k) => { if (k in obj) res[k] = obj[k]; return res; }, {});
+
+export const debounce = (fn: Function, ms = 300) => { let t: any; return function(this: any, ...args: any[]) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); }; };
