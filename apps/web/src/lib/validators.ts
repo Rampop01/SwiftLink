@@ -14,3 +14,5 @@ export const isJSON = (s: string) => { try { JSON.parse(s); return true; } catch
 export const isURL = (s: string) => /^https?:\/\/[\w\d\.-]+\.[\w\d\.-]+/.test(s);
 
 export const isIPV4 = (s: string) => /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(s);
+
+export const isMacAddress = (s: string) => /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(s);
