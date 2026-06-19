@@ -66,3 +66,5 @@ export const shuffleArray = <T>(arr: T[]) => arr.sort(() => Math.random() - 0.5)
 export const sampleArray = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
 
 export const intersection = <T>(a: T[], b: T[]) => a.filter(x => b.includes(x));
+
+export const difference = <T>(a: T[], b: T[]) => a.filter(x => !b.includes(x));
