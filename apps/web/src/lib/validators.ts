@@ -92,3 +92,5 @@ export const randomString = (l = 8) => Math.random().toString(36).substring(2, 2
 export const randomHex = (l = 6) => [...Array(l)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
 export const randomColor = () => '#' + randomHex(6);
+
+export const isLeapYear = (y: number) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
