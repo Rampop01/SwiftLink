@@ -56,3 +56,5 @@ export const bytesToSize = (b: number) => b === 0 ? '0 B' : ['B', 'KB', 'MB', 'G
 export const hexToRgb = (h: string) => { const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16); return [r, g, b]; };
 
 export const rgbToHex = (r: number, g: number, b: number) => '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+
+export const clampArray = (arr: number[], min: number, max: number) => arr.map(x => Math.min(Math.max(x, min), max));
