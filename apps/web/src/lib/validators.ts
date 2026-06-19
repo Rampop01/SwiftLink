@@ -84,3 +84,5 @@ export const debounce = (fn: Function, ms = 300) => { let t: any; return functio
 export const throttle = (fn: Function, wait = 300) => { let inThrottle: boolean; return function(this: any, ...args: any[]) { if (!inThrottle) { fn.apply(this, args); inThrottle = true; setTimeout(() => inThrottle = false, wait); } }; };
 
 export const once = (fn: Function) => { let ran = false, res: any; return function(this: any, ...args: any[]) { if (ran) return res; ran = true; res = fn.apply(this, args); return res; }; };
+
+export const memoize = (fn: Function) => { const cache = new Map(); return function(...args: any[]) { const key = JSON.stringify(args); if (cache.has(key)) return cache.get(key); const res = fn(...args); cache.set(key, res); return res; }; };
