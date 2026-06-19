@@ -68,3 +68,5 @@ export const sampleArray = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.l
 export const intersection = <T>(a: T[], b: T[]) => a.filter(x => b.includes(x));
 
 export const difference = <T>(a: T[], b: T[]) => a.filter(x => !b.includes(x));
+
+export const union = <T>(a: T[], b: T[]) => Array.from(new Set([...a, ...b]));
