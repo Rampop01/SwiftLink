@@ -100,3 +100,5 @@ export const daysInMonth = (m: number, y: number) => new Date(y, m, 0).getDate()
 export const addMonths = (d: Date, m: number) => { const n = new Date(d); n.setMonth(d.getMonth() + m); return n; };
 
 export const subMonths = (d: Date, m: number) => addMonths(d, -m);
+
+export const addYears = (d: Date, y: number) => { const n = new Date(d); n.setFullYear(d.getFullYear() + y); return n; };
