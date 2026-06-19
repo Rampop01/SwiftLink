@@ -130,3 +130,5 @@ export const formatCurrency = (n: number, locale = 'en-US', currency = 'USD') =>
 export const formatNumber = (n: number, locale = 'en-US') => new Intl.NumberFormat(locale).format(n);
 
 export const parseQueryString = (qs: string) => Object.fromEntries(new URLSearchParams(qs));
+
+export const buildQueryString = (params: any) => new URLSearchParams(params).toString();
