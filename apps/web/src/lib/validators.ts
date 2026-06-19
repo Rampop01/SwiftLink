@@ -82,3 +82,5 @@ export const pick = (obj: any, keys: string[]) => keys.reduce((res: any, k) => {
 export const debounce = (fn: Function, ms = 300) => { let t: any; return function(this: any, ...args: any[]) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); }; };
 
 export const throttle = (fn: Function, wait = 300) => { let inThrottle: boolean; return function(this: any, ...args: any[]) { if (!inThrottle) { fn.apply(this, args); inThrottle = true; setTimeout(() => inThrottle = false, wait); } }; };
+
+export const once = (fn: Function) => { let ran = false, res: any; return function(this: any, ...args: any[]) { if (ran) return res; ran = true; res = fn.apply(this, args); return res; }; };
