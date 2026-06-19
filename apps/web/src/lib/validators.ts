@@ -118,3 +118,5 @@ export const isWeekend = (d: Date) => d.getDay() === 0 || d.getDay() === 6;
 export const isWeekday = (d: Date) => !isWeekend(d);
 
 export const startOfDay = (d: Date) => { const n = new Date(d); n.setHours(0, 0, 0, 0); return n; };
+
+export const endOfDay = (d: Date) => { const n = new Date(d); n.setHours(23, 59, 59, 999); return n; };
