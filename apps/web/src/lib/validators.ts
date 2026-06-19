@@ -112,3 +112,5 @@ export const diffHours = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime()
 export const diffMinutes = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime() - d2.getTime()) / 60000);
 
 export const diffSeconds = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime() - d2.getTime()) / 1000);
+
+export const isWeekend = (d: Date) => d.getDay() === 0 || d.getDay() === 6;
