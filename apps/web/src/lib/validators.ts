@@ -12,3 +12,5 @@ export const isUUID = (s: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-
 export const isJSON = (s: string) => { try { JSON.parse(s); return true; } catch { return false; } };
 
 export const isURL = (s: string) => /^https?:\/\/[\w\d\.-]+\.[\w\d\.-]+/.test(s);
+
+export const isIPV4 = (s: string) => /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(s);
