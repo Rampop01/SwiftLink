@@ -40,3 +40,5 @@ export const camelCase = (s: string) => s.replace(/(?:^\w|[A-Z]|\b\w)/g, (w, i) 
 export const pascalCase = (s: string) => s.replace(/(?:^\w|[A-Z]|\b\w)/g, w => w.toUpperCase()).replace(/\s+/g, '');
 
 export const snakeCase = (s: string) => s.replace(/\W+/g, ' ').split(/ |\B(?=[A-Z])/).map(w => w.toLowerCase()).join('_');
+
+export const kebabCase = (s: string) => s.replace(/\W+/g, ' ').split(/ |\B(?=[A-Z])/).map(w => w.toLowerCase()).join('-');
