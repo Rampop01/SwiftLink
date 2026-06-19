@@ -52,3 +52,5 @@ export const isCreditCard = (s: string) => /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7
 export const luhnCheck = (s: string) => s.split('').reverse().reduce((acc, c, i) => acc + (i % 2 !== 0 ? parseInt(c, 10) * 2 > 9 ? parseInt(c, 10) * 2 - 9 : parseInt(c, 10) * 2 : parseInt(c, 10)), 0) % 10 === 0;
 
 export const bytesToSize = (b: number) => b === 0 ? '0 B' : ['B', 'KB', 'MB', 'GB', 'TB'][Math.floor(Math.log(b) / Math.log(1024))] ? (b / Math.pow(1024, Math.floor(Math.log(b) / Math.log(1024)))).toFixed(2) + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][Math.floor(Math.log(b) / Math.log(1024))] : '0 B';
+
+export const hexToRgb = (h: string) => { const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16); return [r, g, b]; };
