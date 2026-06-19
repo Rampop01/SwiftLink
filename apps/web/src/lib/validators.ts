@@ -102,3 +102,5 @@ export const addMonths = (d: Date, m: number) => { const n = new Date(d); n.setM
 export const subMonths = (d: Date, m: number) => addMonths(d, -m);
 
 export const addYears = (d: Date, y: number) => { const n = new Date(d); n.setFullYear(d.getFullYear() + y); return n; };
+
+export const subYears = (d: Date, y: number) => addYears(d, -y);
