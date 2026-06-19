@@ -144,3 +144,5 @@ export const fahrenheitToCelsius = (f: number) => (f - 32) * 5 / 9;
 export const kgToLbs = (kg: number) => kg * 2.20462;
 
 export const lbsToKg = (lbs: number) => lbs / 2.20462;
+
+export const kmToMiles = (km: number) => km * 0.621371;
