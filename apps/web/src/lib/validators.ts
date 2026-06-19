@@ -22,3 +22,5 @@ export const isBooleanString = (s: string) => s === 'true' || s === 'false';
 export const isDateString = (s: string) => !isNaN(Date.parse(s));
 
 export const stripHTML = (s: string) => s.replace(/<[^>]*>?/gm, '');
+
+export const stripNumbers = (s: string) => s.replace(/[0-9]/g, '');
