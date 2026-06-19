@@ -88,3 +88,5 @@ export const once = (fn: Function) => { let ran = false, res: any; return functi
 export const memoize = (fn: Function) => { const cache = new Map(); return function(...args: any[]) { const key = JSON.stringify(args); if (cache.has(key)) return cache.get(key); const res = fn(...args); cache.set(key, res); return res; }; };
 
 export const randomString = (l = 8) => Math.random().toString(36).substring(2, 2 + l);
+
+export const randomHex = (l = 6) => [...Array(l)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
