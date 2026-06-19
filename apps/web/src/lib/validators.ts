@@ -20,3 +20,5 @@ export const isMacAddress = (s: string) => /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]
 export const isBooleanString = (s: string) => s === 'true' || s === 'false';
 
 export const isDateString = (s: string) => !isNaN(Date.parse(s));
+
+export const stripHTML = (s: string) => s.replace(/<[^>]*>?/gm, '');
