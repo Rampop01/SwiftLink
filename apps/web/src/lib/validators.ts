@@ -32,3 +32,5 @@ export const isLowercase = (s: string) => s === s.toLowerCase();
 export const isUppercase = (s: string) => s === s.toUpperCase();
 
 export const countWords = (s: string) => s.trim().split(/\s+/).length;
+
+export const countLines = (s: string) => s.split(/\r\n|\r|\n/).length;
