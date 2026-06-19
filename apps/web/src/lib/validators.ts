@@ -98,3 +98,5 @@ export const isLeapYear = (y: number) => (y % 4 === 0 && y % 100 !== 0) || y % 4
 export const daysInMonth = (m: number, y: number) => new Date(y, m, 0).getDate();
 
 export const addMonths = (d: Date, m: number) => { const n = new Date(d); n.setMonth(d.getMonth() + m); return n; };
+
+export const subMonths = (d: Date, m: number) => addMonths(d, -m);
