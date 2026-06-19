@@ -30,3 +30,5 @@ export const stripPunctuation = (s: string) => s.replace(/[.,\/#!$%\^&\*;:{}=\-_
 export const isLowercase = (s: string) => s === s.toLowerCase();
 
 export const isUppercase = (s: string) => s === s.toUpperCase();
+
+export const countWords = (s: string) => s.trim().split(/\s+/).length;
