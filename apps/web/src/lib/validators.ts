@@ -44,3 +44,5 @@ export const snakeCase = (s: string) => s.replace(/\W+/g, ' ').split(/ |\B(?=[A-
 export const kebabCase = (s: string) => s.replace(/\W+/g, ' ').split(/ |\B(?=[A-Z])/).map(w => w.toLowerCase()).join('-');
 
 export const encodeHTMLEntities = (s: string) => s.replace(/[\u00A0-\u9999<>&]/g, i => '&#' + i.charCodeAt(0) + ';');
+
+export const decodeHTMLEntities = (s: string) => s.replace(/&#([0-9]{1,3});/gi, (m, c) => String.fromCharCode(parseInt(c, 10)));
