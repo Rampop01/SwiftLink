@@ -104,3 +104,5 @@ export const subMonths = (d: Date, m: number) => addMonths(d, -m);
 export const addYears = (d: Date, y: number) => { const n = new Date(d); n.setFullYear(d.getFullYear() + y); return n; };
 
 export const subYears = (d: Date, y: number) => addYears(d, -y);
+
+export const diffDays = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime() - d2.getTime()) / 86400000);
