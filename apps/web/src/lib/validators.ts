@@ -24,3 +24,5 @@ export const isDateString = (s: string) => !isNaN(Date.parse(s));
 export const stripHTML = (s: string) => s.replace(/<[^>]*>?/gm, '');
 
 export const stripNumbers = (s: string) => s.replace(/[0-9]/g, '');
+
+export const stripPunctuation = (s: string) => s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
