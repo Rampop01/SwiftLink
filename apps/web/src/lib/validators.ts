@@ -34,3 +34,5 @@ export const isUppercase = (s: string) => s === s.toUpperCase();
 export const countWords = (s: string) => s.trim().split(/\s+/).length;
 
 export const countLines = (s: string) => s.split(/\r\n|\r|\n/).length;
+
+export const camelCase = (s: string) => s.replace(/(?:^\w|[A-Z]|\b\w)/g, (w, i) => i === 0 ? w.toLowerCase() : w.toUpperCase()).replace(/\s+/g, '');
