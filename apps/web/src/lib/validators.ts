@@ -138,3 +138,5 @@ export const escapeRegex = (s: string) => s.replace(/[.*+?^$\{\}()|[\]\\]/g, '\\
 export const isBase64 = (s: string) => /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(s);
 
 export const celsiusToFahrenheit = (c: number) => c * 9 / 5 + 32;
+
+export const fahrenheitToCelsius = (f: number) => (f - 32) * 5 / 9;
