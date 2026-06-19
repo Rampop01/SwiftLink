@@ -126,3 +126,5 @@ export const isSameDay = (d1: Date, d2: Date) => d1.getFullYear() === d2.getFull
 export const isSameMonth = (d1: Date, d2: Date) => d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth();
 
 export const formatCurrency = (n: number, locale = 'en-US', currency = 'USD') => new Intl.NumberFormat(locale, { style: 'currency', currency }).format(n);
+
+export const formatNumber = (n: number, locale = 'en-US') => new Intl.NumberFormat(locale).format(n);
