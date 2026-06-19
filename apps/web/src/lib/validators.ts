@@ -136,3 +136,5 @@ export const buildQueryString = (params: any) => new URLSearchParams(params).toS
 export const escapeRegex = (s: string) => s.replace(/[.*+?^$\{\}()|[\]\\]/g, '\\$&');
 
 export const isBase64 = (s: string) => /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(s);
+
+export const celsiusToFahrenheit = (c: number) => c * 9 / 5 + 32;
