@@ -132,3 +132,5 @@ export const formatNumber = (n: number, locale = 'en-US') => new Intl.NumberForm
 export const parseQueryString = (qs: string) => Object.fromEntries(new URLSearchParams(qs));
 
 export const buildQueryString = (params: any) => new URLSearchParams(params).toString();
+
+export const escapeRegex = (s: string) => s.replace(/[.*+?^$\{\}()|[\]\\]/g, '\\$&');
