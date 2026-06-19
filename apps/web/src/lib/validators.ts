@@ -28,3 +28,5 @@ export const stripNumbers = (s: string) => s.replace(/[0-9]/g, '');
 export const stripPunctuation = (s: string) => s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
 
 export const isLowercase = (s: string) => s === s.toLowerCase();
+
+export const isUppercase = (s: string) => s === s.toUpperCase();
