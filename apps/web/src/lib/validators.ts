@@ -116,3 +116,5 @@ export const diffSeconds = (d1: Date, d2: Date) => Math.ceil(Math.abs(d1.getTime
 export const isWeekend = (d: Date) => d.getDay() === 0 || d.getDay() === 6;
 
 export const isWeekday = (d: Date) => !isWeekend(d);
+
+export const startOfDay = (d: Date) => { const n = new Date(d); n.setHours(0, 0, 0, 0); return n; };
