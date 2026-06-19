@@ -46,3 +46,5 @@ export const kebabCase = (s: string) => s.replace(/\W+/g, ' ').split(/ |\B(?=[A-
 export const encodeHTMLEntities = (s: string) => s.replace(/[\u00A0-\u9999<>&]/g, i => '&#' + i.charCodeAt(0) + ';');
 
 export const decodeHTMLEntities = (s: string) => s.replace(/&#([0-9]{1,3});/gi, (m, c) => String.fromCharCode(parseInt(c, 10)));
+
+export const isCreditCard = (s: string) => /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/.test(s);
