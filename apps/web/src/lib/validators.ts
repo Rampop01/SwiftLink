@@ -72,3 +72,5 @@ export const difference = <T>(a: T[], b: T[]) => a.filter(x => !b.includes(x));
 export const union = <T>(a: T[], b: T[]) => Array.from(new Set([...a, ...b]));
 
 export const deepMerge = (target: any, source: any) => { for (const k of Object.keys(source)) { if (source[k] instanceof Object) Object.assign(source[k], deepMerge(target[k] || {}, source[k])); } return Object.assign(target || {}, source); };
+
+export const getType = (v: any) => Object.prototype.toString.call(v).slice(8, -1).toLowerCase();
