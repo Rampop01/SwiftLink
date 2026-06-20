@@ -66,3 +66,5 @@ export const lerp = (start: number, end: number, amt: number) => (1 - amt) * sta
 export const mapRange = (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
 export const toRadians = (degrees: number) => degrees * (Math.PI / 180);
+
+export const toDegrees = (radians: number) => radians * (180 / Math.PI);
