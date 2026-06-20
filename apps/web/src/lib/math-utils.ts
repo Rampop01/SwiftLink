@@ -132,3 +132,5 @@ export const logBase10 = (x: number) => Math.log10(x);
 export const logBase2 = (x: number) => Math.log2(x);
 
 export const logBaseN = (x: number, n: number) => Math.log(x) / Math.log(n);
+
+export const mean = (arr: number[]) => arr.reduce((a,b)=>a+b,0)/arr.length;
