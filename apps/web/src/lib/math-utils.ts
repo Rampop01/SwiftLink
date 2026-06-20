@@ -126,3 +126,5 @@ export const idealGasPressure = (n: number, v: number, t: number) => (n * 8.314 
 export const celsiusToKelvin = (c: number) => c + 273.15;
 
 export const kelvinToCelsius = (k: number) => k - 273.15;
+
+export const logBase10 = (x: number) => Math.log10(x);
