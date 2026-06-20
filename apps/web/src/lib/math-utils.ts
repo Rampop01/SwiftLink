@@ -20,3 +20,5 @@ export const volumeOfCylinder = (r: number, h: number) => Math.PI * r * r * h;
 export const surfaceAreaOfCylinder = (r: number, h: number) => 2 * Math.PI * r * (r + h);
 
 export const volumeOfSphere = (r: number) => (4/3) * Math.PI * Math.pow(r, 3);
+
+export const surfaceAreaOfSphere = (r: number) => 4 * Math.PI * r * r;
