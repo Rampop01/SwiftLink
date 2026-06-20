@@ -16,3 +16,5 @@ export const volumeOfCube = (s: number) => s * s * s;
 export const surfaceAreaOfCube = (s: number) => 6 * s * s;
 
 export const volumeOfCylinder = (r: number, h: number) => Math.PI * r * r * h;
+
+export const surfaceAreaOfCylinder = (r: number, h: number) => 2 * Math.PI * r * (r + h);
