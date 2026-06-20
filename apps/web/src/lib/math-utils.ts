@@ -62,3 +62,5 @@ export const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
 export const lcm = (a: number, b: number) => (a * b) / gcd(a, b);
 
 export const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end;
+
+export const mapRange = (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
