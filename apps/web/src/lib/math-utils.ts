@@ -52,3 +52,5 @@ export const magnitude3D = (v: [number, number, number]) => Math.sqrt(v[0] * v[0
 export const normalize2D = (v: [number, number]) => { const m = magnitude2D(v); return m === 0 ? [0, 0] : [v[0] / m, v[1] / m]; };
 
 export const normalize3D = (v: [number, number, number]) => { const m = magnitude3D(v); return m === 0 ? [0, 0, 0] : [v[0] / m, v[1] / m, v[2] / m]; };
+
+export const isPrime = (num: number) => { for(let i = 2, s = Math.sqrt(num); i <= s; i++) if(num % i === 0) return false; return num > 1; };
