@@ -142,3 +142,5 @@ export const mode = (arr: number[]) => { const c = arr.reduce((acc: any, v) => {
 export const variance = (arr: number[]) => { const m = mean(arr); return mean(arr.map(x => Math.pow(x - m, 2))); };
 
 export const standardDeviation = (arr: number[]) => Math.sqrt(variance(arr));
+
+export const factorialArray = (arr: number[]) => arr.map(factorial);
