@@ -150,3 +150,5 @@ export const sumOfSquares = (arr: number[]) => arr.reduce((acc, val) => acc + (v
 export const normalizeArray = (arr: number[]) => { const m = Math.max(...arr); return arr.map(x => x / m); };
 
 export const percentageDifference = (a: number, b: number) => (Math.abs(a - b) / ((a + b) / 2)) * 100;
+
+export const percentageChange = (oldVal: number, newVal: number) => ((newVal - oldVal) / Math.abs(oldVal)) * 100;
