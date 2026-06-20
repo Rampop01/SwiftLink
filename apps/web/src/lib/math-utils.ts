@@ -82,3 +82,5 @@ export const velocity = (distance: number, time: number) => distance / time;
 export const acceleration = (vInitial: number, vFinal: number, time: number) => (vFinal - vInitial) / time;
 
 export const force = (mass: number, acc: number) => mass * acc;
+
+export const kineticEnergy = (mass: number, velocity: number) => 0.5 * mass * velocity * velocity;
