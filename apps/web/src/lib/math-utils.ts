@@ -116,3 +116,5 @@ export const frequencyFromPeriod = (period: number) => 1 / period;
 export const waveSpeed = (frequency: number, wavelength: number) => frequency * wavelength;
 
 export const speedOfLightInMedium = (refractiveIndex: number) => 299792458 / refractiveIndex;
+
+export const energyPhoton = (frequency: number) => 6.62607015e-34 * frequency;
