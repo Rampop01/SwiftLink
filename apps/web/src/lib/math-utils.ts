@@ -120,3 +120,5 @@ export const speedOfLightInMedium = (refractiveIndex: number) => 299792458 / ref
 export const energyPhoton = (frequency: number) => 6.62607015e-34 * frequency;
 
 export const massEnergyEquivalence = (mass: number) => mass * Math.pow(299792458, 2);
+
+export const idealGasPressure = (n: number, v: number, t: number) => (n * 8.314 * t) / v;
