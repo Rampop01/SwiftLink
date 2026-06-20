@@ -56,3 +56,5 @@ export const normalize3D = (v: [number, number, number]) => { const m = magnitud
 export const isPrime = (num: number) => { for(let i = 2, s = Math.sqrt(num); i <= s; i++) if(num % i === 0) return false; return num > 1; };
 
 export const fibonacci = (n: number): number => n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+
+export const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
