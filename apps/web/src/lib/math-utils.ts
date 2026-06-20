@@ -88,3 +88,5 @@ export const kineticEnergy = (mass: number, velocity: number) => 0.5 * mass * ve
 export const potentialEnergy = (mass: number, height: number, g = 9.81) => mass * g * height;
 
 export const momentum = (mass: number, velocity: number) => mass * velocity;
+
+export const workDone = (force: number, distance: number, angleDeg: number = 0) => force * distance * Math.cos(toRadians(angleDeg));
