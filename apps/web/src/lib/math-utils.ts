@@ -14,3 +14,5 @@ export const pythagoras = (a: number, b: number) => Math.sqrt(a * a + b * b);
 export const volumeOfCube = (s: number) => s * s * s;
 
 export const surfaceAreaOfCube = (s: number) => 6 * s * s;
+
+export const volumeOfCylinder = (r: number, h: number) => Math.PI * r * r * h;
