@@ -134,3 +134,5 @@ export const logBase2 = (x: number) => Math.log2(x);
 export const logBaseN = (x: number, n: number) => Math.log(x) / Math.log(n);
 
 export const mean = (arr: number[]) => arr.reduce((a,b)=>a+b,0)/arr.length;
+
+export const median = (arr: number[]) => { const s = [...arr].sort((a,b)=>a-b); const m = Math.floor(s.length/2); return s.length%2===0 ? (s[m-1]+s[m])/2 : s[m]; };
