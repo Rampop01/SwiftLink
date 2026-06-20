@@ -68,3 +68,5 @@ export const mapRange = (value: number, inMin: number, inMax: number, outMin: nu
 export const toRadians = (degrees: number) => degrees * (Math.PI / 180);
 
 export const toDegrees = (radians: number) => radians * (180 / Math.PI);
+
+export const randomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
