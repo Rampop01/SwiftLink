@@ -140,3 +140,5 @@ export const median = (arr: number[]) => { const s = [...arr].sort((a,b)=>a-b); 
 export const mode = (arr: number[]) => { const c = arr.reduce((acc: any, v) => { acc[v] = (acc[v] || 0) + 1; return acc; }, {}); let m = 0; let res: number[] = []; for(const k in c) { if(c[k]>m){ m=c[k]; res=[Number(k)]; } else if(c[k]===m) { res.push(Number(k)); } } return res; };
 
 export const variance = (arr: number[]) => { const m = mean(arr); return mean(arr.map(x => Math.pow(x - m, 2))); };
+
+export const standardDeviation = (arr: number[]) => Math.sqrt(variance(arr));
