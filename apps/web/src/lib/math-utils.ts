@@ -78,3 +78,5 @@ export const compoundInterest = (p: number, r: number, t: number, n: number) => 
 export const simpleInterest = (p: number, r: number, t: number) => p * r * t;
 
 export const velocity = (distance: number, time: number) => distance / time;
+
+export const acceleration = (vInitial: number, vFinal: number, time: number) => (vFinal - vInitial) / time;
