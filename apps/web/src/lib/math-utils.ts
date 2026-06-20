@@ -100,3 +100,5 @@ export const ohmsLawCurrent = (voltage: number, resistance: number) => voltage /
 export const ohmsLawResistance = (voltage: number, current: number) => voltage / current;
 
 export const electricalPower = (voltage: number, current: number) => voltage * current;
+
+export const snellsLawAngle2 = (n1: number, angle1Deg: number, n2: number) => toDegrees(Math.asin((n1 * Math.sin(toRadians(angle1Deg))) / n2));
