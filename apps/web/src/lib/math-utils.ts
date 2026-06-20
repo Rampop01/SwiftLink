@@ -108,3 +108,5 @@ export const gravitationalForce = (m1: number, m2: number, r: number) => (6.6743
 export const escapeVelocity = (mass: number, radius: number) => Math.sqrt((2 * 6.67430e-11 * mass) / radius);
 
 export const density = (mass: number, volume: number) => mass / volume;
+
+export const pressure = (force: number, area: number) => force / area;
