@@ -146,3 +146,5 @@ export const standardDeviation = (arr: number[]) => Math.sqrt(variance(arr));
 export const factorialArray = (arr: number[]) => arr.map(factorial);
 
 export const sumOfSquares = (arr: number[]) => arr.reduce((acc, val) => acc + (val * val), 0);
+
+export const normalizeArray = (arr: number[]) => { const m = Math.max(...arr); return arr.map(x => x / m); };
