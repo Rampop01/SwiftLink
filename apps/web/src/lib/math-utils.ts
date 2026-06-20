@@ -60,3 +60,5 @@ export const fibonacci = (n: number): number => n <= 1 ? n : fibonacci(n - 1) + 
 export const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
 
 export const lcm = (a: number, b: number) => (a * b) / gcd(a, b);
+
+export const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end;
