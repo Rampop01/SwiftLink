@@ -110,3 +110,5 @@ export const escapeVelocity = (mass: number, radius: number) => Math.sqrt((2 * 6
 export const density = (mass: number, volume: number) => mass / volume;
 
 export const pressure = (force: number, area: number) => force / area;
+
+export const frequencyFromPeriod = (period: number) => 1 / period;
