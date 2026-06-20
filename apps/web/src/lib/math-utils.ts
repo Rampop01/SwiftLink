@@ -26,3 +26,5 @@ export const surfaceAreaOfSphere = (r: number) => 4 * Math.PI * r * r;
 export const volumeOfCone = (r: number, h: number) => (1/3) * Math.PI * r * r * h;
 
 export const factorial = (n: number): number => n <= 1 ? 1 : n * factorial(n - 1);
+
+export const combinations = (n: number, k: number) => factorial(n) / (factorial(k) * factorial(n - k));
