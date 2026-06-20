@@ -130,3 +130,5 @@ export const kelvinToCelsius = (k: number) => k - 273.15;
 export const logBase10 = (x: number) => Math.log10(x);
 
 export const logBase2 = (x: number) => Math.log2(x);
+
+export const logBaseN = (x: number, n: number) => Math.log(x) / Math.log(n);
