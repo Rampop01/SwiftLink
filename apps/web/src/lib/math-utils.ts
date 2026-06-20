@@ -136,3 +136,5 @@ export const logBaseN = (x: number, n: number) => Math.log(x) / Math.log(n);
 export const mean = (arr: number[]) => arr.reduce((a,b)=>a+b,0)/arr.length;
 
 export const median = (arr: number[]) => { const s = [...arr].sort((a,b)=>a-b); const m = Math.floor(s.length/2); return s.length%2===0 ? (s[m-1]+s[m])/2 : s[m]; };
+
+export const mode = (arr: number[]) => { const c = arr.reduce((acc: any, v) => { acc[v] = (acc[v] || 0) + 1; return acc; }, {}); let m = 0; let res: number[] = []; for(const k in c) { if(c[k]>m){ m=c[k]; res=[Number(k)]; } else if(c[k]===m) { res.push(Number(k)); } } return res; };
