@@ -114,3 +114,5 @@ export const pressure = (force: number, area: number) => force / area;
 export const frequencyFromPeriod = (period: number) => 1 / period;
 
 export const waveSpeed = (frequency: number, wavelength: number) => frequency * wavelength;
+
+export const speedOfLightInMedium = (refractiveIndex: number) => 299792458 / refractiveIndex;
