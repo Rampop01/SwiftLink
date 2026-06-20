@@ -72,3 +72,5 @@ export const toDegrees = (radians: number) => radians * (180 / Math.PI);
 export const randomFloat = (min: number, max: number) => Math.random() * (max - min) + min;
 
 export const calculateBMI = (weightKg: number, heightM: number) => weightKg / (heightM * heightM);
+
+export const compoundInterest = (p: number, r: number, t: number, n: number) => p * Math.pow(1 + (r / n), n * t);
