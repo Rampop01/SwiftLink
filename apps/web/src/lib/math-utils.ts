@@ -50,3 +50,5 @@ export const magnitude2D = (v: [number, number]) => Math.sqrt(v[0] * v[0] + v[1]
 export const magnitude3D = (v: [number, number, number]) => Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 
 export const normalize2D = (v: [number, number]) => { const m = magnitude2D(v); return m === 0 ? [0, 0] : [v[0] / m, v[1] / m]; };
+
+export const normalize3D = (v: [number, number, number]) => { const m = magnitude3D(v); return m === 0 ? [0, 0, 0] : [v[0] / m, v[1] / m, v[2] / m]; };
