@@ -8,3 +8,5 @@ export const areaOfRectangle = (w: number, h: number) => w * h;
 export const perimeterOfRectangle = (w: number, h: number) => 2 * (w + h);
 
 export const areaOfTriangle = (b: number, h: number) => 0.5 * b * h;
+
+export const pythagoras = (a: number, b: number) => Math.sqrt(a * a + b * b);
