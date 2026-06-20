@@ -86,3 +86,5 @@ export const force = (mass: number, acc: number) => mass * acc;
 export const kineticEnergy = (mass: number, velocity: number) => 0.5 * mass * velocity * velocity;
 
 export const potentialEnergy = (mass: number, height: number, g = 9.81) => mass * g * height;
+
+export const momentum = (mass: number, velocity: number) => mass * velocity;
