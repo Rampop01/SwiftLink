@@ -96,3 +96,5 @@ export const power = (work: number, time: number) => work / time;
 export const ohmsLawVoltage = (current: number, resistance: number) => current * resistance;
 
 export const ohmsLawCurrent = (voltage: number, resistance: number) => voltage / resistance;
+
+export const ohmsLawResistance = (voltage: number, current: number) => voltage / current;
