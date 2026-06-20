@@ -152,3 +152,5 @@ export const normalizeArray = (arr: number[]) => { const m = Math.max(...arr); r
 export const percentageDifference = (a: number, b: number) => (Math.abs(a - b) / ((a + b) / 2)) * 100;
 
 export const percentageChange = (oldVal: number, newVal: number) => ((newVal - oldVal) / Math.abs(oldVal)) * 100;
+
+export const sigmoid = (t: number) => 1 / (1 + Math.exp(-t));
