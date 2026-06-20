@@ -76,3 +76,5 @@ export const calculateBMI = (weightKg: number, heightM: number) => weightKg / (h
 export const compoundInterest = (p: number, r: number, t: number, n: number) => p * Math.pow(1 + (r / n), n * t);
 
 export const simpleInterest = (p: number, r: number, t: number) => p * r * t;
+
+export const velocity = (distance: number, time: number) => distance / time;
