@@ -74,3 +74,5 @@ export const randomFloat = (min: number, max: number) => Math.random() * (max - 
 export const calculateBMI = (weightKg: number, heightM: number) => weightKg / (heightM * heightM);
 
 export const compoundInterest = (p: number, r: number, t: number, n: number) => p * Math.pow(1 + (r / n), n * t);
+
+export const simpleInterest = (p: number, r: number, t: number) => p * r * t;
