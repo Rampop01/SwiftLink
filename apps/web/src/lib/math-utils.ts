@@ -106,3 +106,5 @@ export const snellsLawAngle2 = (n1: number, angle1Deg: number, n2: number) => to
 export const gravitationalForce = (m1: number, m2: number, r: number) => (6.67430e-11 * m1 * m2) / (r * r);
 
 export const escapeVelocity = (mass: number, radius: number) => Math.sqrt((2 * 6.67430e-11 * mass) / radius);
+
+export const density = (mass: number, volume: number) => mass / volume;
