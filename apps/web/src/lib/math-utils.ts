@@ -58,3 +58,5 @@ export const isPrime = (num: number) => { for(let i = 2, s = Math.sqrt(num); i <
 export const fibonacci = (n: number): number => n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 
 export const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
+
+export const lcm = (a: number, b: number) => (a * b) / gcd(a, b);
