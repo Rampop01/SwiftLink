@@ -32,3 +32,5 @@ export const combinations = (n: number, k: number) => factorial(n) / (factorial(
 export const permutations = (n: number, k: number) => factorial(n) / factorial(n - k);
 
 export const distance2D = (x1: number, y1: number, x2: number, y2: number) => Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+
+export const distance3D = (x1: number, y1: number, z1: number, x2: number, y2: number, z2: number) => Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2) + Math.pow(z2 - z1, 2));
