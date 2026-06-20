@@ -104,3 +104,5 @@ export const electricalPower = (voltage: number, current: number) => voltage * c
 export const snellsLawAngle2 = (n1: number, angle1Deg: number, n2: number) => toDegrees(Math.asin((n1 * Math.sin(toRadians(angle1Deg))) / n2));
 
 export const gravitationalForce = (m1: number, m2: number, r: number) => (6.67430e-11 * m1 * m2) / (r * r);
+
+export const escapeVelocity = (mass: number, radius: number) => Math.sqrt((2 * 6.67430e-11 * mass) / radius);
