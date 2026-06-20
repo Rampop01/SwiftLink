@@ -90,3 +90,5 @@ export const potentialEnergy = (mass: number, height: number, g = 9.81) => mass 
 export const momentum = (mass: number, velocity: number) => mass * velocity;
 
 export const workDone = (force: number, distance: number, angleDeg: number = 0) => force * distance * Math.cos(toRadians(angleDeg));
+
+export const power = (work: number, time: number) => work / time;
