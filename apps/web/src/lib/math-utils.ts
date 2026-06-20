@@ -40,3 +40,5 @@ export const midpoint2D = (x1: number, y1: number, x2: number, y2: number) => [(
 export const midpoint3D = (x1: number, y1: number, z1: number, x2: number, y2: number, z2: number) => [(x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2];
 
 export const dotProduct2D = (v1: [number, number], v2: [number, number]) => v1[0] * v2[0] + v1[1] * v2[1];
+
+export const dotProduct3D = (v1: [number, number, number], v2: [number, number, number]) => v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
