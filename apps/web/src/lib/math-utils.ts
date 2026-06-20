@@ -124,3 +124,5 @@ export const massEnergyEquivalence = (mass: number) => mass * Math.pow(299792458
 export const idealGasPressure = (n: number, v: number, t: number) => (n * 8.314 * t) / v;
 
 export const celsiusToKelvin = (c: number) => c + 273.15;
+
+export const kelvinToCelsius = (k: number) => k - 273.15;
