@@ -46,3 +46,5 @@ export const dotProduct3D = (v1: [number, number, number], v2: [number, number, 
 export const crossProduct3D = (v1: [number, number, number], v2: [number, number, number]) => [v1[1]*v2[2] - v1[2]*v2[1], v1[2]*v2[0] - v1[0]*v2[2], v1[0]*v2[1] - v1[1]*v2[0]];
 
 export const magnitude2D = (v: [number, number]) => Math.sqrt(v[0] * v[0] + v[1] * v[1]);
+
+export const magnitude3D = (v: [number, number, number]) => Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
